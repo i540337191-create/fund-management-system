@@ -1,0 +1,10 @@
+import type {ApiSessionUser} from './apiClient';
+import type {ExitPosition,ExitProof} from './exitSettlementTypes';
+import type {DealMaterialRef} from './dealTypes';
+export type AssetStatus='managed'|'exiting'|'exited'|'legacy_exited';
+export type ExitArchive={id:string;version:number;actor:ApiSessionUser;time:string;reason:string;completionReview:string;evidence:ExitProof[];fingerprint:string;positions:ExitPosition[];executionIds:string[];paymentIds:string[];dealIds:string[];current:boolean};
+export type ExitClaim={id:string;version:number;status:'open'|'resolved'|'cancelled';title:string;description:string;reason:string;evidence:ExitProof[];actor:ApiSessionUser;time:string};
+export type AssetHistoryView={sourceIssue?:string;dataOrigin?:string;dataPurpose?:string;projectId:string;name:string;legacyStatus:string;fundIds:string[];status:AssetStatus;statusLabel:string;inManagedMetrics:boolean;legacyUnverified:boolean;blockers:string[];positions:ExitPosition[];archiveCurrent:boolean;currentArchiveId:string|null;openClaimCount:number;archives:ExitArchive[];claims:ExitClaim[];latestClaims:ExitClaim[];revision:number;currentUser:ApiSessionUser;mayArchive:boolean;mayManageClaims:boolean};
+type Base={requestId:string;expectedRevision:number;reason:string;evidence:DealMaterialRef[]};
+export type AssetHistoryAction=Base & ({action:'archive_exit';completionReview:string}|{action:'create_claim';title:string;description:string}|{action:'revise_claim';claimId:string;title:string;description:string;status:ExitClaim['status']});
+export const assetBlockerLabels:Record<string,string>={no_closed_positions:'没有可核验的实际交割持仓',missing_closed_terms:'已交割批次缺完整基金要素',remaining_positions:'仍有基金批次持仓未退出',outstanding_receipts:'仍有合同对价未收',active_deals:'仍有交易批次办理中'};

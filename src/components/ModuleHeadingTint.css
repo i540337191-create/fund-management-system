@@ -1,0 +1,5 @@
+/* A restrained echo of the existing risk heading ribbon; never changes header geometry. */
+.atelier-main[data-header-tint] .page-heading:not(dialog .page-heading){position:relative;isolation:isolate}
+.atelier-main[data-header-tint] .page-heading:not(dialog .page-heading)::before{content:'';position:absolute;inset:-12px -8px -5px;z-index:-1;pointer-events:none;background:url('/images/fund-ledger-ribbon.png') center 60% / 100% auto no-repeat;opacity:.12;mask-image:linear-gradient(90deg,transparent,#000 18%,#000 85%,transparent)}
+:root[data-color-mode=dark] .atelier-main[data-header-tint] .page-heading:not(dialog .page-heading)::before{opacity:.045;mix-blend-mode:luminosity}
+@media(max-width:760px){.atelier-main[data-header-tint] .page-heading:not(dialog .page-heading)::before{inset:-8px -4px -3px;background-size:auto 180px;opacity:.09}}

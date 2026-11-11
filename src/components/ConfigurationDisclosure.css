@@ -1,0 +1,15 @@
+:root.atelier-theme .configuration-disclosure{min-width:0}
+:root.atelier-theme button.configuration-trigger[data-ui]{display:flex;align-items:center;gap:9px;justify-content:flex-start;max-width:100%;color:var(--danger);white-space:normal;text-align:left}
+:root.atelier-theme .configuration-trigger>svg{flex-shrink:0}
+:root.atelier-theme dialog.configuration-drawer[open]{position:fixed;inset:0 0 0 auto;margin:0 0 0 auto;width:min(960px,100vw);max-width:100vw;height:100dvh;max-height:100dvh;overflow:auto;padding:0;border:0;border-left:1px solid var(--line);border-radius:0;background:var(--surface);box-shadow:-18px 0 55px #221a1120}
+:root.atelier-theme dialog.configuration-drawer[open]>div:first-child{position:sticky;top:0;z-index:2;margin:0;padding:20px 24px;min-height:72px;border-bottom:1px solid var(--line);background:var(--surface);align-items:center}
+.configuration-drawer-content{padding:22px 24px;min-width:0}
+.configuration-drawer-content :is(p,label){overflow-wrap:anywhere}
+:root.atelier-theme .configuration-drawer :is(input,select,textarea){max-width:100%;min-width:0}
+:root.atelier-theme .custom-schema-field>.configuration-trigger{width:100%;min-height:58px;justify-content:space-between;border:0;background:var(--surface);box-shadow:none}
+:root.atelier-theme .custom-schema-field>.configuration-trigger>svg{margin-right:3px}
+:root.atelier-theme .custom-schema-field>.configuration-trigger>span:first-of-type{margin-right:auto}
+@media(max-width:600px){.configuration-drawer-content{padding:18px}:root.atelier-theme dialog.configuration-drawer[open]>div:first-child{padding:16px 18px}.configuration-drawer .template-preview-grid{grid-template-columns:1fr}}
+
+:root.atelier-theme dialog.configuration-drawer>form{padding:22px 24px}
+@media(max-width:600px){:root.atelier-theme dialog.configuration-drawer>form{padding:18px}}

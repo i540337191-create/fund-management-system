@@ -1,0 +1,53 @@
+/* One centered content measure for business pages; conversation keeps its viewport canvas. */
+.fundapp-shell .atelier-main{width:100%;max-width:1840px;margin-inline:auto;min-width:0}
+.fundapp-shell .atelier-main:has(.assistant-workspace){max-width:none}
+/* Share the viewport remainder instead of capping each module in pixels. */
+@media(min-width:1101px){
+ .fundapp-shell:not(.agent-shell) .atelier-body{display:flex;flex-direction:column;min-height:100dvh}
+ .fundapp-shell:not(.agent-shell) .atelier-topbar{flex-shrink:0}
+ .fundapp-shell:not(.agent-shell) .atelier-main{display:flex;flex-direction:column;flex:1;min-width:0;width:100%}
+ .fundapp-shell:not(.agent-shell) .atelier-main>div{display:flex;flex-direction:column;flex:1;min-width:0;min-height:0}
+ :is(.funds-workspace,.projects-workspace,.capital-portfolio,.tasks-workspace){display:flex;flex-direction:column;flex:1;min-width:0}
+ :is(.funds-workspace,.projects-workspace,.capital-portfolio,.tasks-workspace)>*{flex-shrink:0}
+ .funds-workspace>.fund-register,.projects-workspace>.project-register,.capital-portfolio>.capital-focus-workspace{flex:1}
+ .capital-focus-workspace>.capital-fund-browser{max-height:none}
+ .capital-focus-workspace>.capital-fund-focus{min-height:0}
+ .tasks-workspace>.aw-tasks-workspace{flex:1;grid-template-rows:auto auto auto auto auto auto minmax(160px,1fr) auto}
+ .settings-workspace>.settings-home-c{flex:1}
+ .atelier-main:has(.weekly-workbench)>div,.weekly-workbench{display:flex;flex-direction:column;flex:1;min-height:0}
+ .weekly-layout{flex:1}
+ .risk-monitor :has(>.risk-event-list){align-items:stretch}
+ .risk-monitor .risk-detail{align-self:stretch;max-height:none}
+}
+@media(min-width:1251px){
+ .inbox-review-layout{flex:1;min-height:360px;grid-template-rows:minmax(0,1fr)}
+ :root.atelier-theme .inbox-c .inbox-review-layout>section{height:auto;max-height:none;min-height:0}
+ :root.atelier-theme .inbox-c .inbox-queue-scroll{max-height:none;flex:1}
+}
+/* Short split windows scroll the page; action footers must remain reachable. */
+@media(min-width:1101px) and (max-height:749px){
+ .atelier-body:has(:is(.materials-workspace,.inbox-workspace,.meetings-workspace,.reports-workspace,.settings-workspace)){height:auto;min-height:100dvh}
+}
+@media(min-width:1101px){.atelier-main:has(.weekly-workbench){display:flex;flex-direction:column}}
+@media(min-width:1101px){
+ .fundapp-shell:not(.agent-shell) .atelier-main:not(:has(.restored-dashboard)){padding-bottom:24px}
+ .capital-redesign{display:flex;flex-direction:column;flex:1;min-height:0}
+ .settings-workspace>div:not([hidden]):has(>.settings-home-c){display:flex;flex-direction:column;flex:1;min-height:0}
+ .settings-workspace .settings-home-c{flex:1}
+ .funds-workspace>.fund-register,.projects-workspace>.project-register{display:flex;flex-direction:column}
+ .fund-register>.responsive-table,.project-register>.responsive-table{flex:1;min-height:0}
+ .risk-monitor{display:flex;flex-direction:column;flex:1}
+ .risk-monitor :has(>.risk-event-list){flex:1}
+}
+@media(min-width:1251px){:root.atelier-theme .inbox-c .inbox-review-layout{align-items:stretch}:root.atelier-theme .inbox-c .inbox-review-layout>section{align-self:stretch}}
+@media(min-width:761px) and (max-width:1100px){.fundapp-shell .atelier-topbar{gap:10px}.fundapp-shell .global-business-search{flex:1;width:auto;min-width:0}.fundapp-shell .atelier-top-actions{gap:8px}}
+@media(min-width:1101px){:root.atelier-theme .risk-monitor .risk-review-desk{align-items:stretch}:root.atelier-theme .risk-monitor .risk-event-list{align-self:stretch}}
+@media(min-width:761px) and (max-width:1000px){
+ :root.atelier-theme .restored-dashboard .restored-heading.page-heading{grid-template-columns:minmax(0,1fr)}
+ :root.atelier-theme .restored-dashboard .dashboard-calendar{grid-column:1/-1;width:100%;min-width:0}
+}
+
+/* A page holds the selected record count; neither pane clips it to one viewport. */
+:root.atelier-theme .materials-c .material-c-body{flex:1 0 auto;height:auto;min-height:0;grid-template-rows:auto}
+:root.atelier-theme .materials-c .material-register-content{flex:1 0 auto;height:auto;min-height:0;overflow:visible}
+:root.atelier-theme .materials-c .material-c-detail{height:auto;max-height:none;overflow:visible}

@@ -1,0 +1,122 @@
+/* One compact frame for all six employee views. */
+.agent-shell{--employee-hover-shadow:0 3px 10px color-mix(in srgb,var(--bronze) 12%,transparent)}
+.agent-shell .atelier-topbar{justify-content:flex-start;padding-inline:24px}
+.agent-shell .global-business-search{margin:0 auto 0 0;width:min(510px,50%);flex:none}
+.agent-shell .global-business-search .atelier-search{width:100%;margin:0;height:38px;padding:0 13px;border:1px solid color-mix(in srgb,var(--bronze) 20%,var(--line));border-radius:11px;background:color-mix(in srgb,var(--surface) 60%,var(--inset));box-shadow:inset 0 1px 0 color-mix(in srgb,var(--surface) 85%,transparent)}
+.agent-shell .global-business-search .atelier-search>svg{color:var(--bronze);flex:none}
+.agent-shell .global-business-search .atelier-search input{font-size:13px;line-height:20px;min-width:0;width:100%;background:transparent;padding:0;border:0;border-radius:0;box-shadow:none}
+.agent-shell .global-business-search .atelier-search:hover{border-color:color-mix(in srgb,var(--bronze) 44%,var(--line))}
+.agent-shell .global-business-search .atelier-search:focus-within{background:var(--surface);border-color:var(--bronze);outline:2px solid var(--accent-soft);outline-offset:2px}
+.agent-shell .agent-workspace.employee-management{padding:0;min-width:0}
+.agent-shell :is(.assistant-header,.employee-management>.aw-header){height:auto;min-height:72px;margin:0;padding:16px 24px 12px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-shrink:0}
+.agent-shell :is(.assistant-header h1,.employee-management>.aw-header h1){font-size:24px;line-height:32px;font-weight:650;letter-spacing:normal;display:flex;align-items:center;gap:10px;margin:0}
+.agent-shell :is(.assistant-header h1,.employee-management>.aw-header h1)>svg{display:block;width:24px;height:24px;color:var(--bronze);flex:none}
+.agent-shell .employee-management>.aw-header>div{min-width:0}
+.agent-shell .employee-management>.aw-header .aw-header-actions{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.agent-shell :is(.assistant-main,.employee-management)>.aw-tabs{flex:none;gap:8px;margin:0;padding:4px 24px;min-height:0;align-items:center;overflow-x:auto;border-bottom:1px solid var(--line);font-size:14px;line-height:22px}
+.agent-shell :is(.assistant-main,.employee-management)>.aw-tabs a{display:inline-flex;align-items:center;justify-content:center;min-height:36px;margin:0;padding:7px 14px;border:0;border-radius:9px;line-height:22px;color:var(--secondary);text-decoration:none;box-shadow:none;background:transparent}
+.agent-shell :is(.assistant-main,.employee-management)>.aw-tabs a[aria-current=page]{color:var(--bronze);font-weight:600;background:var(--accent-soft);box-shadow:0 2px 5px color-mix(in srgb,var(--bronze) 10%,transparent)}
+.agent-shell :is(.assistant-main,.employee-management)>.aw-tabs a:hover{color:var(--ink);background:var(--hover)}
+.agent-shell .aw-tabs a:focus-visible{outline:2px solid var(--bronze);outline-offset:2px}
+.agent-shell .agent-context{padding:10px 24px;min-height:53px;align-items:center;border-bottom:1px solid var(--line)}
+.agent-shell .employee-management>.employee-section-description{padding:16px 24px 0;margin:0;color:var(--secondary);font-size:14px;line-height:24px}
+.agent-shell .employee-management>:not(.aw-header):not(.aw-tabs):not(.employee-section-description):not(dialog){margin-inline:24px}
+.agent-shell .employee-management>.aw-feedback-slot{margin-top:0;min-height:40px}
+.agent-shell .employee-management>.aw-toolbar{margin-top:0;margin-bottom:20px;gap:12px;flex-wrap:wrap}
+.agent-shell .aw-toolbar>label{width:min(360px,100%);min-width:0}
+.agent-shell .aw-toolbar input{width:100%}
+.agent-shell :is(.aw-toolbar,.aw-form,.aw-field,.agent-c-drawer) :is(input:not([type=checkbox]),textarea,select){border:1px solid color-mix(in srgb,var(--bronze) 22%,var(--line));border-radius:10px;background:color-mix(in srgb,var(--inset) 65%,var(--surface));color:var(--ink);box-shadow:inset 0 1px 0 color-mix(in srgb,var(--surface) 85%,transparent);min-height:42px;padding:10px 13px;font-size:14px;line-height:22px}
+.agent-shell :is(.aw-toolbar,.aw-form,.aw-field,.agent-c-drawer) :is(input,textarea,select):hover{border-color:color-mix(in srgb,var(--bronze) 44%,var(--line))}
+.agent-shell :is(.aw-toolbar,.aw-form,.aw-field,.agent-c-drawer) :is(input,textarea,select):focus-visible{outline:2px solid var(--accent-soft);outline-offset:2px;border-color:var(--bronze);background:var(--surface)}
+.agent-shell input::placeholder,.agent-shell textarea::placeholder{color:var(--secondary);opacity:1}
+.employee-catalogue{display:grid;grid-template-columns:200px minmax(0,1fr);gap:28px;padding-bottom:28px}
+.employee-categories{display:flex;flex-direction:column;gap:6px;border-right:1px solid var(--line);padding:8px 20px 8px 0;align-self:start;position:sticky;top:16px}
+.agent-workspace .employee-categories button{display:flex;justify-content:flex-start;text-align:left;border:0;border-radius:9px;background:transparent;padding:12px;min-height:44px;gap:10px;color:var(--secondary)}
+.employee-categories button span{flex:1}.employee-categories small{font-variant-numeric:tabular-nums;font-size:12px}
+.agent-workspace .employee-categories button[aria-pressed=true]{color:var(--bronze);background:var(--accent-soft);font-weight:600}
+.employee-catalogue-list,.employee-catalogue-entry{min-width:0}
+.agent-shell .employee-catalogue .aw-record{display:grid;grid-template-columns:48px minmax(0,1fr) auto;column-gap:16px;row-gap:5px;padding:22px 0;border:0;border-bottom:1px solid var(--line);border-radius:0;background:transparent;box-shadow:none}
+.employee-record-icon{grid-column:1;grid-row:1/5;display:flex;align-items:center;justify-content:center;width:44px;height:48px;background:var(--inset);color:var(--bronze);border:1px solid var(--line);border-radius:12px}
+.agent-shell .employee-catalogue .aw-record-head{grid-column:2;display:flex;align-items:center;justify-content:space-between;gap:16px;margin:0}
+.agent-shell .employee-catalogue .aw-record h2{font-size:16px;line-height:26px;font-weight:600;overflow-wrap:anywhere}
+.agent-shell .employee-catalogue .aw-description{grid-column:2;margin:0;font-size:14px;line-height:24px;max-width:72ch;overflow-wrap:anywhere}
+.agent-shell .employee-catalogue .aw-meta{grid-column:2;font-size:12px;margin:3px 0 0}
+.agent-shell .employee-catalogue .aw-actions{grid-column:3;grid-row:1/5;align-self:center;justify-content:flex-end;max-width:270px;gap:6px;margin:0;padding:0}
+.agent-shell .employee-catalogue .aw-actions button{min-height:34px;font-size:12px;padding:6px 10px}
+.agent-shell .employee-catalogue .aw-template-preview{grid-column:2;margin:3px 0 0;padding:0;border:0;background:transparent}
+.agent-shell .employee-catalogue .aw-status{font-size:12px;line-height:20px;border-radius:6px;padding:2px 8px;white-space:normal;text-align:right;flex-shrink:0;color:var(--secondary);background:var(--inset);max-width:190px}
+.agent-shell .employee-catalogue .aw-status[data-connected=true]{color:var(--success);background:var(--success-bg)}
+.employee-duplicates{border-bottom:1px solid var(--line);padding:8px 0 10px 64px;font-size:13px;color:var(--secondary)}
+.employee-duplicates>summary{color:var(--danger);cursor:pointer;padding:6px 0}.employee-duplicates>p{margin:8px 0;font-size:12px}
+.agent-shell .employee-duplicates .aw-record{grid-template-columns:36px minmax(0,1fr);padding:18px 0}
+.agent-shell .employee-duplicates .aw-record>.aw-actions{grid-column:2;grid-row:auto;justify-content:flex-start;max-width:none}
+.employee-duplicates .employee-record-icon{width:32px;height:36px}
+.agent-shell .employee-management>.aw-ledger{display:grid;gap:0;padding-bottom:24px}
+.agent-shell .employee-management>.aw-ledger>.aw-record{border:0;border-bottom:1px solid var(--line);border-radius:0;background:transparent;padding:22px 0;box-shadow:none}
+.agent-shell .employee-management .aw-result{padding:16px;border-radius:10px;background:var(--inset);font-size:13px;line-height:1.8;max-height:300px;overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere}
+.agent-shell :is(.agent-action-card,.aw-proposal){box-shadow:none}
+.agent-shell .agent-action-card{transition:transform 150ms ease-out}
+.agent-shell .assistant-composer{box-shadow:none;background:var(--inset)}
+.agent-shell .assistant-composer:focus-within{box-shadow:none;background:var(--surface);border-color:var(--bronze);outline:2px solid var(--accent-soft);outline-offset:2px}
+.agent-shell .assistant-composer textarea{background:transparent;border:0;box-shadow:none}
+@media(hover:hover) and (pointer:fine){
+ .agent-shell .agent-action-card:hover{transform:translateY(-1px);box-shadow:var(--employee-hover-shadow)}
+}
+@media(max-width:1250px){.employee-catalogue{grid-template-columns:170px minmax(0,1fr);gap:20px}.agent-shell .employee-catalogue .aw-record{grid-template-columns:42px minmax(0,1fr)}.agent-shell .employee-catalogue .aw-actions{grid-column:2;grid-row:auto;justify-content:flex-start;max-width:none}.employee-record-icon{width:38px;height:44px}}
+@media(max-width:760px){
+ .agent-shell .atelier-topbar{padding-inline:12px}.agent-shell .global-business-search{flex:1;width:auto;min-width:0}
+ .agent-shell :is(.assistant-header,.employee-management>.aw-header){padding:14px 16px 10px;min-height:68px;gap:8px}
+ .agent-shell :is(.assistant-header h1,.employee-management>.aw-header h1){font-size:20px;line-height:28px;gap:8px}
+ .agent-shell :is(.assistant-main,.employee-management)>.aw-tabs{padding-inline:16px;gap:4px}
+ .agent-shell :is(.assistant-main,.employee-management)>.aw-tabs a{padding-inline:10px}
+ .agent-shell .employee-management>:not(.aw-header):not(.aw-tabs):not(.employee-section-description):not(dialog){margin-inline:16px}
+ .agent-shell .employee-management>.employee-section-description{padding-inline:16px}.agent-shell .agent-context{padding-inline:16px}
+ .employee-catalogue{grid-template-columns:minmax(0,1fr);gap:8px}.employee-categories{position:static;flex-direction:row;overflow-x:auto;border:0;border-bottom:1px solid var(--line);padding:0 0 12px;gap:4px}.agent-workspace .employee-categories button{white-space:nowrap;flex:none;padding:9px 10px;font-size:13px}.employee-categories button svg{display:none}
+ .agent-shell .employee-catalogue .aw-record{column-gap:12px;padding:18px 0}.agent-shell .employee-catalogue .aw-record-head{flex-wrap:wrap;gap:4px}.agent-shell .employee-catalogue .aw-status{max-width:none;text-align:left}.employee-duplicates{padding-left:0}
+ .agent-shell .aw-toolbar>label{width:100%}.agent-shell .aw-toolbar>span{margin-left:0}.agent-shell .employee-management .aw-toolbar{gap:8px}
+ .agent-shell .assistant-header-actions{gap:3px}.agent-shell .assistant-header-actions .assistant-icon{width:30px}
+ .agent-shell .agent-availability{display:none}
+}
+@media(prefers-reduced-motion:reduce){.agent-shell .agent-action-card{transition:none}.agent-shell .agent-action-card:hover{transform:none}}
+.agent-shell .atelier-main[data-header-tint] :is(.assistant-header,.employee-management>.aw-header).page-heading::before{inset:0;opacity:.12}
+:root[data-color-mode=dark] .agent-shell .atelier-main[data-header-tint] :is(.assistant-header,.employee-management>.aw-header).page-heading::before{opacity:.045}
+.agent-shell .employee-management>.aw-feedback-slot{height:40px;min-height:40px;flex:none;margin-bottom:8px}
+:root.atelier-theme .agent-shell .employee-categories button[data-ui]{background:transparent;border:0;box-shadow:none;color:var(--secondary)}
+:root.atelier-theme .agent-shell .employee-categories button[data-ui][aria-pressed=true]{background:var(--accent-soft);color:var(--bronze);box-shadow:0 2px 5px color-mix(in srgb,var(--bronze) 8%,transparent)}
+:root.atelier-theme .agent-shell .employee-categories button[data-ui]:hover{background:var(--hover);color:var(--ink)}
+:root.atelier-theme .agent-shell .employee-catalogue .configuration-trigger{padding:3px 0;min-height:30px;border:0;background:transparent;box-shadow:none;font-weight:500;text-align:left;font-size:12px;color:var(--danger)}
+:root.atelier-theme .agent-shell .employee-catalogue .configuration-trigger:hover{background:var(--hover)}
+.agent-shell .employee-search{position:relative;display:flex;align-items:center}
+.agent-shell .employee-search>svg{position:absolute;left:13px;color:var(--bronze);pointer-events:none}
+.agent-shell .aw-toolbar .employee-search>input{padding-left:40px}
+.agent-shell .employee-management>.aw-ledger>.aw-record{display:grid;grid-template-columns:48px minmax(0,1fr) auto;column-gap:16px;row-gap:6px}
+.employee-ledger-icon{grid-column:1;grid-row:1/6;width:44px;height:48px;display:flex;align-items:center;justify-content:center;border-radius:12px;color:var(--bronze);background:var(--inset)}
+.agent-shell .employee-management>.aw-ledger .aw-record-head{display:flex;grid-column:2/-1;grid-row:1;align-items:center;margin:0;gap:16px}
+.agent-shell .employee-management>.aw-ledger .aw-record-head h2{font-size:16px;line-height:26px;flex:1;min-width:0;overflow-wrap:anywhere}
+.agent-shell .employee-management>.aw-ledger .aw-record-head .aw-status{margin-left:auto;max-width:200px;text-align:right;font-size:12px}
+.agent-shell .employee-management>.aw-ledger .aw-description,.agent-shell .employee-management>.aw-ledger .aw-record>p{grid-column:2;grid-row:auto;margin:0;line-height:24px}
+.agent-shell .employee-management>.aw-ledger .aw-record>.aw-actions{grid-column:3;grid-row:2/5;align-self:center;max-width:330px;justify-content:flex-end;margin:0}
+.agent-shell .employee-management>.aw-ledger .aw-result{grid-column:2/-1;grid-row:auto;margin:8px 0}
+.agent-shell .employee-management>.aw-ledger .aw-template-preview{grid-column:2;grid-row:auto;padding:0;margin:0;background:transparent;border:0}
+:root.atelier-theme .agent-shell .employee-management>.aw-ledger .configuration-trigger{padding:3px 0;min-height:30px;border:0;background:transparent;box-shadow:none;color:var(--danger);font-size:12px;font-weight:500}
+@media(max-width:1100px){.agent-shell .employee-management>.aw-ledger .aw-record>.aw-actions{grid-column:2/-1;grid-row:auto;justify-content:flex-start;max-width:none}}
+@media(max-width:760px){.agent-shell .employee-management>.aw-ledger>.aw-record{grid-template-columns:36px minmax(0,1fr);gap:6px 12px}.employee-ledger-icon{width:32px;height:40px}.agent-shell .employee-management>.aw-ledger .aw-record-head{flex-wrap:wrap}.agent-shell .employee-management>.aw-ledger .aw-record-head .aw-status{margin-left:0}.agent-shell .employee-management>.aw-ledger .aw-record-head h2{flex-basis:100%}}
+:root.atelier-theme .agent-shell :is(.assistant-message-actions,.agent-actions) button[data-ui]{box-shadow:none}
+@media(hover:hover) and (pointer:fine){
+ :root.atelier-theme .agent-shell :is(.assistant-message-actions,.agent-actions) button[data-ui]:hover:not(:disabled){box-shadow:var(--employee-hover-shadow);transform:translateY(-1px)}
+}
+@media(prefers-reduced-motion:reduce){:root.atelier-theme .agent-shell :is(.assistant-message-actions,.agent-actions) button[data-ui]:hover:not(:disabled){transform:none}}
+.agent-shell .agent-manual-action{box-shadow:none;transition:transform 150ms ease-out}
+@media(hover:hover) and (pointer:fine){.agent-shell .agent-manual-action:hover:not(:disabled){box-shadow:var(--employee-hover-shadow);transform:translateY(-1px)}}
+@media(prefers-reduced-motion:reduce){.agent-shell .agent-manual-action{transition:none}.agent-shell .agent-manual-action:hover:not(:disabled){transform:none}}
+@media(max-width:760px){
+ .agent-shell :is(.assistant-header,.employee-management>.aw-header){display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:28px 44px;gap:8px;height:104px;min-height:104px;padding:14px 16px 10px}
+ .agent-shell .assistant-header>.assistant-header-title,.agent-shell .employee-management>.aw-header>div:first-child{grid-column:1;grid-row:1;min-width:0;display:flex;align-items:center;gap:8px}
+ .agent-shell :is(.assistant-header h1,.employee-management>.aw-header h1){white-space:nowrap;flex-shrink:0}
+ .agent-shell .assistant-header>.assistant-header-actions,.agent-shell .employee-management>.aw-header>.aw-header-actions{grid-column:1;grid-row:2;justify-self:end;align-self:center;display:flex;align-items:center;gap:4px}
+ .agent-shell .assistant-header-actions>.assistant-icon{width:32px;min-height:36px}
+}
+.agent-shell .employee-management>.aw-ledger>.ledger-pagination{grid-column:1/-1;margin-top:20px;padding:16px 0;border-top:1px solid var(--line)}
+
+.agent-shell .assistant-log:has(.assistant-empty){padding-top:12px}
+.agent-shell .assistant-empty{padding-top:0}

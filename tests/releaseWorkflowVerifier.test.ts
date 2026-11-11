@@ -1,0 +1,26 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { execFile } from 'node:child_process';
+import { promisify } from 'node:util';
+import { mkdtemp,writeFile } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
+import { createServer } from '../server/src/index.ts';
+import { createMemoryLedgerStore } from '../server/src/ledger/store.ts';
+const execFileAsync=promisify(execFile);
+test('release --write and marker readback use strict task identity/revision and cannot advance workflow stages',async t=>{
+ const store=createMemoryLedgerStore();const email='release-check@example.local',password='release-test-password';
+ const server=createServer({ledgerStore:store,ai:{env:{QWEN_API_KEY:'isolated-release-fixture'},fetchImpl:async()=>({ok:true,status:200,text:async()=>JSON.stringify({choices:[{message:{content:JSON.stringify({summary:'原件要求补齐财务资料',extracted:['补齐财务资料'],generatedTasks:['经办人补齐财务资料']})}}]})})},auth:{mode:'password',adminEmail:email,adminPassword:password,sessionSecret:'release-check-secret'}});
+ const requests:{method:string;path:string;body:any}[]=[];
+ server.addHook('preHandler',async request=>{if(request.url.startsWith('/api/tasks')||request.url.endsWith('/stage'))requests.push({method:request.method,path:request.url,body:request.body});});
+ const baseUrl=await server.listen({host:'127.0.0.1',port:0});t.after(()=>server.close());
+ const temp=await mkdtemp(join(tmpdir(),'release-workflow-check-'));const envFile=join(temp,'.env');await writeFile(envFile,'');
+ const marker='workflow-schema-verifier';const before=store.listProjects().find(project=>project.id==='demo-robotics')!.stage;
+ const {stdout}=await execFileAsync(process.execPath,['scripts/verify-server-release.mjs','--release-env-file',envFile,'--base-url',baseUrl,'--email',email,'--password',password,'--write','--write-marker',marker,'--expect-write-marker',marker],{cwd:process.cwd(),timeout:60000,maxBuffer:2*1024*1024});
+ const result=JSON.parse(stdout);assert.equal(result.ok,true);assert.equal(result.checks.find((check:any)=>check.name==='project stage bypass is blocked')?.ok,true);assert.equal(result.checks.find((check:any)=>check.name==='expected write marker task actor persists')?.ok,true);
+ const creation=requests.find(request=>request.method==='POST'&&request.path==='/api/tasks')!.body;
+ assert.match(creation.requestId,/^[0-9a-f-]{36}$/);assert.equal(creation.ownerId,'user-admin');assert.equal(creation.owner,undefined);assert.equal(creation.actor,undefined);
+ const update=requests.find(request=>request.method==='PATCH'&&request.path.startsWith('/api/tasks/'))!.body;assert.match(update.requestId,/^[0-9a-f-]{36}$/);assert.notEqual(update.requestId,creation.requestId);assert.equal(update.expectedRevision,1);assert.equal(update.actor,undefined);
+ const task=store.listTasks().find(task=>task.name===`服务端发布验收任务 ${marker}`)!;assert.equal(task.ownerId,'user-admin');assert.equal(task.revision,2);assert.equal(task.status,'进行中');assert.equal(store.listProjects().find(project=>project.id==='demo-robotics')!.stage,before);
+ assert.ok(store.listAuditEvents().some(event=>event.action==='更新任务'&&JSON.parse(event.detail).actorId==='user-admin'));
+});

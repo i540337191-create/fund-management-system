@@ -1,0 +1,4 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {createServer} from 'vite';
+test('session authentication rejection excludes gateways, forbidden business access and transport failures',async()=>{const server=await createServer({configFile:false,optimizeDeps:{noDiscovery:true,include:[]},server:{middlewareMode:true,hmr:{port:30000+process.pid%20000}},appType:'custom'});try{const {isSessionRejection}=await server.ssrLoadModule('/src/App.tsx');assert.equal(isSessionRejection({status:401}),true);assert.equal(isSessionRejection({code:'unauthenticated'}),true);for(const error of[{status:502},{status:503},{status:403,code:'forbidden'},new TypeError('network unavailable'),{status:409,code:'client_session_changed'}])assert.equal(isSessionRejection(error),false);}finally{await server.close();}});

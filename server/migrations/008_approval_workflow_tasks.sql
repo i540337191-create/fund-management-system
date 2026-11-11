@@ -1,0 +1,13 @@
+alter table projects add column owner_actor_id text;
+update projects set owner_actor_id = manager_user_id;
+alter table tasks add column owner_actor_id text;
+update tasks set owner_actor_id = owner_user_id;
+alter table tasks add column owner_label text;
+alter table tasks add column kind text not null default 'manual' check(kind in ('manual','review','supplement'));
+alter table tasks add column approval_round_id text;
+alter table tasks add column revision integer not null default 1 check(revision > 0);
+alter table tasks add column completed_at timestamptz;
+create table approval_rounds(id text primary key, project_id text not null references projects(id), payload jsonb not null);
+create index approval_rounds_project on approval_rounds(project_id);
+create table workflow_requests(request_id text primary key, project_id text not null references projects(id), fingerprint text not null, result jsonb not null);
+create unique index users_email_case_unique on users(lower(email));

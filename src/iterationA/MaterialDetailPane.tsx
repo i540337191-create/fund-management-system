@@ -1,0 +1,19 @@
+import {useEffect,useState,type ReactNode} from 'react';
+import {FileText,ExternalLink} from 'lucide-react';
+import {createApiClient,type ApiMaterial,type ApiMaterialVersion} from '../lib/apiClient';
+import type {MaterialDirectoryRow} from '../lib/materialFilters';
+import {MaterialExtractionButton} from '../components/MaterialExtractionButton';
+const api=createApiClient();
+export function MaterialDetailPane({row,material,excerpt,originalHref,onVersions,onReview,actions}:{row:MaterialDirectoryRow;material?:ApiMaterial;excerpt?:string;originalHref?:string;onVersions?:()=>void;onReview:()=>void;actions:ReactNode}){
+ const [result,setResult]=useState<{id:string;versions?:ApiMaterialVersion[];error?:boolean}|null>(null),[retry,setRetry]=useState(0);
+ useEffect(()=>{if(!material)return;let active=true;setResult(null);void api.getMaterialVersions(material.id).then(data=>{if(active)setResult({id:material.id,versions:data.versions});}).catch(()=>{if(active)setResult({id:material.id,error:true});});return()=>{active=false;};},[material?.id,material?.currentVersionId,retry]);
+ const data=result?.id===material?.id?result:null;
+ return <aside className="material-c-detail" aria-label="所选资料详情"><header><FileText size={22}/><h2>{row.name}</h2></header>
+  <section className="material-detail-relations"><h3>关联对象</h3><dl>{material?.relationships ? ([['funds','基金'],['projects','项目'],['companies','被投公司'],['investors','投资人']] as const).filter(([key])=>material.relationships![key].length).map(([key,label])=><div key={key} data-relation={key}><dt>{label}</dt><dd>{material.relationships![key].map(item=>item.name).join('、')}</dd></div>) : <><div><dt>基金</dt><dd>{row.fund||'尚未关联'}</dd></div><div><dt>项目 / 对象</dt><dd>{row.project||'尚未关联'}</dd></div></>}{material?.relationships && Object.values(material.relationships).every(items=>!items.length)?<div><dt>关联状态</dt><dd>尚未关联</dd></div>:null}<div><dt>归档位置</dt><dd>{row.path||'尚未登记'}</dd></div></dl></section>
+  <section><h3>原件信息</h3><dl><div><dt>资料类型</dt><dd>{row.type}</dd></div><div><dt>登记来源</dt><dd>{row.source||'尚未登记'}</dd></div><div><dt>上传人</dt><dd>{row.uploader||'尚未登记'}</dd></div><div><dt>登记日期</dt><dd>{row.time||'尚未登记'}</dd></div><div><dt>原件大小</dt><dd>{material?.sizeBytes!=null?`${(material.sizeBytes/1024).toFixed(1)} KB`:'尚未取得'}</dd></div></dl></section>
+  <section><div className="material-c-section-heading"><h3>版本管理</h3>{onVersions?<button type="button" data-ui="secondary" onClick={onVersions}>管理版本与关联</button>:null}</div><div className="material-c-version-list" role={data?.error?'alert':'status'}>{!material?<p>原始物料尚未入库，版本以已有原件为准。</p>:data?.error?<p>版本读取失败。<button type="button" data-ui="info" onClick={()=>setRetry(value=>value+1)}>重试读取</button></p>:!data?.versions?<p>正在读取当前资料版本…</p>:data.versions.length?data.versions.map(version=><div key={version.id}><div className="material-version-meta"><strong>版本 {version.version}</strong><span>{version.historical?version.createdAt.slice(0,10):new Date(version.createdAt).toLocaleDateString('zh-CN',{timeZone:'Asia/Shanghai'})}</span></div><a data-ui="info" href={version.downloadHref} target="_blank" rel="noreferrer">下载</a></div>):<p>暂无已登记版本。</p>}</div></section>
+
+  <section><h3>正文与摘要</h3>{material?<MaterialExtractionButton key={material.id+material.currentVersionId} material={material}/>:<p>原始物料正文以现有识别文本为准。</p>}{excerpt?<p className="material-c-excerpt">{excerpt}</p>:<p className="material-c-note">暂无摘要。</p>}</section>
+  <footer>{material?.generatedDocumentHref?<a data-ui="secondary" href={material.generatedDocumentHref} target="_blank" rel="noreferrer" title={material.generatedDocumentSource}>下载生成副本<ExternalLink size={14}/></a>:null}{originalHref?<a data-ui="primary" href={originalHref} target="_blank" rel="noreferrer">查看 / 下载原件<ExternalLink size={14}/></a>:null}<button type="button" data-ui="secondary" onClick={onReview}>原件与归属核对</button>{actions}</footer>
+ </aside>;
+}

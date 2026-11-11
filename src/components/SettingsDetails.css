@@ -1,0 +1,87 @@
+/* Settings interiors share the approved overview's surfaces without changing business controls. */
+:root.atelier-theme .settings-workspace:not([data-section='设置总览'])>.page-heading{position:relative;isolation:isolate}
+:root.atelier-theme .settings-workspace:not([data-section='设置总览'])>.page-heading::after{content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;background:url('/images/fund-ledger-ribbon.png') right 55%/70% auto no-repeat;opacity:.18}
+:root.atelier-theme .settings-workspace>.settings-tabs{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 20px;padding:7px;background:var(--accent-soft);border:1px solid var(--line);border-radius:12px;flex-shrink:0}
+:root.atelier-theme .settings-workspace>.settings-tabs[hidden]{display:none}
+:root.atelier-theme .settings-tabs button{display:inline-flex;align-items:center;gap:7px;min-height:38px;padding:8px 14px;font-size:13px;border-radius:8px;box-shadow:none;white-space:normal;text-align:left}
+:root.atelier-theme .settings-detail-panel{min-width:0;overflow:visible}
+:root.atelier-theme .settings-detail-panel[hidden]{display:none}
+:root.atelier-theme .settings-detail-panel>.surface-card{padding:24px;border:1px solid var(--line);border-radius:12px;box-shadow:none;background:var(--surface)}
+:root.atelier-theme .settings-detail-panel h2{font-size:20px;font-weight:650;line-height:1.5}
+:root.atelier-theme .settings-detail-panel :is(#accounts>div:first-child,section[aria-label='基金与项目可见范围']) h2,:root.atelier-theme .settings-detail-panel>.surface-card>div:first-child>h2,:root.atelier-theme .settings-detail-panel .custom-c>header h2,:root.atelier-theme .settings-detail-panel .template-catalogue>header h2,:root.atelier-theme .settings-detail-panel .document-template-settings>header h2{display:flex;align-items:center;gap:12px}
+:root.atelier-theme .settings-detail-panel :is(#accounts>div:first-child,section[aria-label='基金与项目可见范围']) h2::before,:root.atelier-theme .settings-detail-panel>.surface-card>div:first-child>h2::before,:root.atelier-theme .settings-detail-panel .template-catalogue>header h2::before,:root.atelier-theme .settings-detail-panel .document-template-settings>header h2::before{content:'';flex-shrink:0;width:5px;height:22px;border-radius:3px;background:linear-gradient(#d5a45c,#98601e)}
+:root.atelier-theme .settings-detail-panel p{line-height:1.75;overflow-wrap:anywhere}
+:root.atelier-theme .settings-detail-panel :is(input,select,textarea){min-width:0;max-width:100%}
+:root.atelier-theme .settings-detail-panel :is(button,a)[data-ui]{font-size:13px}
+:root.atelier-theme .settings-own-account{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:14px 24px;padding:18px 20px;border-radius:10px;background:color-mix(in srgb,var(--accent-soft) 35%,var(--surface));border-color:var(--line)}
+:root.atelier-theme .settings-own-account>h3{grid-column:1/-1;font-size:14px;color:var(--bronze)}
+:root.atelier-theme .settings-own-account>dl{grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin:0}
+:root.atelier-theme .settings-own-account>dl dt{font-size:12px;margin-bottom:4px}
+:root.atelier-theme .settings-own-account>div{margin:0;max-width:370px;align-items:center;justify-content:flex-end}
+:root.atelier-theme .settings-own-account>div>p{font-size:12px;width:100%;text-align:right}
+:root.atelier-theme .settings-account-filters{grid-template-columns:minmax(0,2fr) minmax(180px,1fr)}
+:root.atelier-theme .settings-account-table{border:1px solid var(--line);border-radius:10px}
+:root.atelier-theme .settings-account-table th{font-size:12px;background:var(--inset);font-weight:600;color:var(--secondary)}
+:root.atelier-theme .settings-account-table td{vertical-align:middle;padding-block:12px}
+:root.atelier-theme .settings-account-table tbody tr:last-child td{border-bottom:0}
+:root.atelier-theme .settings-account-table tbody tr:hover{background:color-mix(in srgb,var(--accent-soft) 25%,var(--surface))}
+:root.atelier-theme .settings-access-panel{display:grid;grid-template-columns:minmax(0,2fr) minmax(240px,1fr);gap:20px 28px}
+:root.atelier-theme .settings-access-panel>h2{grid-column:1/-1}
+:root.atelier-theme .settings-access-panel>*{margin-top:0}
+:root.atelier-theme .settings-access-panel>fieldset{grid-column:1;grid-row:2;min-width:0}
+:root.atelier-theme .settings-access-policy{grid-column:2;grid-row:2;align-self:start;border-radius:10px;padding:18px 20px;background:var(--accent-soft);color:var(--secondary);font-size:13px}
+:root.atelier-theme .settings-access-policy h3{color:var(--bronze);font-weight:650;margin-bottom:10px}
+:root.atelier-theme .settings-access-policy ul{list-style:disc;padding-left:17px;display:grid;gap:9px;line-height:1.75}
+:root.atelier-theme .settings-access-panel>p{grid-column:1/-1}
+:root.atelier-theme .settings-access-panel .settings-access-empty{padding:18px;border:1px dashed var(--line);border-radius:10px;color:var(--secondary);font-size:13px;background:var(--inset)}
+:root.atelier-theme .settings-detail-panel>.custom-c>header{margin:0 0 18px;padding:20px 24px;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+:root.atelier-theme .settings-detail-panel .custom-c-layout{grid-template-columns:240px minmax(0,1fr);gap:18px}
+:root.atelier-theme .settings-detail-panel :is(.custom-c-locations,.custom-c-preview){border-radius:12px;padding:20px}
+:root.atelier-theme .settings-detail-panel .custom-c-locations{background:color-mix(in srgb,var(--accent-soft) 35%,var(--surface))}
+:root.atelier-theme .settings-detail-panel .custom-c-locations h3{color:var(--bronze);margin-bottom:16px}
+:root.atelier-theme .settings-detail-panel .custom-c-preview header h3{font-size:17px}
+:root.atelier-theme .settings-detail-panel .custom-c-config-title{font-size:17px;padding-top:20px;color:var(--bronze)}
+:root.atelier-theme .settings-detail-panel .agent-workspace{padding:0}
+:root.atelier-theme .settings-detail-panel .template-catalogue{padding:22px 24px;margin-bottom:20px}
+:root.atelier-theme .settings-detail-panel .template-catalogue nav{gap:6px;margin:16px 0}
+:root.atelier-theme .settings-detail-panel .template-location{padding:12px 0;font-size:13px}
+:root.atelier-theme .settings-detail-panel .template-version-strip{background:var(--accent-soft);color:var(--secondary)}
+:root.atelier-theme .settings-detail-panel .template-preview-grid{gap:18px}
+:root.atelier-theme .settings-detail-panel .template-preview-grid>section{background:var(--paper);border-radius:10px}
+:root.atelier-theme .settings-detail-panel .template-preview-grid h3{color:var(--bronze);font-size:16px}
+:root.atelier-theme .settings-detail-panel .agent-workspace>.aw-header{margin:0 0 16px;align-items:center;padding:18px 22px;background:var(--accent-soft);border-radius:12px}
+:root.atelier-theme .settings-detail-panel .aw-header h1{font-size:20px;letter-spacing:normal}
+:root.atelier-theme .settings-detail-panel .aw-header p{font-size:13px}
+:root.atelier-theme .settings-detail-panel .aw-toolbar{flex-wrap:wrap;background:var(--surface);padding:14px 18px;border:1px solid var(--line);border-radius:10px;gap:10px}
+:root.atelier-theme .settings-detail-panel .aw-record{padding:20px;border-radius:12px}
+:root.atelier-theme .settings-detail-panel .document-template-settings{padding:22px 24px;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+:root.atelier-theme .settings-detail-panel .document-template-settings>label{max-width:680px}
+:root.atelier-theme .settings-detail-panel .settings-audit-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:18px}
+:root.atelier-theme .settings-audit-list>div{border:1px solid var(--line);border-radius:10px;padding:16px;margin:0;background:var(--paper)}
+:root.atelier-theme .settings-audit-list>div>p:first-child{font-weight:500}
+:root.atelier-theme .settings-audit-list>div>p:last-child{font-size:12px;color:var(--bronze)}
+:root[data-color-mode=dark] .settings-workspace:not([data-section='设置总览'])>.page-heading::after{display:none}
+@media(max-width:1100px){:root.atelier-theme .settings-own-account{grid-template-columns:1fr}:root.atelier-theme .settings-own-account>div{max-width:none;justify-content:flex-start}:root.atelier-theme .settings-own-account>div>p{text-align:left}:root.atelier-theme .settings-access-panel{grid-template-columns:minmax(0,1.6fr) minmax(220px,1fr)}:root.atelier-theme .settings-detail-panel .custom-c-layout{grid-template-columns:210px minmax(0,1fr)}}
+@media(max-width:760px){:root.atelier-theme .settings-workspace>.settings-tabs{gap:5px;padding:6px}:root.atelier-theme .settings-tabs button{flex:1 1 auto;padding:8px 10px;min-height:44px}:root.atelier-theme .settings-detail-panel>.surface-card,:root.atelier-theme .settings-detail-panel>.custom-c>header,:root.atelier-theme .settings-detail-panel .document-template-settings,:root.atelier-theme .settings-detail-panel .template-catalogue{padding:18px}:root.atelier-theme .settings-own-account>dl{grid-template-columns:1fr;gap:12px}:root.atelier-theme .settings-account-filters,:root.atelier-theme .settings-access-panel,:root.atelier-theme .settings-detail-panel .custom-c-layout,:root.atelier-theme .settings-detail-panel .settings-audit-list{grid-template-columns:1fr}:root.atelier-theme .settings-access-panel>fieldset,:root.atelier-theme .settings-access-policy{grid-column:auto;grid-row:auto}:root.atelier-theme .settings-access-panel>fieldset{order:1}:root.atelier-theme .settings-access-policy{order:2}:root.atelier-theme .settings-access-panel>p{order:3}:root.atelier-theme .settings-account-table table{min-width:720px}:root.atelier-theme .settings-detail-panel .aw-header{flex-wrap:wrap;gap:12px}:root.atelier-theme .settings-detail-panel .aw-toolbar>*{min-width:0;max-width:100%}}
+.settings-tab-links{display:contents}
+@media(max-width:760px){
+ :root.atelier-theme .settings-workspace>.settings-tabs{flex-wrap:nowrap;padding:6px;gap:8px}
+ :root.atelier-theme .settings-tabs>.settings-tab-links{display:flex;flex:1;min-width:0;gap:6px;overflow-x:auto;scrollbar-width:thin;scrollbar-color:var(--bronze) transparent;align-items:center}
+ :root.atelier-theme .settings-tab-links button{flex:0 0 auto;min-height:42px;white-space:nowrap}
+ :root.atelier-theme .settings-workspace>.page-heading .page-heading-actions{align-self:flex-end}
+}
+:root.atelier-theme .settings-access-panel{grid-template-columns:minmax(0,1fr)}
+:root.atelier-theme .settings-access-panel>fieldset{grid-column:1/-1;grid-row:2}
+:root.atelier-theme .settings-access-panel>.settings-access-policy{grid-column:1/-1;grid-row:3}
+:root.atelier-theme .settings-access-policy ul{grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));column-gap:30px}
+.settings-access-members{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,210px),1fr));gap:8px}
+.settings-access-members>label{padding:8px 12px;border:1px solid var(--line);border-radius:8px;overflow-wrap:anywhere;background:var(--paper);font-size:13px}
+.settings-access-members input{flex-shrink:0}
+:root.atelier-theme .settings-location-note{color:var(--danger);font-weight:500;font-size:13px;line-height:1.8}
+.settings-related-config{margin-top:18px}
+.settings-related-config>button{margin-top:8px;width:100%}
+.configuration-drawer .template-preview-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:0}
+.configuration-drawer .template-preview-grid>section{padding:18px;border:1px solid var(--line);border-radius:10px;min-width:0}
+.configuration-drawer .template-preview-grid h3{font-size:16px;font-weight:600;margin-bottom:10px;color:var(--bronze)}
+.configuration-drawer .aw-header{padding:16px 18px;background:var(--accent-soft);border-radius:10px;margin-bottom:18px}
+@media(max-width:700px){.configuration-drawer .template-preview-grid{grid-template-columns:1fr}}

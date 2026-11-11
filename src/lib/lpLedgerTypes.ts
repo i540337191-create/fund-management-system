@@ -1,0 +1,10 @@
+import type {FundInvestor} from '../data/funds';
+export type LpTotals={currency:'CNY';unit:'元';commitment:string|null;paidIn:string|null;commitmentKnown:number;receiptKnown:number;investorCount:number;excludedCommitments?:number;excludedReceipts?:number};
+export type LpInvestor=FundInvestor&{profile?:import('./lpProfile').LpProfile;id:string;revision:number;contactName?:string;contactPhone?:string;contactEmail?:string;totals?:LpTotals};
+export type LpProof={id:string;materialId:string;versionId:string;name:string;sha256:string;sizeBytes:number;readIssue?:string};
+export type LpEntry={id:string;investorId:string;amount:string;currency:'CNY';unit:'元';actorId:string;actor:string;createdAt:string;proof:LpProof;effectiveDate?:string;changeReason?:string;previousVersion?:string|null;version?:number;fundId?:string;requestId?:string;bankDate?:string;reference?:string;note?:string;corrects?:string;reason?:string;active?:boolean;current?:boolean};
+export type LpMaterial={id:string;name:string;currentVersionId?:string;currentVersion?:number;readIssue?:string;versions:{id:string;version:number;name:string;sha256:string;downloadHref?:string}[]};
+export type LpLedger={investors:LpInvestor[];totals:LpTotals};
+export type LpDetail={investor:LpInvestor;commitments:LpEntry[];receipts:LpEntry[];materials:LpMaterial[];totals:LpTotals;history?:{id:string;investorId:string;actorId:string;actor:string;createdAt:string;requestId:string;before:LpInvestor|null;after:LpInvestor}[]};
+export type LpMasterInput={profile?:import('./lpProfile').LpProfile;requestId:string;expectedRevision?:number;name:string;type:string;contactName?:string;contactPhone?:string;contactEmail?:string};
+export type LpMoneyInput={requestId:string;expectedRevision:number;amount:string;currency:'CNY';unit:'元';proof:{materialId:string;versionId:string};effectiveDate?:string;changeReason?:string;bankDate?:string;reference?:string;note?:string;reason?:string};

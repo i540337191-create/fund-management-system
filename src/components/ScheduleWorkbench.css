@@ -1,0 +1,19 @@
+.aw-schedules-workspace>.aw-ledger{display:grid;gap:16px}
+.aw-schedules-workspace>.aw-ledger>.aw-record{display:grid;grid-template-columns:minmax(0,1fr) auto 68px;column-gap:24px;row-gap:4px;padding:16px 20px;border:1px solid var(--line);border-radius:10px;background:var(--surface);min-width:0}
+.aw-schedules-workspace .aw-record-head{display:contents}
+.aw-schedules-workspace .aw-record-head h2{grid-column:1;grid-row:1;margin:0;overflow-wrap:anywhere}
+.aw-schedules-workspace .aw-record-head .aw-status{grid-column:3;grid-row:1 / 4;align-self:center;justify-self:end}
+.aw-schedules-workspace .aw-description{grid-column:1;grid-row:2;overflow-wrap:anywhere}
+.aw-schedules-workspace .aw-record>.aw-meta{grid-column:1;grid-row:3;margin:0;font-variant-numeric:tabular-nums}
+.aw-schedules-workspace .aw-record>.aw-actions{grid-column:2;grid-row:1 / 4;align-self:center;margin:0;gap:8px;flex-wrap:wrap}
+@media(max-width:1100px){.aw-schedules-workspace>.aw-ledger>.aw-record{grid-template-columns:minmax(0,1fr) auto;gap:8px 16px}.aw-schedules-workspace .aw-record-head .aw-status{grid-column:2;grid-row:1;align-self:start}.aw-schedules-workspace .aw-description,.aw-schedules-workspace .aw-record>.aw-meta{grid-column:1 / -1}.aw-schedules-workspace .aw-record>.aw-actions{grid-column:1 / -1;grid-row:4;margin-top:4px;justify-self:start}}
+@media(max-width:640px){.aw-schedules-workspace>.aw-ledger>.aw-record{padding:16px;grid-template-columns:minmax(0,1fr) 56px}.aw-schedules-workspace .aw-record-head h2{font-size:16px}}
+dialog[open]:has(.aw-schedules-form){display:flex;flex-direction:column}
+dialog:has(.aw-schedules-form)>div:first-child{flex:none;padding-bottom:16px;border-bottom:1px solid var(--line)}
+.aw-schedules-form{display:flex;flex-direction:column;min-height:0;overflow:hidden}
+.aw-schedules-form>fieldset{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;overflow:auto;min-height:0;padding-right:4px}
+.aw-schedules-form>fieldset>.aw-field{min-width:0;margin:0}
+.aw-schedules-form>fieldset>:nth-child(3),.aw-schedules-form>fieldset>:nth-child(6),.aw-schedules-form>fieldset>.aw-checkbox{grid-column:1 / -1}
+.aw-schedules-form>fieldset textarea{min-height:112px}
+.aw-schedules-form>.aw-actions{flex:none;justify-content:flex-end;margin:16px 0 0;padding-top:16px;border-top:1px solid var(--line);background:var(--surface)}
+@media(max-width:640px){.aw-schedules-form>fieldset{grid-template-columns:minmax(0,1fr)}.aw-schedules-form>fieldset>:nth-child(n){grid-column:1}.aw-schedules-form>.aw-actions>button{min-width:96px}}

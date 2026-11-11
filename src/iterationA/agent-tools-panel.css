@@ -1,0 +1,14 @@
+/* The shared header is positioned; put this drawer in the dialog top layer instead. */
+:root.atelier-theme dialog.agent-tools-panel[open]{width:min(460px,100vw);display:flex;flex-direction:column;overflow:hidden;box-shadow:-4px 0 18px color-mix(in srgb,var(--bronze) 10%,transparent)}
+:root.atelier-theme dialog.agent-tools-panel[open]>div:first-child{position:static;flex:none;padding:18px 22px;min-height:68px}
+.agent-tools-content{flex:1;min-height:0;overflow:auto;padding:0 22px 22px;color:var(--ink);font-size:14px;line-height:1.7}
+.agent-tools-content>.agent-c-drawer-intro{display:block;margin:16px 0;font-size:14px;line-height:1.7}
+.agent-tools-content>nav{display:flex;gap:8px;padding-bottom:16px;border-bottom:1px solid var(--line)}
+.agent-tools-content>nav button{flex:1}
+.agent-tools-content .agent-c-tool-list{min-height:0}
+.agent-tools-content .agent-c-tool-list article{padding:18px 0}
+.agent-tools-content .agent-c-tool-list article p{font-size:14px;max-height:none}
+.agent-tools-content .agent-c-tool-list h3{font-size:15px;line-height:24px}
+.agent-tools-content footer{padding-top:20px}
+.agent-tools-content .agent-c-scope .agent-c-note{display:block;line-height:1.7}
+.agent-shell .employee-catalogue-list>.ledger-pagination{margin-top:20px;padding:16px 0;border-top:1px solid var(--line)}

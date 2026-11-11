@@ -1,0 +1,76 @@
+.risk-status-section { border:1px solid var(--line); border-radius:8px; background:var(--surface); overflow:hidden; }
+.risk-status-section + .risk-status-section { margin-top:16px; }
+.risk-status-section > summary { display:flex; align-items:center; gap:12px; padding:14px 18px; cursor:pointer; background:var(--inset); }
+.risk-status-section > summary strong { font-size:16px; }
+.risk-status-section > summary span { color:var(--secondary); font-variant-numeric:tabular-nums; }
+.risk-status-section > summary::before { content:'›'; font-size:20px; }
+.risk-status-section[open] > summary::before { transform:rotate(90deg); }
+.risk-status-section .responsive-table { border:0; border-radius:0; }
+.risk-status-empty { padding:16px 18px; color:var(--secondary); }
+
+.iteration-a-risk-c .risk-review-desk { display:block; }
+.iteration-a-risk-c .risk-event-list { display:block; }
+.iteration-a-risk-c .risk-event { display:block; width:100%; padding:14px 18px; margin:0; box-shadow:none; border:0; border-bottom:1px solid var(--line); border-radius:0; background:var(--surface); }
+.iteration-a-risk-c .risk-event[aria-pressed=true] { background:var(--accent-soft); }
+.iteration-a-risk-c .risk-detail { margin-top:20px; box-shadow:none; }
+:root.atelier-theme .iteration-a-risk-c .risk-event { background:var(--surface); color:var(--ink); }
+:root.atelier-theme .iteration-a-risk-c .risk-event[aria-pressed=true] { background:var(--accent-soft); }
+:root.atelier-theme .iteration-a-risk-c .risk-severity-tabs > button { box-shadow:none; }
+.iteration-a-risk-c .risk-event h2 { font-size:15px; }
+.iteration-a-risk-c .risk-event > p,.iteration-a-risk-c .risk-event .risk-event-meta { margin-top:6px; }
+.risk-read-feedback{height:44px;overflow:auto;color:var(--secondary);font-size:14px;line-height:1.6}
+.risk-read-feedback[role=alert]{color:var(--danger)}
+
+/* Second approved concept, measured at 1672 × 941; shared navigation is preserved. */
+.risk-monitor.risk-ledger-page{padding:0 16px 0 36px;margin-top:-14px}
+:root.atelier-theme .risk-monitor.risk-ledger-page .page-heading{border-bottom:1px solid var(--line);padding-bottom:24px;margin-bottom:30px}
+:root.atelier-theme .risk-monitor.risk-ledger-page .page-heading h1{font-family:"Songti SC","STSong",serif;font-size:48px;line-height:62px;font-weight:700}
+.risk-monitor.risk-ledger-page .page-heading-eyebrow{font-size:16px;line-height:20px}
+.manual-risk-ledger .manual-risk-heading{display:flex;justify-content:space-between;align-items:center;gap:20px;margin-bottom:20px;min-height:48px}
+.manual-risk-ledger .manual-risk-heading>div:first-child{display:flex;align-items:baseline;gap:28px;flex-wrap:wrap}
+.manual-risk-ledger .manual-risk-heading h3,.risk-materials-heading h2{font-family:"Songti SC","STSong",serif;font-size:30px;font-weight:700;line-height:42px}
+.manual-risk-ledger .manual-risk-heading p,.risk-materials-heading p{font-size:16px;line-height:26px;color:var(--secondary)}
+.manual-risk-tools{display:flex;align-items:center;gap:12px}
+:root.atelier-theme .manual-risk-ledger .manual-risk-tools>button[data-ui]{height:46px;min-width:113px;font-size:17px;gap:12px;border-radius:10px}
+:root.atelier-theme .manual-risk-ledger .manual-risk-tools>button[data-ui=primary]{min-width:153px}
+.risk-monitor.risk-ledger-page .risk-source-note{margin:0;color:var(--warning)!important;background:var(--warning-bg);padding:10px 20px;font-size:16px;line-height:24px;min-height:46px}
+.risk-monitor.risk-ledger-page .risk-read-feedback{height:22px;line-height:22px;font-size:13px}
+.manual-risk-tabs{display:flex;gap:14px;border-bottom:1px solid var(--line);overflow-x:auto}
+:root.atelier-theme .manual-risk-ledger .manual-risk-tabs>button[data-ui]{position:relative;flex-shrink:0;display:flex;gap:10px;align-items:center;padding:8px 22px 13px;min-height:52px;border:0;border-radius:0;background:transparent;color:var(--danger);box-shadow:none;font-size:18px;font-weight:500}
+:root.atelier-theme .manual-risk-ledger .manual-risk-tabs>button[data-ui][aria-pressed=true]{color:var(--bronze);font-weight:650}
+:root.atelier-theme .manual-risk-ledger .manual-risk-tabs>button[data-ui]:hover{background:var(--hover)}
+.manual-risk-tabs>button[aria-pressed=true]:after{position:absolute;content:"";height:2px;bottom:0;left:10px;right:10px;background:var(--bronze)}
+.manual-risk-ledger .manual-risk-records{min-height:192px;border-bottom:1px solid var(--line)}
+.manual-risk-ledger .responsive-table{border:0;border-radius:0;background:transparent;box-shadow:none}
+.manual-risk-ledger table{table-layout:fixed;width:100%;background:transparent}
+.manual-risk-ledger th:nth-child(1){width:32%}.manual-risk-ledger th:nth-child(2){width:13.2%}.manual-risk-ledger th:nth-child(3){width:13.4%}.manual-risk-ledger th:nth-child(4){width:12.8%}.manual-risk-ledger th:nth-child(5){width:28.6%}
+:root.atelier-theme .risk-monitor.risk-ledger-page .manual-risk-ledger :is(th,thead,tbody,td,.responsive-table){background:transparent}
+.manual-risk-ledger th{height:60px;padding:18px 14px 12px;color:var(--secondary);font-size:16px}
+.manual-risk-ledger td{height:132px;padding:14px;vertical-align:middle;overflow-wrap:anywhere;font-size:16px;line-height:1.55}
+.manual-risk-ledger td:first-child>p:first-child{font-size:17px;font-weight:650}
+.manual-risk-ledger td:first-child>p+p{margin-top:4px;color:var(--secondary);font-size:16px}
+.manual-risk-ledger td:first-child>.manual-risk-origin{display:inline-block;font-size:13px;padding:1px 8px;border-radius:5px;background:var(--accent-soft);color:var(--bronze);border:1px solid var(--line)}
+.manual-risk-ledger .manual-risk-project>span{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.manual-risk-level,.manual-risk-state{display:inline-block;padding:2px 9px;border-radius:5px;font-size:14px;white-space:nowrap;margin:2px 6px 2px 0;background:var(--warning-bg);color:var(--warning)}
+.manual-risk-level[data-level=高]{background:var(--danger-bg);color:var(--danger)}.manual-risk-level[data-level=低],.manual-risk-state[data-resolved=true]{background:var(--success-bg);color:var(--success)}
+.manual-risk-ledger .manual-risk-source,.manual-risk-ledger .manual-risk-date{display:block}
+:root.atelier-theme .manual-risk-ledger td:last-child button[data-ui]{font-size:15px;white-space:nowrap;gap:8px;padding:8px 11px;min-height:40px}
+.risk-materials-heading{display:flex;align-items:baseline;flex-wrap:wrap;gap:12px 24px;margin:36px 0 15px}
+.risk-monitor.risk-ledger-page .risk-filters{grid-template-columns:repeat(5,190px);gap:28px;padding:0 10px;background:transparent;border:0;box-shadow:none;margin-bottom:28px}
+.risk-monitor.risk-ledger-page .risk-filters>label{background:var(--surface);height:38px;padding:0 12px;gap:10px}
+.risk-monitor.risk-ledger-page .risk-filters select{font-size:16px;background:transparent;box-shadow:none}
+.risk-monitor.risk-ledger-page .risk-review-desk{display:block;border:0;background:transparent;box-shadow:none;border-radius:0;overflow:visible}
+.risk-monitor.risk-ledger-page .risk-event-list{border:0;padding:0}
+.risk-monitor.risk-ledger-page .risk-status-section{margin-bottom:12px}
+.risk-monitor.risk-ledger-page .risk-status-section summary{color:var(--danger)}
+.risk-monitor.risk-ledger-page .risk-detail{border-top:1px solid var(--line);margin-top:20px;min-height:0;padding:24px 0}
+.risk-monitor.risk-ledger-page .risk-empty{text-align:center;padding:35px 16px 45px}
+.risk-monitor.risk-ledger-page .risk-empty>svg{margin:0 auto 14px;width:56px;height:56px;stroke-width:1.2}
+.risk-monitor.risk-ledger-page .risk-review-desk:not(:has(.risk-event)) .risk-detail{display:none}
+@media(max-width:1450px){.risk-monitor.risk-ledger-page{padding-inline:12px}.risk-monitor.risk-ledger-page .risk-filters{grid-template-columns:repeat(5,minmax(0,190px));gap:16px}.manual-risk-ledger .manual-risk-heading>div:first-child{gap:10px}.manual-risk-ledger td:last-child>div{gap:6px}}
+@media(max-width:1100px){.manual-risk-ledger table{min-width:1000px}.manual-risk-ledger .manual-risk-heading{align-items:flex-start}.manual-risk-ledger .manual-risk-heading>div:first-child{display:block}.risk-monitor.risk-ledger-page .risk-filters{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:767px){.risk-monitor.risk-ledger-page{padding:0;margin-top:0}:root.atelier-theme .risk-monitor.risk-ledger-page .page-heading h1{font-size:32px;line-height:42px}.manual-risk-ledger .manual-risk-heading h3,.risk-materials-heading h2{font-size:24px;line-height:34px}.manual-risk-ledger .manual-risk-heading{display:block}.manual-risk-ledger .manual-risk-tools{margin-top:14px}.manual-risk-ledger .manual-risk-heading p,.risk-materials-heading p{font-size:14px}.risk-monitor.risk-ledger-page .risk-source-note{font-size:13px}.risk-monitor.risk-ledger-page .risk-filters{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;padding:0}.risk-monitor.risk-ledger-page .risk-filters>label{height:44px}.manual-risk-ledger table{min-width:0}.manual-risk-ledger td{height:auto;padding:10px 12px;font-size:14px}.manual-risk-ledger .manual-risk-project>span{white-space:normal}.manual-risk-ledger .responsive-table td>*{grid-column:2;min-width:0}.manual-risk-ledger .responsive-table td::before{grid-column:1;grid-row:1}.manual-risk-ledger .responsive-table td>.manual-risk-level,.manual-risk-ledger .responsive-table td>.manual-risk-state{justify-self:start}.manual-risk-ledger td:last-child>div{justify-content:flex-end}}
+:root.atelier-theme .risk-monitor.risk-ledger-page .risk-filters select{background-color:transparent!important;border:0;min-height:0;padding:0;border-radius:0}
+.manual-risk-ledger .manual-risk-tabs span{font-variant-numeric:tabular-nums}
+.manual-risk-ledger td:first-child>.manual-risk-origin{font-weight:550}
+@media(min-width:768px){.manual-risk-ledger td:last-child{vertical-align:middle}.manual-risk-ledger td:last-child>div{justify-content:flex-start}.manual-risk-ledger td:first-child>p:first-child{font-size:18px}.manual-risk-ledger .manual-risk-project{font-size:16px}}

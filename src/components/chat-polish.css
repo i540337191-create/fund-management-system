@@ -1,0 +1,28 @@
+/* Current-layout polish, selected R27 variant 3. Unslop by Damir Sokolovsky, CC BY 4.0. */
+.agent-shell .chat-polish .assistant-message-assistant .assistant-message-author {gap:12px;align-items:center;margin-bottom:12px;}
+.agent-shell .chat-polish .assistant-message-assistant .assistant-message-author time {padding-left:12px;border-left:1px solid var(--line);font-variant-numeric:tabular-nums;}
+.agent-shell .chat-polish .assistant-message-user {border-color:color-mix(in srgb,var(--bronze) 17%,var(--line));background:color-mix(in srgb,var(--bronze) 7%,var(--surface));}
+.agent-shell .chat-polish .assistant-markdown {overflow-wrap:anywhere;}
+.agent-shell .chat-polish .assistant-message-actions {gap:8px;opacity:1;margin-top:12px;}
+.agent-shell .chat-polish .assistant-message-actions button {min-height:34px;padding:5px 10px;border:1px solid var(--line);border-radius:6px;background:var(--inset);color:var(--secondary);font-size:12px;}
+.agent-shell .chat-polish .assistant-message-actions button:hover {color:var(--bronze);border-color:var(--bronze);}
+.agent-shell .chat-polish .assistant-citations {border-left:2px solid color-mix(in srgb,var(--bronze) 45%,var(--line));padding-left:12px;}
+.agent-shell .chat-polish .assistant-citations summary {color:var(--action-danger-ink,var(--danger));min-height:36px;}
+.agent-shell .chat-polish .assistant-citations li {min-width:0;padding:12px 0;}
+.agent-shell .chat-polish .assistant-citations a {flex-wrap:wrap;overflow-wrap:anywhere;}
+.agent-shell .chat-polish .assistant-citations li>p {max-height:160px;}
+.agent-shell .chat-polish .agent-process-strip {border:1px solid var(--line);background:var(--inset);gap:8px 16px;}
+.agent-shell .chat-polish .agent-activity summary {min-height:36px;color:var(--action-danger-ink,var(--danger));}
+.agent-shell .chat-polish .agent-actions {border-top:1px solid var(--line);padding-top:16px;}
+.agent-shell .chat-polish .agent-action-card {border-color:color-mix(in srgb,var(--bronze) 30%,var(--line));}
+.agent-shell .chat-polish .assistant-composer {border:1px solid color-mix(in srgb,var(--bronze) 60%,var(--line));border-radius:16px;background:var(--surface);box-shadow:0 3px 12px #00000006;}
+.agent-shell .chat-polish .assistant-composer:focus-within {border-color:var(--bronze);box-shadow:0 0 0 2px color-mix(in srgb,var(--bronze) 10%,transparent);}
+.agent-shell .chat-polish .assistant-composer-tools {border-top:1px solid color-mix(in srgb,var(--line) 50%,transparent);}
+.agent-shell .chat-polish .assistant-table-scroll {max-width:100%;border:1px solid var(--line);border-radius:6px;}
+.agent-shell .chat-polish .assistant-code {max-width:100%;}
+.agent-shell .chat-polish .assistant-attachments>span {max-width:100%;min-width:0;}
+.agent-shell .chat-polish .assistant-attachments>span>span {overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+@media(max-width:600px){.agent-shell .chat-polish .assistant-message-actions button{min-height:40px}.agent-shell .chat-polish .assistant-message-assistant{padding-left:40px}.agent-shell .chat-polish .assistant-citations summary{max-width:100%;font-size:11px}.agent-shell .chat-polish .assistant-composer{border-radius:12px}.agent-shell .chat-polish .assistant-citations{padding-left:8px}.agent-shell .chat-polish .agent-actions{margin-left:0}.agent-shell .chat-polish .assistant-message-actions{gap:6px}}
+/* The page status occupies real space; the conversation must use the remaining height. */
+.agent-shell .atelier-main>div:has(>.assistant-workspace.chat-polish){display:flex;flex-direction:column;min-height:0;}
+.agent-shell .assistant-workspace.chat-polish{flex:1 1 0;height:auto;min-height:0;}

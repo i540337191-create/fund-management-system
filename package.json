@@ -1,0 +1,53 @@
+{
+  "name": "fund-management-system",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0",
+    "dev:api": "npm --prefix server run dev",
+    "test": "node --test --test-concurrency=1 --experimental-strip-types tests/*.test.ts",
+    "test:api": "npm --prefix server test",
+    "build": "tsc --noEmit && vite build",
+    "build:api": "npm --prefix server run build",
+    "check:client-secrets": "node scripts/check-client-secret-exposure.mjs --require-dist",
+    "backup:db": "node scripts/backup-postgres.mjs",
+    "restore:db": "node scripts/restore-postgres.mjs",
+    "materials:build-chunks": "node scripts/generate-material-text-chunks.mjs",
+    "materials:build-office-previews": "node scripts/generate-office-preview-pdfs.mjs",
+    "materials:build-pdf-page-images": "node scripts/generate-pdf-page-images.mjs",
+    "materials:import-db": "npm --prefix server run import:materials:dev",
+    "prepare:release-env": "node scripts/prepare-release-env.mjs",
+    "verify:release": "node scripts/verify-server-release.mjs",
+    "preflight:release": "node scripts/preflight-server-release.mjs",
+    "deploy:compose": "node scripts/deploy-compose-release.mjs",
+    "drill:restore:compose": "node scripts/drill-compose-backup-restore.mjs",
+    "package:release": "node scripts/package-release.mjs",
+    "evidence:phase1": "node scripts/collect-phase1-evidence.mjs",
+    "audit:phase1": "node scripts/audit-serverization-phase1.mjs",
+    "preview": "vite preview --host 0.0.0.0",
+    "package:release:workspace": "node scripts/package-workspace.mjs",
+    "backup:full": "node scripts/full-backup.mjs backup",
+    "restore:full": "node scripts/full-backup.mjs restore",
+    "demo": "node scripts/start-demo.mjs"
+  },
+  "dependencies": {
+    "@chenglou/pretext": "^0.0.6",
+    "@vitejs/plugin-react": "^5.0.0",
+    "lucide-react": "^0.468.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "vite": "^8.0.10"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.17",
+    "@types/react-dom": "^18.3.5",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5.7.2"
+  },
+  "imports": {
+    "#fund/i18n/*": "./src/i18n/*.ts"
+  }
+}

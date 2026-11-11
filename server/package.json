@@ -1,0 +1,28 @@
+{
+  "name": "fund-management-api",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/start.ts",
+    "start": "node dist/start.js",
+    "build": "tsc -p tsconfig.json",
+    "migrate": "node dist/db/migrate.js",
+    "seed": "node dist/db/seed.js",
+    "migrate:dev": "tsx src/db/migrate.ts",
+    "seed:dev": "tsx src/db/seed.ts",
+    "import:materials": "node dist/db/import-source-materials.js",
+    "import:materials:dev": "tsx src/db/import-source-materials.ts",
+    "test": "node --test --test-concurrency=2 --experimental-strip-types tests/*.test.ts"
+  },
+  "dependencies": {
+    "fastify": "^5.0.0",
+    "pg": "^8.13.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/pg": "^8.20.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.2"
+  }
+}

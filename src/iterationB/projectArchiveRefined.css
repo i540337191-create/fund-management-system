@@ -1,0 +1,142 @@
+/* Selected C: bronze dossier, exception first, compact business records. */
+.project-archive-workspace{--dossier-bronze:#856039;--dossier-selection:linear-gradient(180deg,#c6a16b20,#b28b5338);--dossier-selection-shadow:0 3px 12px #79542c26,inset 0 1px 0 #fff7e955;--dossier-gold:#d9b57d;--dossier-deep:#382819;--dossier-rule:color-mix(in srgb,var(--bronze) 18%,var(--line))}
+:root.atelier-theme .project-archive-workspace .project-header-a{position:relative;isolation:isolate;overflow:hidden;background:radial-gradient(ellipse at 85% -70%,#bd8b4c99 0,transparent 65%),linear-gradient(112deg,#2c2017,#513922 55%,#322217);border:1px solid #80613c;border-radius:5px;box-shadow:inset 0 1px 0 #f2d7a233,0 3px 9px #34231816;padding:20px 24px 16px;margin-bottom:14px;color:#f6eddf}
+.project-archive-workspace .project-header-a:before{content:'';position:absolute;z-index:-1;inset:0;pointer-events:none;background:repeating-linear-gradient(118deg,transparent 0 4px,#f7dba103 4px 5px),linear-gradient(153deg,transparent 68%,#f9dca114 68.1%,transparent 70%,#e7c18e16 71%,transparent 71.2%);opacity:.8}
+.project-archive-workspace .project-header-a h2{font-family:'Songti SC','STSong',serif;font-size:24px;line-height:34px;letter-spacing:.01em;color:#fff5e5;font-weight:700}
+.project-archive-workspace .project-header-a h2>button{color:inherit!important}
+.project-archive-workspace .project-header-a-meta{margin-top:8px;font-size:13px;gap:10px 18px}
+.project-archive-workspace .project-header-a-meta :is(dt,.project-header-a-badges>span:first-child,.project-header-a-updated){color:#dacbb7}
+.project-archive-workspace .project-header-a-meta :is(dd,time){color:#f5e8d5;font-weight:500}
+.project-archive-workspace .project-header-a-meta dl>div+div,.project-archive-workspace .project-header-a-updated{border-color:#ad8d5d55}
+.project-archive-workspace .project-header-a-badges>span:not(:first-child){background:#ecd7b723!important;color:#f2dfbd!important;box-shadow:inset 0 0 0 1px #d7b77e66;padding:2px 9px;border-radius:3px}
+.project-archive-workspace .project-header-a-badges>span:last-child{background:#34412c88!important;color:#e0e8c9!important;box-shadow:inset 0 0 0 1px #a7ad7766}
+:root.atelier-theme .project-archive-workspace :is(.project-archive-page-actions,.project-header-a-tools) button[data-ui]{background:var(--action-create-fill)!important;color:var(--action-primary-ink)!important;border:1px solid #aa8352!important;border-radius:4px!important;box-shadow:inset 0 1px 0 #ead3a233,0 2px 4px #21130926!important;text-shadow:0 1px 1px #39210e55;font-weight:550}
+:root.atelier-theme .project-archive-workspace :is(.project-archive-page-actions,.project-header-a-tools) button[data-ui]:hover{background:linear-gradient(160deg,#b88c56,#885d34)!important}
+.project-archive-workspace .project-header-a-stages{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:0;flex-wrap:nowrap;margin-top:20px;min-height:40px;padding:0;border:1px solid #b9975b88;border-radius:3px;background:linear-gradient(180deg,#b48b5340,#51381e33)}
+.project-archive-workspace .project-header-a-stages li{display:flex;justify-content:space-between;align-items:center;position:relative;gap:8px;margin:0;min-width:0;min-height:40px;color:#d9c6ac;font-size:13px;padding:0 8px 0 12px;border-right:1px solid #b9975b55}
+.project-archive-workspace .project-header-a-stages li:last-child{border:0}
+.project-archive-workspace .project-stage-label{display:flex;align-items:center;justify-content:center;gap:8px;min-width:0;padding:0!important;background:transparent!important;box-shadow:none!important;border-radius:0!important;font-weight:500;white-space:nowrap}
+.project-archive-workspace .project-stage-label b{font-size:10px;font-weight:400;letter-spacing:.03em;color:#b69a73}
+.project-archive-workspace .project-stage-label small{font-size:10px;font-weight:500;line-height:17px;padding:0 5px;color:#68451f;background:#f1d6a1;border-radius:2px}
+.project-archive-workspace .project-header-a-stages [aria-current=step]{color:#fff3d9;background:linear-gradient(105deg,#a77536,#c4944f 60%,#9a682e);clip-path:polygon(0 0,calc(100% - 9px) 0,100% 50%,calc(100% - 9px) 100%,0 100%);border:0;box-shadow:inset 0 1px 0 #f3d69c88}
+.project-archive-workspace .project-header-a-stages [aria-current=step] b{color:#f2d6a9}
+.project-archive-workspace .project-header-a-stages li>svg{stroke-width:1.6;color:#d3b27e;width:18px;flex-shrink:0}
+.project-archive-workspace .project-header-a-stages [aria-current=step]>svg{color:#fff0cf}
+.project-archive-workspace .project-header-a-stage-note{color:#e8cfaa}
+:root.atelier-theme .project-archive-workspace .project-review-strip{margin:0 0 10px;border-radius:3px;background:linear-gradient(105deg,var(--danger-bg),color-mix(in srgb,var(--danger-bg) 45%,var(--surface)));border:1px solid color-mix(in srgb,var(--danger) 30%,var(--line));box-shadow:none;height:38px;min-height:38px}
+.project-archive-workspace .project-review-strip>strong{color:var(--danger);border-color:color-mix(in srgb,var(--danger) 30%,transparent);font-size:13px}
+.project-archive-workspace .project-review-strip>strong>span{background:var(--danger);font-weight:600}
+.project-archive-workspace .project-review-strip-results p{color:var(--danger);font-size:13px;font-weight:500}
+:root.atelier-theme .project-archive-workspace .project-review-strip-results button{color:var(--danger);font-size:12px}
+:root.atelier-theme .project-archive-workspace .project-review-strip>.business-refresh{color:var(--danger);border-left-color:color-mix(in srgb,var(--danger) 25%,transparent)}
+.project-archive-workspace .project-module-nav{padding:0 0 6px;gap:0;margin-bottom:14px}
+:root.atelier-theme .project-archive-workspace .project-module-nav>button{flex:1;font-size:14px;padding:9px 8px;font-weight:550}
+:root.atelier-theme .project-archive-workspace .project-module-nav>button[aria-current=page]{background:var(--dossier-selection)!important;box-shadow:var(--dossier-selection-shadow)!important;color:var(--bronze)!important;border-radius:4px!important}
+.archive-module-summary{padding:0 0 14px;margin-bottom:14px;border-bottom:1px solid var(--dossier-rule);min-height:128px}
+.archive-module-conclusion{display:flex;align-items:flex-start;justify-content:space-between;gap:20px;min-height:58px}
+.archive-module-conclusion h2{font-size:12px;color:var(--secondary);font-weight:500;margin-bottom:5px}
+.archive-module-conclusion p{font-size:16px;line-height:1.8;font-weight:600;color:var(--ink);max-width:105ch}
+.archive-module-conclusion .business-refresh{flex-shrink:0;margin:0}
+.archive-process-nodes{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);gap:8px;margin-top:14px;max-width:1100px;min-height:42px}
+:root.atelier-theme .project-archive-workspace .archive-process-nodes>button{display:flex;align-items:baseline;gap:10px;justify-content:flex-start;text-align:left;padding:9px 16px;min-height:40px;border:0;border-radius:4px;background:transparent!important;box-shadow:none!important;color:var(--ink)!important;font-size:13px}
+:root.atelier-theme .project-archive-workspace .archive-process-nodes>button:last-child{border-right:0}
+:root.atelier-theme .project-archive-workspace .archive-process-nodes>button[aria-current=step]{background:var(--dossier-selection)!important;box-shadow:var(--dossier-selection-shadow)!important}
+.archive-process-nodes small{font-size:10px;letter-spacing:.02em;color:var(--secondary)}
+.archive-process-nodes strong{font-weight:550;font-size:12px;color:var(--bronze);margin-left:auto;white-space:nowrap}
+:root.atelier-theme .project-archive-workspace .project-next-action{grid-template-columns:minmax(0,1fr) auto;gap:5px 16px;padding:0 0 14px;border:0;border-bottom:1px solid var(--dossier-rule);border-radius:0;background:transparent;min-height:68px;margin-bottom:0}
+.project-archive-workspace .project-next-action h3{font-size:12px!important;color:var(--secondary);font-weight:500}
+.project-archive-workspace .project-next-action-copy{font-size:16px;line-height:1.8;font-weight:600;color:var(--ink)}
+.project-archive-workspace .project-overview-facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));padding:12px 0;background:transparent;border:0;border-radius:0;margin:0}
+.project-archive-workspace .project-overview-facts>div{justify-content:flex-start;gap:12px;padding:0 16px}
+.project-archive-workspace .project-overview-facts>div:first-child{padding-left:0}
+.project-archive-workspace .project-overview-facts :is(dt,dd){font-size:13px}
+.project-archive-workspace .project-overview-basis{margin:0 0 10px;font-size:11px}
+.project-archive-workspace .project-overview-columns{grid-template-columns:minmax(0,1fr) minmax(240px,28%);gap:24px;margin:0 0 12px;align-items:start}
+.project-archive-workspace .project-overview-main{gap:18px}
+.project-archive-workspace .archive-section{border:0;border-radius:0;padding:0;background:transparent}
+.project-archive-workspace .archive-section>header{margin:0 0 10px;min-height:32px}
+.project-archive-workspace .archive-section>header h3{font-size:15px;font-weight:600;color:var(--ink)}
+.project-archive-workspace .archive-section>header h3:before{display:none}
+.project-archive-workspace .project-overview-side{border-left:1px solid var(--dossier-rule);padding-left:22px;gap:20px}
+.project-archive-workspace .project-overview-side h4{margin:12px 0 4px}
+.project-archive-workspace .project-overview-side p{color:var(--ink);font-size:13px;line-height:1.9;margin:6px 0 12px}
+.project-archive-workspace .overview-a-table{border:1px solid var(--line)}
+.project-archive-workspace .overview-a-table :is(th,td){padding:9px 12px;font-size:13px;line-height:1.65}
+.project-archive-workspace .overview-a-table th{background:var(--inset);font-weight:550;color:var(--secondary)}
+.archive-inspector-links{display:flex;align-items:center;gap:10px;border-top:1px solid var(--dossier-rule);padding:14px 0;margin-top:16px;flex-wrap:wrap}
+.archive-inspector-links>span{font-size:12px;color:var(--secondary);margin-right:6px}
+:root.atelier-theme .archive-inspector-links button{min-height:32px;padding:6px 12px}
+.archive-basic-record{font-size:13px;line-height:1.85}
+.archive-basic-record>dl{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 20px;margin-bottom:20px}
+.archive-basic-record>dl>div{display:grid;grid-template-columns:80px minmax(0,1fr);gap:8px;padding:9px 0;border-bottom:1px solid var(--line)}
+.archive-basic-record dt{color:var(--secondary)}
+.archive-basic-record section{padding:12px 0;border-bottom:1px solid var(--line)}
+.archive-basic-record h3{font-size:14px;margin-bottom:8px}
+.archive-basic-record p{white-space:pre-wrap}
+.archive-drawer-intro{font-size:13px;color:var(--secondary);margin-bottom:16px}
+.archive-drawer-toolbar,.archive-report-toolbar{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.archive-report-primary-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.archive-report-utilities{margin-left:auto;display:flex;gap:8px;flex-shrink:0}
+:root.atelier-theme .project-archive-workspace .project-module-content>section:not(.project-overview-compact){border:0;border-radius:0;background:transparent;padding:0}
+.project-archive-workspace .archive-deal-grid{gap:18px 24px}
+.project-archive-workspace .archive-deal-section{background:transparent;border:0;border-radius:0;padding:0}
+.project-archive-workspace .archive-deal-section>h3{font-size:14px!important;color:var(--ink)}
+.project-archive-workspace .project-support-details{border:0;border-radius:0;padding:8px 0;background:transparent}
+.project-archive-workspace .project-record-list{border:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);border-radius:0;background:transparent}
+.project-archive-workspace .project-record-list>summary{padding:10px 4px}
+.project-archive-workspace .project-record-list>.project-record-body{padding:8px 12px 14px;background:var(--surface)}
+:root.atelier-theme .project-archive-workspace .project-module-content :is(button,a)[data-ui=secondary]{background:linear-gradient(155deg,#ad865332,#9a73302b)!important;color:var(--bronze)!important;border:1px solid color-mix(in srgb,var(--bronze) 32%,var(--line));box-shadow:inset 0 1px 0 #f0dbb322!important;border-radius:3px}
+:root.atelier-theme .project-archive-workspace .business-refresh{background:transparent!important;box-shadow:none!important;border:0!important;color:var(--bronze);width:30px;height:30px;min-height:30px;padding:6px!important}
+.project-archive-workspace .diligence-workspace>div:first-child{margin-bottom:8px}
+.project-archive-workspace .diligence-state{margin-top:8px;padding:6px 10px;font-size:12px}
+.project-archive-workspace .diligence-view-help{margin-block:8px;font-size:12px}
+.project-archive-workspace .archive-status-line{padding:8px 12px!important;border:0!important;border-radius:0!important;background:var(--inset)!important}
+@media(max-width:1100px){.project-archive-workspace .project-overview-columns{grid-template-columns:minmax(0,1fr)}.project-archive-workspace .project-overview-side{grid-template-columns:repeat(2,minmax(0,1fr));border-left:0;border-top:1px solid var(--line);padding:16px 0 0}.project-archive-workspace .project-header-a-meta{gap:8px 12px}.archive-process-nodes strong{white-space:normal}}
+@media(max-width:700px){.project-archive-workspace .project-header-a{padding:16px}.project-archive-workspace .project-header-a h2{font-size:21px}.project-archive-workspace .project-header-a-title{gap:12px}.project-archive-workspace .project-header-a-stages{grid-template-columns:repeat(3,minmax(0,1fr));gap:0}.project-archive-workspace .project-header-a-stages li{font-size:12px;padding-inline:8px;min-height:36px}.project-archive-workspace .project-header-a-stages li:nth-child(3){border-right:0}.project-archive-workspace .project-header-a-stages li:nth-child(-n+3){border-bottom:1px solid #b9975b55}.project-archive-workspace .project-header-a-stages li>svg{width:14px}.project-archive-workspace .project-stage-label{gap:5px}.project-archive-workspace .project-stage-label small{display:none}.project-archive-workspace .project-review-strip{height:auto}.project-archive-workspace .project-overview-facts{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.project-archive-workspace .project-overview-facts>div:nth-child(3){padding-left:0}.project-archive-workspace .project-overview-side{grid-template-columns:minmax(0,1fr)}.archive-process-nodes{grid-auto-flow:row;grid-template-columns:minmax(0,1fr)}.archive-process-nodes>button{border:0!important}.archive-module-summary{min-height:0}.archive-basic-record>dl{grid-template-columns:minmax(0,1fr)}}
+.project-archive-workspace .project-header-a[data-risk="高"] .project-header-a-badges>span:last-child{background:#68292199!important;color:#ffcfbe!important;box-shadow:inset 0 0 0 1px #e58b7277}
+.project-archive-workspace .project-header-a[data-risk="中"] .project-header-a-badges>span:last-child{background:#795a2188!important;color:#ffe3a3!important;box-shadow:inset 0 0 0 1px #ddbc7177}
+.archive-module-summary-brief{min-height:72px;margin-bottom:12px;padding-bottom:8px}
+.archive-process-nodes[data-sequential=false]>button>small{display:none}
+.archive-process-fact{display:flex;align-items:baseline;justify-content:space-between;gap:12px;padding:9px 16px;background:transparent;border:0;font-size:13px}
+.archive-process-fact:last-child{border:0}
+@media(max-width:1100px){.archive-process-nodes{grid-auto-flow:row;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px}.archive-process-nodes button,.archive-process-fact{border:0!important}}
+@media(max-width:700px){.archive-process-nodes{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:1100px){.project-archive-workspace .project-module-nav{display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}.project-archive-workspace .project-module-nav>button{white-space:nowrap}.project-archive-workspace .project-stage-label small{display:none}}
+
+.project-archive-workspace .project-module-content .task-register table td:first-child{border-left:0}
+
+.archive-business-intro{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 36px;padding:4px 0 22px}
+.archive-business-intro h3,.archive-investment-headline h3,.archive-business-action>h3{font-size:15px;font-weight:600;color:var(--ink);margin-bottom:8px}
+.archive-business-intro p{font-size:14px;line-height:1.9;white-space:pre-wrap;color:var(--ink)}
+.archive-business-intro time,.archive-business-note{font-size:12px;color:var(--secondary);line-height:1.8}
+.archive-master-investment{display:flex;gap:18px;align-items:center;padding:10px 0 16px;font-size:13px}.archive-master-investment>strong{font-size:17px;color:var(--bronze)}.archive-master-investment>button{margin-left:auto}
+.archive-investment-headline{padding:12px 0 18px;border-block:1px solid var(--line);margin-bottom:22px;min-height:132px}
+.archive-investment-headline>header{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px}.archive-investment-headline>header>h3{margin:0}.archive-investment-headline-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap}.archive-investment-headline-actions>span{font-size:12px;color:var(--secondary)}
+.archive-business-facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;margin:14px 0}.archive-business-facts dt{font-size:12px;color:var(--secondary)}.archive-business-facts dd{font-size:22px;line-height:1.8;color:var(--bronze);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.archive-operating-snapshot{margin:10px 0 24px!important}.archive-operating-snapshot .archive-business-note{margin-bottom:10px}.archive-operating-snapshot td small{display:block;font-size:11px;color:var(--secondary);line-height:1.7}
+.archive-business-risks{padding:0 0 20px!important}.archive-business-risks p{font-size:13px;line-height:1.9}.archive-business-action{padding:12px 0 18px}.archive-business-action .project-next-action{border-bottom:0!important;padding-bottom:0!important}
+@media(max-width:900px){.archive-business-facts{grid-template-columns:repeat(2,minmax(0,1fr))}.archive-business-intro{gap:18px}}
+@media(max-width:650px){.archive-business-intro{grid-template-columns:1fr}}
+.archive-document-directory>header{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}.archive-document-directory h3{font-size:15px}
+.archive-directory-layout{display:grid;grid-template-columns:minmax(180px,24%) minmax(0,1fr);gap:24px}.archive-directory-layout>nav{display:flex;flex-direction:column;gap:8px}.archive-directory-layout>nav>button{display:flex;text-align:left;align-items:center;gap:8px;background:transparent!important;border:0!important;box-shadow:none;min-height:38px}.archive-directory-layout>nav>button>span{flex:1}.archive-directory-layout>nav>button[aria-current=page]{background:var(--dossier-selection)!important;box-shadow:var(--dossier-selection-shadow)!important}.archive-directory-layout details{font-size:11px}.archive-directory-layout details>summary{font-size:11px!important}
+@media(max-width:900px){.archive-directory-layout{grid-template-columns:minmax(0,1fr)}.archive-directory-layout>nav{flex-direction:row;flex-wrap:wrap}.archive-directory-layout>nav>button{max-width:100%}}
+/* Match the fund cover's desktop dimensions; allow long names to grow naturally. */
+:root.atelier-theme .project-archive-workspace .project-header-a{min-height:192px;display:flex;flex-direction:column;justify-content:space-between;padding:20px 24px 24px}
+.project-archive-workspace .project-header-a h2{font-size:30px;line-height:1.35}
+.project-archive-workspace .project-header-a-meta{margin-top:12px;margin-bottom:4px}
+.project-archive-workspace .project-header-a-stages{width:100%;margin-top:20px}
+.project-archive-workspace .dossier-sections{display:grid;grid-template-columns:166px minmax(0,1fr);gap:28px;align-items:start;min-width:0;margin-top:14px}
+.project-archive-workspace .dossier-section-directory{display:flex;flex-direction:column;gap:6px;padding:0 18px 14px 0;border-right:1px solid var(--line)}
+:root.atelier-theme .project-archive-workspace .dossier-section-directory>button{justify-content:flex-start;text-align:left;min-height:40px;padding:9px 12px;background:transparent!important;box-shadow:none!important;border:0!important;color:var(--secondary);font-size:13px}
+:root.atelier-theme .project-archive-workspace .dossier-section-directory>button[aria-current=page]{background:var(--dossier-selection)!important;box-shadow:var(--dossier-selection-shadow)!important;color:var(--bronze)}
+.project-archive-workspace .dossier-section-panels{min-width:0}.project-archive-workspace .dossier-section-panels>section[hidden]{display:none!important}
+.project-archive-workspace .dossier-section-panels .archive-investment-headline{border-top:0;padding-top:0;margin-top:0}
+.project-archive-workspace .dossier-section-panels .archive-deal-section{margin-bottom:18px}
+@media(min-width:1650px){:root.atelier-theme .project-archive-workspace .project-header-a{min-height:210px}}
+@media(max-width:1100px){.project-archive-workspace .dossier-sections{grid-template-columns:145px minmax(0,1fr);gap:20px}.project-archive-workspace .dossier-section-panels .archive-business-facts{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:760px){.project-archive-workspace .dossier-sections{display:block}.project-archive-workspace .dossier-section-directory{flex-direction:row;flex-wrap:wrap;padding:0 0 12px;border:0}.project-archive-workspace .project-header-a h2{font-size:24px}}
+.project-archive-workspace .archive-business-intro{gap:14px 32px;padding:0 0 14px}.project-archive-workspace .archive-business-intro h3{margin-bottom:5px}.project-archive-workspace .archive-business-intro p{line-height:1.7}
+:root.atelier-theme .project-archive-workspace .dossier-section-directory>button{color:var(--secondary)!important}
+:root.atelier-theme .project-archive-workspace .dossier-section-directory>button[aria-current=page]{color:var(--bronze)!important}
+.archive-investment-entry{display:flex;align-items:center;gap:10px 18px;flex-wrap:wrap;padding:4px 0 14px;font-size:13px;line-height:1.8}.archive-investment-entry>p{flex:1;min-width:200px;color:var(--secondary)}
+.archive-allocation-row{display:flex;align-items:flex-end;gap:12px;margin:10px 0}.archive-allocation-row>label{flex:1;min-width:0;font-size:13px}

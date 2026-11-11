@@ -1,0 +1,2 @@
+export function validCalendarDate(value:string){return /^\d{4}-\d{2}-\d{2}$/.test(value)&&Number.isFinite(Date.parse(value+'T00:00:00Z'))&&new Date(value+'T00:00:00Z').toISOString().slice(0,10)===value;}
+export function negativeFinancialValue(value:string){const match=/^[-−]\s*([\d,]+(?:\.\d+)?)/.exec(value.trim().replace(/^(?:人民币|CNY|RMB|¥|￥)\s*/i,''));return Boolean(match&&/[1-9]/.test(match[1]));}

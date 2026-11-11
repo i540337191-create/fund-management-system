@@ -1,0 +1,8 @@
+dialog:has(.meeting-schedule-form)>div:first-child{margin:-24px -24px 20px;padding:20px 24px;background:var(--inset);border-bottom:1px solid var(--line)}
+.meeting-schedule-form>fieldset{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;border:0;padding:0;min-width:0}
+.meeting-schedule-form>fieldset>label{margin:0;min-width:0}
+.meeting-schedule-form>fieldset>label:first-child{grid-column:1 / -1}
+.meeting-schedule-form>.flex{justify-content:flex-end;border-top:1px solid var(--line);padding-top:16px}
+.meeting-schedule-feedback{height:48px;overflow:auto}
+.meeting-schedule-feedback>p{margin:0}
+@media(max-width:640px){.meeting-schedule-form>fieldset{grid-template-columns:minmax(0,1fr)}.meeting-schedule-form>fieldset>label:first-child{grid-column:1}.meeting-schedule-form>.flex{flex-wrap:wrap}}

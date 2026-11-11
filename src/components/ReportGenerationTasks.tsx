@@ -1,0 +1,10 @@
+import {ArchiveIssueTicker} from '../iterationB/ArchiveIssueTicker';
+import {useEffect,useState} from 'react';
+import {createApiClient} from '../lib/apiClient';
+import {assistantClient,type Conversation} from '../lib/assistantClient';
+import {readReportGenerations,reportGenerationEvent,type ReportGeneration} from '../lib/reportGeneration';
+export function ReportGenerationTasks({onOpen}:{onOpen:(task:ReportGeneration)=>void}){
+ const [rows,setRows]=useState<{task:ReportGeneration;conversation?:Conversation;failed?:boolean}[]>([]),[error,setError]=useState(''),[refresh,setRefresh]=useState(0),[loading,setLoading]=useState(true);
+ useEffect(()=>{let alive=true,reading=false;async function load(){if(reading)return;reading=true;try{const {user}=await createApiClient().getSessionMe();const tasks=readReportGenerations(localStorage,user.id);const next=await Promise.all(tasks.map(async task=>{try{return {task,conversation:await assistantClient.get(task.conversationId)};}catch{return {task,failed:true};}}));if(alive){setRows(next);setError('');}}catch{if(alive){setRows([]);setError('暂未读取报告生成任务，请稍后重新进入。');}}finally{reading=false;if(alive)setLoading(false);}}void load();const timer=setInterval(()=>void load(),3000);window.addEventListener(reportGenerationEvent,load);return()=>{alive=false;clearInterval(timer);window.removeEventListener(reportGenerationEvent,load);};},[refresh]);
+ return <ArchiveIssueTicker label="报告生成任务" viewLabel="查看任务" busy={loading} onRefresh={()=>setRefresh(n=>n+1)} status={loading?'正在读取报告生成任务…':error||(rows.length?`${rows.length} 项报告任务，可继续核对与保存。`:'暂无待续办的报告任务。')} items={rows.map(({task,conversation:c,failed})=>{const message=c?.messages.find(m=>m.role==='assistant'&&m.requestId===task.requestId);const status=failed?'状态暂未读取':c?.activeRequestId===task.requestId?'生成中':message?.status==='complete'?'草稿已生成 · 待核对':message?'生成未完成 · 可恢复':'生成请求待核对';return {id:task.id,label:failed?'暂不可读取的报告任务':task.name,source:status,detail:failed?'请重新读取任务状态；权限不足时不能查看内容。':'退出页面不停止已接收的生成任务，草稿仍须核对并保存。',open:()=>failed?setRefresh(n=>n+1):onOpen(task)};})}/>;
+}

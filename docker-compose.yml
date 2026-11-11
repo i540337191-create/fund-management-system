@@ -1,0 +1,86 @@
+x-service-logging: &service-logging
+  driver: json-file
+  options:
+    max-size: "10m"
+    max-file: "5"
+
+services:
+  postgres:
+    restart: unless-stopped
+    logging: *service-logging
+    image: postgres:16
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-fundapp_road_fund}
+      POSTGRES_USER: ${POSTGRES_USER:-fundapp}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?POSTGRES_PASSWORD is required}
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER:-fundapp} -d $${POSTGRES_DB:-fundapp_road_fund}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  api:
+    restart: unless-stopped
+    logging: *service-logging
+    build:
+      context: .
+      dockerfile: server/Dockerfile
+    environment:
+      API_PORT: 8788
+      MATERIAL_STORAGE_ROOT: /app/private-material-storage/data
+      PGHOST: postgres
+      PGPORT: 5432
+      PGUSER: ${POSTGRES_USER:-fundapp}
+      PGPASSWORD: ${POSTGRES_PASSWORD:?POSTGRES_PASSWORD is required}
+      PGDATABASE: ${POSTGRES_DB:-fundapp_road_fund}
+      APP_AUTH_MODE: ${APP_AUTH_MODE:-password}
+      SESSION_SECRET: ${SESSION_SECRET:?SESSION_SECRET is required}
+      SESSION_COOKIE_SECURE: ${SESSION_COOKIE_SECURE:-false}
+      SESSION_MAX_AGE_SECONDS: ${SESSION_MAX_AGE_SECONDS:-28800}
+      ADMIN_EMAIL: ${ADMIN_EMAIL:-admin@example.local}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:?ADMIN_PASSWORD is required}
+      QWEN_API_KEY: ${QWEN_API_KEY:-}
+      QWEN_BASE_URL: ${QWEN_BASE_URL:-https://token-plan.cn-beijing.maas.aliyuncs.com/compatible-mode/v1}
+      QWEN_MODEL: ${QWEN_MODEL:-qwen3.7-max}
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:8788/api/health').then(r=>{if(!r.ok)process.exit(1)}).catch(()=>process.exit(1))"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 60s
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - material_files:/app/private-material-storage
+    expose:
+      - "8788"
+
+  web:
+    restart: unless-stopped
+    logging: *service-logging
+    build:
+      context: .
+      dockerfile: Dockerfile.web
+    expose:
+      - "80"
+
+  nginx:
+    restart: unless-stopped
+    logging: *service-logging
+    build:
+      context: .
+      dockerfile: Dockerfile.nginx
+    depends_on:
+      api:
+        condition: service_healthy
+      web:
+        condition: service_started
+    ports:
+      - "${HTTP_BIND_ADDRESS:-127.0.0.1}:${HTTP_PORT:-80}:80"
+
+volumes:
+  postgres_data:
+  material_files:

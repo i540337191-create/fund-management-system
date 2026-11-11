@@ -1,0 +1,7 @@
+.agent-workspace>.aw-feedback-slot{height:72px;overflow:auto;display:flex;align-items:center;margin:0 0 8px;color:var(--secondary);font-size:13px}
+.aw-feedback-slot>p{margin:0}
+.agent-workspace>.aw-feedback-slot>.aw-error{width:100%;margin:0;display:flex;align-items:center;flex-wrap:wrap;gap:8px;padding:8px 12px}
+.aw-feedback-slot:focus-visible{outline:2px solid var(--bronze);outline-offset:2px;border-radius:6px}
+
+.aw-feedback-slot>.aw-saved-feedback{display:flex;flex-wrap:wrap;align-items:center;gap:4px 12px;width:100%}
+.aw-saved-feedback>button{margin-left:auto}

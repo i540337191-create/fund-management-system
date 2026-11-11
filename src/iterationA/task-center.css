@@ -1,0 +1,261 @@
+/* Shared embedded task workspace keeps its existing operations. */
+.iteration-a-selection{display:flex;align-items:center;flex-wrap:wrap;gap:12px;padding:8px 12px;background:var(--inset)}
+.iteration-a-task-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:16px 0}
+.iteration-a-task-stats>button{display:flex;flex-direction:column;padding:14px;color:var(--bronze)}
+.iteration-a-task-stats strong{font-size:26px}
+.aw-task-ledger input[type=checkbox]{width:18px;height:18px;accent-color:var(--bronze)}
+.workflow-task-workspace .task-source-location{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:80px;padding:12px 14px;border:1px solid var(--line);font-size:13px}
+.workflow-task-workspace tr[data-source-selected=true]{background:var(--accent-soft);outline:1px solid var(--bronze);outline-offset:-1px}
+
+/* Selected Image Gen result 01, task-center-charts-20261109. */
+:root.atelier-theme main .tasks-workspace>.task-center-v3{--task-line:color-mix(in srgb,var(--bronze) 16%,transparent);display:flex;flex-direction:column;gap:0;min-width:0;padding:0 4px}
+:root.atelier-theme .task-center-v3 .aw-header{order:0;display:flex;justify-content:space-between;align-items:center;border:0;margin:0 0 18px;padding:0}
+:root.atelier-theme .task-center-v3 .aw-header>div:first-child{display:flex;align-items:center;flex-wrap:wrap;gap:8px 18px}
+:root.atelier-theme .task-center-v3 .task-center-eyebrow{width:100%;color:var(--bronze);font-size:12px;line-height:1.4;margin:0}
+:root.atelier-theme main .task-center-v3 .aw-header h1{font:600 34px/1.35 var(--task-display);margin:0}
+.task-center-v3 .aw-header-actions{display:flex;align-items:center;gap:16px}
+:root.atelier-theme .task-center-v3 .task-center-refresh-link{display:inline-flex;background:transparent;border:0;box-shadow:none;padding:4px;color:var(--bronze);min-width:0;font-size:12px}
+.task-center-more{position:relative;color:var(--bronze);font-size:14px}
+.task-center-more>summary{list-style:none;cursor:pointer;padding:10px;min-height:40px;display:flex;align-items:center;gap:8px}
+.task-center-more>summary::after{content:'⌄'}
+:root.atelier-theme .task-center-v3 .task-more-items{position:absolute;right:0;top:100%;z-index:20;min-width:200px;padding:8px;background:var(--paper);border:1px solid var(--task-line);border-radius:4px;box-shadow:0 6px 18px #30282012;display:grid}
+:root.atelier-theme .task-center-v3 .task-more-items>*{text-align:left;justify-content:flex-start;border:0;background:transparent;box-shadow:none;border-radius:3px;padding:8px 12px;font-size:14px;min-height:40px;white-space:nowrap;color:var(--bronze)}
+:root.atelier-theme .task-center-v3 .aw-header-actions>.aw-primary{background:var(--action-create-fill);color:var(--action-primary-ink);border:1px solid #b58a55;border-radius:5px;padding:9px 17px;min-height:42px}
+.task-center-overview{order:1;display:grid;grid-template-columns:1.15fr 1.1fr .8fr;gap:30px;min-height:186px;padding:12px 12px 20px;border-bottom:1px solid var(--task-line);margin-bottom:0}
+.task-center-overview>section,.task-center-overview>.task-composition-region{min-width:0}
+.task-center-overview>section{border-left:1px solid var(--task-line);padding-left:30px}
+.task-center-overview h3{font:600 18px/1.5 var(--task-text);margin:0 0 12px}
+:root.atelier-theme .task-center-v3 .composition-chart{border:0;border-radius:0;padding:0;background:transparent;box-shadow:none}
+.task-center-v3 .composition-chart .chart-heading{margin:0 0 10px;display:block}
+.task-center-v3 .composition-chart .chart-heading>span{display:none}
+.task-center-v3 .composition-body{display:flex;align-items:center;gap:14px;margin:0}
+.task-center-v3 .composition-body>svg{width:136px;height:136px;flex-shrink:0}
+.task-center-v3 .composition-arc,.task-center-v3 .composition-track{stroke-width:12}
+:root.atelier-theme .task-center-v3 .composition-arc[data-active=false]{opacity:1}
+.task-center-v3 .composition-number{font-size:27px;font-weight:500;fill:var(--bronze)}
+.task-center-v3 .composition-caption{font-size:11px;fill:var(--secondary)}
+.task-center-v3 .composition-legend{display:grid;gap:4px;flex:1;min-width:0}
+:root.atelier-theme .task-center-v3 .composition-legend>button{display:grid;grid-template-columns:8px 1fr max-content max-content;gap:7px;min-height:31px;padding:3px 0;background:transparent;border:0;border-radius:0;box-shadow:none;font-size:14px;text-align:left;color:var(--ink)}
+:root.atelier-theme .task-center-v3 .composition-legend>button[aria-pressed=true]{background:transparent}
+.task-center-v3 .composition-legend strong{font-weight:500}
+.task-center-v3 .composition-legend small{color:var(--secondary);font-size:11px}
+.task-center-v3 .composition-legend .chart-swatch{width:8px;height:8px;border-radius:2px}
+:root.atelier-theme .task-center-v3 .task-source-chart>button{display:grid;grid-template-columns:78px 35px minmax(0,1fr);gap:10px;align-items:center;width:100%;text-align:left;border:0;border-radius:0;background:transparent;box-shadow:none;min-height:30px;padding:2px 0;font-size:14px}
+.task-source-chart strong{font-weight:500;font-variant-numeric:tabular-nums}
+.task-source-chart meter{width:100%;height:12px;appearance:none;display:block;border:0;background:transparent}
+.task-source-chart meter::-webkit-meter-bar{height:12px;background:transparent;border:0;border-radius:3px;box-shadow:none}
+.task-source-chart meter::-webkit-meter-optimum-value{background:#a17d51;border-radius:3px}
+.task-source-chart button:nth-of-type(2) meter::-webkit-meter-optimum-value{background:#95b3a2}
+.task-source-chart button:nth-of-type(3) meter::-webkit-meter-optimum-value{background:#c9b89d}
+.task-source-chart button:nth-of-type(4) meter::-webkit-meter-optimum-value{background:#b6b3ae}
+:root.atelier-theme .task-center-v3 .task-source-chart>button[aria-pressed=true]{color:var(--bronze);font-weight:600}
+:root.atelier-theme .task-center-v3 .task-quick-filters>button{display:flex;align-items:center;justify-content:flex-start;gap:12px;border:0;border-radius:0;background:transparent;box-shadow:none;padding:3px 0;min-height:45px;width:100%;font-size:16px}
+.task-quick-filters svg{color:var(--bronze);stroke-width:1.4}
+.task-quick-filters strong{font:500 28px/1.2 var(--task-text);color:var(--bronze)}
+.task-quick-filters button[data-tone=danger] strong{color:var(--danger)}
+.task-quick-filters small{font-size:12px}
+.task-quick-filters button[aria-pressed=true]{text-decoration:underline;text-underline-offset:5px}
+.task-center-controls{order:2;min-width:0}
+.task-state-tabs{display:flex;gap:36px;align-items:center;border-bottom:1px solid var(--task-line);overflow:auto}
+:root.atelier-theme .task-center-v3 .task-state-tabs>button{border:0;border-bottom:2px solid transparent;background:transparent;box-shadow:none;border-radius:0;padding:9px 16px;min-height:48px;font:500 17px/1.4 var(--task-text);white-space:nowrap;color:var(--ink)}
+:root.atelier-theme .task-center-v3 .task-state-tabs>button[aria-pressed=true]{color:var(--bronze);border-bottom-color:var(--bronze)}
+.task-state-tabs button>span{margin-left:8px;font-variant-numeric:tabular-nums}
+.task-main-filters{display:grid;grid-template-columns:1.8fr 1fr 1fr 1fr auto;gap:14px;padding:16px 0;align-items:center}
+.task-main-filters>*{min-width:0}
+:root.atelier-theme .task-center-v3 .task-main-filters :is(input,select,button){width:100%;min-height:38px;font-size:14px;padding:7px 12px;border:1px solid var(--task-line);border-radius:4px;background:transparent;box-shadow:none}
+.task-center-v3 .task-search-first{position:relative}
+.task-search-first>svg{position:absolute;top:50%;left:12px;transform:translateY(-50%);color:var(--secondary);pointer-events:none;stroke-width:1.5}
+:root.atelier-theme .task-center-v3 .task-main-filters input{padding-left:36px}
+:root.atelier-theme .task-center-v3 .task-main-filters button[data-active=true]{color:var(--bronze);border-color:var(--bronze)}
+.task-filter-dialog{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-bottom:20px}
+.task-filter-dialog label{display:grid;gap:8px;font-size:14px}
+.task-filter-dialog select{width:100%;min-height:40px}
+:root.atelier-theme .task-center-v3>.aw-feedback-slot{order:3;height:24px;min-height:24px;margin:-8px 0 4px;overflow:auto;font-size:12px}
+:root.atelier-theme .task-center-v3 .aw-task-ledger{order:4;border:0;border-radius:0;background:transparent;overflow:visible;min-width:0}
+.task-center-v3 .iteration-a-selection[data-has-selection=false]{display:none}
+:root.atelier-theme .task-center-v3 .aw-task-scroll{max-height:none;overflow:auto;scrollbar-gutter:auto;overscroll-behavior:auto}
+:root.atelier-theme .task-center-v3 .aw-task-ledger table{table-layout:fixed;min-width:1080px;width:100%;border-collapse:collapse;font-size:14px}
+:root.atelier-theme main .task-center-v3 .aw-task-ledger th{border:0;background:var(--inset);color:var(--bronze);font:500 13px/1.5 var(--task-text);padding:11px 10px;text-align:left;white-space:nowrap}
+:root.atelier-theme main .task-center-v3 .aw-task-ledger td{padding:12px 10px;border:0;border-bottom:1px solid var(--task-line);font-size:14px;line-height:1.5;vertical-align:middle;min-width:0;overflow-wrap:anywhere}
+:root.atelier-theme .task-center-v3 .aw-task-ledger :is(th,td):first-child{width:21%;min-width:0}
+:root.atelier-theme .task-center-v3 .aw-task-ledger :is(th,td):nth-child(2){width:21%}
+:root.atelier-theme .task-center-v3 .aw-task-ledger :is(th,td):nth-child(3){width:11%}
+:root.atelier-theme .task-center-v3 .aw-task-ledger :is(th,td):nth-child(4){width:10%}
+:root.atelier-theme .task-center-v3 .aw-task-ledger :is(th,td):nth-child(5){width:9%}
+:root.atelier-theme .task-center-v3 .aw-task-ledger :is(th,td):nth-child(6){width:6%}
+:root.atelier-theme .task-center-v3 .aw-task-ledger :is(th,td):nth-child(7){width:10%}
+:root.atelier-theme .task-center-v3 .aw-task-ledger :is(th,td):last-child{width:12%;min-width:0}
+:root.atelier-theme .task-center-v3 .aw-task-ledger .task-title{display:inline;text-align:left;font:600 15px/1.5 "Microsoft YaHei","微软雅黑","PingFang SC",sans-serif;border:0;background:transparent;border-radius:2px;box-shadow:none;padding:0;min-height:28px;color:var(--ink);overflow-wrap:anywhere}
+.task-center-v3 .task-object-link{display:block;font-size:14px;color:var(--ink);min-height:0;line-height:1.5}
+.task-center-v3 .task-fund-link{margin-top:4px;color:var(--secondary)}
+:root.atelier-theme .task-center-v3 .aw-task-ledger small{font-size:11px;line-height:1.5;margin-top:3px;color:var(--secondary)}
+:root.atelier-theme .task-center-v3 .aw-task-ledger .aw-status{font-size:13px;background:transparent;border:0;color:var(--secondary);padding:0}
+:root.atelier-theme .task-center-v3 .aw-task-ledger .task-overdue-badge{display:table;padding:1px 6px;color:var(--danger);background:var(--danger-bg);border-radius:3px}
+.task-center-v3 .aw-task-ledger time{white-space:normal;font-size:13px;margin:0}
+:root.atelier-theme .task-center-v3 .aw-task-ledger .aw-actions{gap:5px;flex-wrap:nowrap}
+:root.atelier-theme .task-center-v3 .aw-task-ledger .aw-actions>*{font-size:13px;min-height:32px;padding:4px 9px;white-space:nowrap;border-radius:4px;box-shadow:none}
+:root.atelier-theme .task-center-v3 .aw-task-ledger .task-row-more{border:0;background:transparent;padding:4px;min-width:22px;color:var(--bronze)}
+.task-center-v3 [data-priority=high]{color:var(--warning)}
+.task-center-v3 [data-priority=urgent]{color:var(--danger);font-weight:600}
+:root.atelier-theme .task-center-v3 .aw-task-pagination{padding:18px 8px 12px;display:flex;align-items:center;gap:8px;border:0;font-size:13px;color:var(--secondary)}
+.task-center-v3 .aw-task-pagination>span{margin-right:auto}
+:root.atelier-theme .task-center-v3 .aw-task-pagination>button{min-height:34px;font-size:13px;padding:4px 12px}
+.task-center-v3 .task-ledger-explanation{display:none}
+.task-center-v3 .task-center-desert{order:6;display:block;width:calc(100% + 8px);max-width:none;height:120px;object-fit:cover;object-position:center bottom;margin:6px -4px -20px;pointer-events:none;mask-image:linear-gradient(to bottom,transparent,#000 25%)}
+.task-center-v3>.aw-empty{order:4;min-height:300px}
+.task-center-focus h2{display:none}
+.task-center-focus h3{font:600 27px/1.4 'Songti SC','STSong',serif}
+.task-center-focus dl{display:grid;gap:14px;margin:22px 0}
+.task-center-focus dl>div{display:grid;grid-template-columns:120px minmax(0,1fr);gap:16px}
+.task-center-focus dt{display:flex;gap:8px;align-items:center;color:var(--secondary)}
+.task-center-focus dd{overflow-wrap:anywhere}
+.task-center-focus dd>small{display:block;color:var(--warning)}
+.task-center-focus .task-focus-return{display:none}
+.task-focus-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
+.task-focus-note{border-top:1px solid var(--line);padding-top:18px}
+.task-focus-note p{white-space:pre-wrap;font-size:14px}
+.task-focus-note h4{font:600 20px/1.4 'Songti SC','STSong',serif;margin-bottom:10px}
+.task-business-views{margin:0;min-width:0}
+.task-business-views>header{display:none}
+.task-business-views>[role=tablist]{display:flex;gap:18px;border-bottom:1px solid var(--line);overflow:auto;margin-bottom:20px}
+.task-business-views>[role=tablist]>button{white-space:nowrap;min-height:44px;color:var(--bronze);padding:8px 0}
+.task-business-views>[role=tablist]>button[aria-selected=true]{border-bottom:1px solid var(--bronze)}
+.task-business-views>[hidden]{display:none!important}
+.task-business-views .operations-hero::before{display:none}
+:root[data-color-mode=dark] .task-center-v3 .task-center-desert{opacity:.38}
+@media(max-width:1200px){.task-center-overview{grid-template-columns:1.2fr 1fr;gap:22px}.task-center-overview>.task-quick-filters{grid-column:1/-1;display:flex;gap:24px;align-items:center;border:0;padding:0}.task-quick-filters h3{margin:0;white-space:nowrap}.task-center-overview .task-quick-filters>button{width:auto}.task-main-filters{grid-template-columns:2fr 1fr 1fr}.task-main-filters>select[aria-label=待办负责人]{grid-column:2}.task-main-filters>button{grid-column:3}}
+@media(max-width:700px){:root.atelier-theme main .task-center-v3 .aw-header h1{font-size:28px}.task-center-v3 .aw-header-actions{gap:4px}.task-center-v3 .aw-header-actions>.aw-primary{padding:7px 10px;font-size:13px}.task-center-v3 .task-center-refresh-link span{display:none}.task-center-overview{grid-template-columns:1fr;padding:10px 0 16px;gap:18px}.task-center-overview>section{border-left:0;padding-left:0}.task-center-overview>.task-quick-filters{gap:16px;flex-wrap:wrap}.task-quick-filters h3{width:100%;font-size:18px}.task-center-overview .task-quick-filters>button{gap:8px;font-size:14px}.task-center-v3 .composition-body>svg{width:120px;height:120px}.task-source-chart{max-width:100%}.task-state-tabs{gap:4px}:root.atelier-theme .task-center-v3 .task-state-tabs>button{font-size:17px;padding:9px 8px}.task-main-filters{grid-template-columns:1fr 1fr;gap:10px}.task-main-filters>label{grid-column:1/-1}.task-main-filters>select[aria-label=待办负责人]{grid-column:1}.task-main-filters>button{grid-column:2}.task-filter-dialog{grid-template-columns:1fr}:root.atelier-theme .task-center-v3 .task-main-filters :is(input,select,button){min-height:44px}.task-center-v3 .aw-task-pagination{flex-wrap:wrap}.task-center-v3 .aw-task-pagination>span{width:100%}.task-center-v3 .task-center-desert{height:95px}:root.atelier-theme .task-center-v3 .aw-task-ledger .aw-actions>*{min-height:44px}}
+/* The global semantic-button theme is intentionally neutralized on chart/navigation text. */
+:root.atelier-theme main .tasks-workspace .task-center-v3 :is(.composition-legend>button,.task-source-chart>button,.task-quick-filters>button,.task-state-tabs>button,.task-title,.task-row-more,.task-center-refresh-link){background:transparent!important;box-shadow:none!important;border:0!important;border-radius:0!important}
+:root.atelier-theme main .tasks-workspace .task-center-v3 .task-state-tabs>button{border-bottom:2px solid transparent!important}
+:root.atelier-theme main .tasks-workspace .task-center-v3 .task-state-tabs>button[aria-pressed=true]{border-bottom-color:var(--bronze)!important}
+:root.atelier-theme main .tasks-workspace .task-center-v3 .task-title{color:var(--ink)!important;font:600 15px/1.5 "Microsoft YaHei","微软雅黑","PingFang SC",sans-serif!important}
+:root.atelier-theme main .tasks-workspace .task-center-v3 .task-object-link{color:var(--ink);text-decoration:none;font-size:14px}
+:root.atelier-theme main .tasks-workspace .task-center-v3 .task-fund-link{color:var(--secondary)}
+:root.atelier-theme main .tasks-workspace .task-center-v3 .composition-arc[data-chart-tone=muted]{stroke:#b6b3ae}
+:root.atelier-theme main .tasks-workspace .task-center-v3 .composition-arc[data-chart-tone=success]{stroke:#95b3a2}
+:root.atelier-theme main .tasks-workspace .task-center-v3 .composition-arc[data-chart-tone=bronze]{stroke:#a17d51}
+:root.atelier-theme main .tasks-workspace .task-center-v3>.aw-feedback-slot{height:16px;min-height:16px;margin:-8px 0 0}
+:root.atelier-theme main .tasks-workspace .task-center-v3 .aw-task-ledger td{padding:10px;font-size:14px!important}
+.task-center-v3 .task-row-checkbox{width:14px;height:14px;margin-right:7px;vertical-align:middle;accent-color:var(--bronze)}
+:root.atelier-theme main .tasks-workspace>.task-center-v3{min-height:calc(100dvh - 114px)}
+.task-center-v3 .task-center-desert{margin-top:auto}
+:root.atelier-theme main .task-center-v3 .aw-task-ledger td:first-child{position:relative;padding-left:30px}
+.task-center-v3 .task-row-checkbox{position:absolute;left:9px;top:17px;margin:0}
+:root.atelier-theme main .tasks-workspace .task-center-v3 .aw-task-ledger .task-title{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+.task-center-v3 .task-object-link{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.task-center-v3 .task-test-marker{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+@media(max-width:700px){.task-center-overview>.task-quick-filters{display:grid;grid-template-columns:1fr 1fr;gap:8px}.task-quick-filters h3{grid-column:1/-1}.task-center-overview .task-quick-filters>button{min-width:0;white-space:nowrap}.task-center-overview{gap:14px}}
+@media(min-width:1201px){.task-center-overview{padding-top:0;padding-bottom:6px;min-height:180px}}
+:root.atelier-theme main .tasks-workspace .task-center-v3 .aw-task-ledger td{padding-top:6px;padding-bottom:6px}
+:root.atelier-theme main .tasks-workspace .task-center-v3 .aw-task-ledger .task-title{line-height:1.5!important}
+:root.atelier-theme main .tasks-workspace .task-center-v3 .aw-task-ledger small{line-height:1.3;margin-top:2px}
+
+/* Task typography: display serif only for the page title, one UI face for operational text. */
+:root.atelier-theme main .tasks-workspace>.task-center-v3{--task-text:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif;--task-display:"Songti SC","STSong",serif;font-family:var(--task-text);font-size:15px;line-height:1.6;letter-spacing:0;-webkit-font-smoothing:antialiased}
+:root.atelier-theme main .tasks-workspace .task-center-v3 .aw-header h1{letter-spacing:.035em;font-weight:600}
+:root.atelier-theme main .tasks-workspace .task-center-v3 :is(button,input,select){font-family:var(--task-text)}
+:root.atelier-theme main .tasks-workspace .task-center-v3 .task-center-eyebrow{font-size:12px;letter-spacing:.12em;font-weight:500}
+:root.atelier-theme main .tasks-workspace .task-center-v3 .task-center-overview h3{font-family:var(--task-text);font-size:17px;font-weight:600;letter-spacing:.015em}
+:root.atelier-theme main .tasks-workspace .task-center-v3 .composition-number{font-family:var(--task-text);font-size:30px;font-weight:500;font-variant-numeric:tabular-nums;letter-spacing:-.04em}
+:root.atelier-theme main .tasks-workspace .task-center-v3 .composition-caption{font-family:var(--task-text);font-size:11px;font-weight:400}
+:root.atelier-theme main .tasks-workspace .task-center-v3 .composition-legend>button{font-size:14px;line-height:1.6;color:var(--ink)}
+:root.atelier-theme main .tasks-workspace .task-center-v3 .composition-legend :is(strong,small){font-variant-numeric:tabular-nums;font-weight:400}
+:root.atelier-theme main .tasks-workspace .task-center-v3 .composition-legend small{font-size:12px}
+:root.atelier-theme main .tasks-workspace .task-center-v3 .task-source-chart>button{font-size:14px;line-height:1.6;color:var(--ink)}
+:root.atelier-theme main .tasks-workspace .task-center-v3 .task-source-chart strong{font-size:15px;font-weight:500}
+:root.atelier-theme main .tasks-workspace .task-center-v3 .task-state-tabs>button{font-size:16px;font-weight:500;letter-spacing:.02em}
+:root.atelier-theme main .tasks-workspace .task-center-v3 .task-state-tabs>button>span{font-size:17px;letter-spacing:0;font-weight:400}
+:root.atelier-theme main .tasks-workspace .task-center-v3 .aw-task-ledger th{font-size:13px;font-weight:500;letter-spacing:.04em;color:var(--secondary)}
+:root.atelier-theme main .tasks-workspace .task-center-v3 .aw-task-ledger td{font-size:14px!important;font-weight:400;line-height:1.6}
+:root.atelier-theme main .tasks-workspace .task-center-v3 .aw-task-ledger small{font-size:12px;line-height:1.5;font-weight:400}
+:root.atelier-theme main .tasks-workspace .task-center-v3 .aw-task-ledger :is(time,.aw-status){font-family:var(--task-text);font-size:13px;font-weight:400;letter-spacing:0;font-variant-numeric:tabular-nums}
+:root.atelier-theme main .tasks-workspace .task-center-v3 .task-object-link{font-size:14px;font-weight:500;line-height:1.65}
+:root.atelier-theme main .tasks-workspace .task-center-v3 .task-fund-link{font-size:12px;font-weight:400;line-height:1.5}
+:root.atelier-theme main .tasks-workspace .task-center-v3 .aw-task-ledger .aw-actions>*{font-size:13px;font-weight:500}
+:root.atelier-theme main .tasks-workspace .task-center-v3 .aw-task-pagination{font-size:13px;font-weight:400;letter-spacing:.015em}
+@media(max-width:700px){:root.atelier-theme main .tasks-workspace .task-center-v3 .aw-header h1{font-size:28px}.task-center-overview{gap:14px}}
+.task-center-v3 .task-center-focus h3{font:600 24px/1.5 var(--task-text);letter-spacing:.01em}
+.task-center-v3 .task-focus-note h4{font:600 17px/1.5 var(--task-text)}
+.task-center-v3 .task-center-focus :is(dt,dd,p){font-family:var(--task-text);line-height:1.7}
+
+/* A quiet perimeter gives the open ledger a clear left and right edge. */
+:root.atelier-theme main .tasks-workspace .task-center-v3 .aw-task-ledger{border:1px solid color-mix(in srgb,var(--bronze) 22%,transparent);border-radius:5px;background:var(--paper);box-shadow:0 2px 8px color-mix(in srgb,var(--ink) 4%,transparent)}
+.task-center-v3 .aw-task-scroll{border-radius:4px 4px 0 0}
+:root.atelier-theme main .tasks-workspace .task-center-v3 .aw-task-pagination{padding:14px 12px}
+
+:root.atelier-theme main .tasks-workspace .task-center-v3 .task-center-more>summary{display:inline-flex;align-items:center;justify-content:center;gap:4px;padding:8px 6px;line-height:20px;min-height:40px;color:var(--bronze)}
+.task-center-more>summary::after,.task-center-more>summary::marker{content:none!important;display:none!important}
+.task-center-more>summary::-webkit-details-marker{display:none}
+.task-center-more>summary>svg{position:static!important;display:block;flex:0 0 14px;width:14px;height:14px;margin:0;transform:none!important;stroke-width:1.5}
+:root.atelier-theme .task-center-v3 .task-focus-actions>a.aw-primary{color:#fff8ee!important;background:var(--bronze);border-color:var(--bronze);text-decoration:none}
+
+/* Category workbench: quiet resting state, elevation only on interaction. */
+:root.atelier-theme .task-business-views>[role=tablist]>button{background:transparent!important;border:0!important;border-radius:4px;box-shadow:none!important;text-decoration:none!important;padding:8px 10px}
+:root.atelier-theme .task-business-views>[role=tablist]>button[aria-selected=true]{color:var(--bronze);font-weight:600}
+:root.atelier-theme .task-business-views :is(.operations-alert,.operations-secondary>button,.composition-legend>button,.deadline-day){background:transparent!important;border:0!important;box-shadow:none!important;text-decoration:none!important}
+:root.atelier-theme .task-business-views :is(.operations-alert-label,.operations-alert[aria-pressed=true] .operations-alert-label){text-decoration:none!important}
+:root.atelier-theme .task-business-views .has-deadline .deadline-day-count{background:transparent;padding:0}
+:root.atelier-theme .task-business-views .deadline-timeline{gap:10px!important}
+:root.atelier-theme .task-business-views :is([role=tablist]>button,.operations-alert,.operations-secondary>button,.composition-legend>button,.deadline-day):is(:hover,:focus-visible){background:color-mix(in srgb,var(--bronze) 3%,transparent)!important;box-shadow:0 2px 7px color-mix(in srgb,var(--bronze) 12%,transparent)!important;text-decoration:none!important}
+@media(max-width:600px){:root.atelier-theme .task-business-views .deadline-timeline{gap:6px!important}}
+.task-business-views .composition-body{display:grid;grid-template-columns:100px minmax(0,1fr);gap:12px}
+.task-business-views .composition-body>svg{width:100px;height:100px}
+.task-business-views .composition-legend{min-width:0}
+:root.atelier-theme .task-business-views .composition-legend>button{display:grid;grid-template-columns:8px minmax(42px,1fr) 25px 30px;gap:4px;min-width:0;font-size:12px;padding:5px 0}
+.task-business-views .composition-legend>button>span:nth-child(2){white-space:nowrap}
+:root.atelier-theme .task-business-views .task-chart-row>:is(.composition-chart,.task-deadline-outlook){box-shadow:none}
+@media(max-width:600px){.task-business-views .task-chart-row{grid-template-columns:minmax(0,1fr)}}
+
+/* Match the shared SectionHeader eyebrow used by fund/project ledgers. */
+:root.atelier-theme main .tasks-workspace .task-center-v3 .aw-header>div:first-child{display:grid;grid-template-columns:max-content max-content;align-items:center;column-gap:18px;row-gap:0}
+:root.atelier-theme main .tasks-workspace .task-center-v3 .aw-header .page-heading-eyebrow{grid-column:1/-1;width:auto;margin:0 0 4px;padding:0;font-size:12px;font-weight:600;line-height:18px;letter-spacing:0;color:var(--bronze);font-family:var(--task-text)}
+:root.atelier-theme main .tasks-workspace .task-center-v3 .aw-header{margin-inline:-4px}
+:root.atelier-theme main .tasks-workspace .task-center-v3 .aw-header .page-heading-eyebrow{font-family:"PingFang SC","Microsoft YaHei",sans-serif}
+
+:root.atelier-theme main .tasks-workspace .task-center-v3 .aw-task-ledger .aw-actions>a[data-ui]{color:var(--ink)!important}
+
+/* Page heading follows the shared module header rather than the display mockup. */
+:root.atelier-theme main .tasks-workspace .task-center-v3 .aw-header.page-heading{align-items:flex-end;margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid var(--line);gap:16px}
+:root.atelier-theme main .tasks-workspace .task-center-v3 .aw-header.page-heading h1{font-family:"PingFang SC","Microsoft YaHei",sans-serif;font-size:26px;font-weight:650;line-height:34px;letter-spacing:0;margin:0}
+:root.atelier-theme main .tasks-workspace .task-center-v3 .aw-header.page-heading h1{align-self:start}
+
+/* Task detail ledger follows the risk register's hierarchy and semantic cues. */
+:root.atelier-theme main .tasks-workspace .task-center-v3 .aw-task-ledger th{height:44px;padding:10px 14px;font-size:14px;font-weight:600;letter-spacing:.02em;color:var(--bronze);border-bottom:1px solid color-mix(in srgb,var(--bronze) 28%,var(--line))}
+:root.atelier-theme main .tasks-workspace .task-center-v3 .aw-task-ledger td{padding:12px 14px;background:var(--surface);border-bottom-color:var(--line);line-height:1.6}
+:root.atelier-theme main .tasks-workspace .task-center-v3 .aw-task-ledger td:first-child{padding-left:34px}
+:root.atelier-theme main .tasks-workspace .task-center-v3 .aw-task-ledger .task-title{color:var(--bronze)!important;line-height:1.6!important}
+.task-center-v3 .task-row-checkbox{left:12px;top:18px}
+:root.atelier-theme main .tasks-workspace .task-center-v3 .aw-task-ledger tbody tr:hover td{background:color-mix(in srgb,var(--accent-soft) 35%,var(--surface))}
+:root.atelier-theme main .tasks-workspace .task-center-v3 .aw-task-ledger td .task-origin-badge{display:table;font-size:11px;font-weight:500;line-height:19px;padding:0 5px;border-radius:3px;background:var(--info-bg);color:var(--info);margin-top:4px}
+:root.atelier-theme main .tasks-workspace .task-center-v3 .aw-task-ledger td .task-origin-badge[data-origin=seed_demo]{background:var(--accent-soft);color:var(--bronze)}
+:root.atelier-theme main .tasks-workspace .task-center-v3 .aw-task-ledger time[datetime]{color:var(--success);font-variant-numeric:tabular-nums}
+:root.atelier-theme main .tasks-workspace .task-center-v3 .aw-task-ledger .aw-status{display:inline-flex;align-items:center;gap:6px;color:var(--warning);font-size:13px;font-weight:550;white-space:normal}
+.task-center-v3 .aw-task-ledger .aw-status::before{content:'';width:5px;height:5px;border-radius:50%;background:currentColor;flex-shrink:0}
+:root.atelier-theme main .tasks-workspace .task-center-v3 .aw-task-ledger .aw-status[data-status=complete]{color:var(--success);background:var(--success-bg);padding:2px 7px;border-radius:4px}
+:root.atelier-theme main .tasks-workspace .task-center-v3 .aw-task-ledger .aw-status[data-status=cancelled]{color:var(--secondary)}
+:root.atelier-theme main .tasks-workspace .task-center-v3 .aw-task-ledger td[data-priority]{font-size:13px!important;font-weight:550;color:var(--warning)}
+.task-center-v3 .aw-task-ledger td[data-priority]::before{content:'•';margin-right:6px}
+:root.atelier-theme main .tasks-workspace .task-center-v3 .aw-task-ledger td:is([data-priority=high],[data-priority=urgent]){color:var(--danger)}
+:root.atelier-theme main .tasks-workspace .task-center-v3 .aw-task-ledger td[data-priority=low]{color:var(--success)}
+:root.atelier-theme main .tasks-workspace .task-center-v3 .aw-task-ledger .aw-actions>a[data-ui]{background:transparent!important;border:0;box-shadow:none;padding-inline:3px;font-weight:550;color:var(--ink)!important}
+:root.atelier-theme main .tasks-workspace .task-center-v3 .aw-task-ledger .aw-actions>a[data-ui]:hover{background:var(--accent-soft)!important}
+@media(max-width:700px){:root.atelier-theme main .tasks-workspace .task-center-v3 .aw-task-ledger :is(th,td){padding-inline:12px}:root.atelier-theme main .tasks-workspace .task-center-v3 .aw-task-ledger td:first-child{padding-left:34px}}
+
+/* Match the risk register's readable type scale and balance the identity columns. */
+:root.atelier-theme main .tasks-workspace .task-center-v3 .aw-task-ledger .task-title{font-size:17px!important;font-weight:600!important;line-height:1.6!important}
+:root.atelier-theme main .tasks-workspace .task-center-v3 .aw-task-ledger td{font-size:15px!important;height:82px;padding-top:12px;padding-bottom:12px}
+:root.atelier-theme main .tasks-workspace .task-center-v3 .aw-task-ledger small{font-size:13px;line-height:1.55}
+:root.atelier-theme main .tasks-workspace .task-center-v3 .task-object-link{font-size:15px;line-height:1.6}
+:root.atelier-theme main .tasks-workspace .task-center-v3 .task-fund-link{font-size:13px;font-weight:400}
+:root.atelier-theme main .tasks-workspace .task-center-v3 .aw-task-ledger :is(th,td):first-child{width:24%}
+:root.atelier-theme main .tasks-workspace .task-center-v3 .aw-task-ledger :is(th,td):nth-child(2){width:24%}
+:root.atelier-theme main .tasks-workspace .task-center-v3 .aw-task-ledger :is(th,td):nth-child(3){width:10%}
+:root.atelier-theme main .tasks-workspace .task-center-v3 .aw-task-ledger :is(th,td):nth-child(4){width:9%}
+:root.atelier-theme main .tasks-workspace .task-center-v3 .aw-task-ledger :is(th,td):nth-child(5){width:9%}
+:root.atelier-theme main .tasks-workspace .task-center-v3 .aw-task-ledger :is(th,td):nth-child(6){width:6%}
+:root.atelier-theme main .tasks-workspace .task-center-v3 .aw-task-ledger :is(th,td):nth-child(7){width:9%}
+:root.atelier-theme main .tasks-workspace .task-center-v3 .aw-task-ledger :is(th,td):last-child{width:9%}
+.task-center-v3 .task-row-checkbox{top:50%;transform:translateY(-50%)}
+:root.atelier-theme main .tasks-workspace .task-center-v3 .aw-task-ledger .task-title{font-size:14px!important;line-height:1.5!important}
+:root.atelier-theme main .tasks-workspace .task-center-v3 .aw-task-ledger td{height:64px;padding-top:8px;padding-bottom:8px}

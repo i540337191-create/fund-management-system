@@ -1,0 +1,9 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {getUpcomingMeetings,meetingLocalTime,meetingScheduleWire,groupMeetingsByMonth} from '../src/lib/meetingSchedule.ts';import type {MeetingRecord} from '../src/data/meetings.ts';
+
+test('calendar directory groups real months descending, preserves record order within month and unknown dates',()=>{
+ const rows=[{id:'a',date:'2026-11-06'},{id:'b',date:'2000-01-01'},{id:'c',date:'2026-11-13'},{id:'d',date:'未填写'},{id:'e',date:'2026-13-01'}] as MeetingRecord[];
+ const groups=groupMeetingsByMonth(rows);
+ assert.deepEqual(groups.map(g=>[g.label,g.meetings.map(m=>m.id)]),[['2026年11月',['a','c']],['2000年1月',['b']],['日期待核实',['d','e']]]);
+ assert.deepEqual(rows.map(m=>m.id),['a','b','c','d','e']);assert.equal(groups[0].meetings[0],rows[0]);assert.deepEqual(groupMeetingsByMonth([]),[]);
+});
+test('upcoming meetings use explicit schedule and timestamps independently of minutes; stable boundaries',()=>{const now=new Date('2026-11-06T00:00:00Z');const meeting=(id:string,scheduleStatus:MeetingRecord['scheduleStatus'],startsAt:string,status:MeetingRecord['status']='待确认',endsAt?:string)=>({id,scheduleStatus,startsAt,status,endsAt} as MeetingRecord);const rows=[meeting('future','scheduled','2026-11-06T01:00:00Z','已归档'),meeting('cancel','cancelled','2026-11-06T01:00:00Z'),meeting('end','ended','2026-11-06T01:00:00Z'),meeting('unknown',undefined,'2026-11-06T01:00:00Z'),meeting('past','scheduled','2026-11-05T23:00:00Z'),meeting('edge','scheduled','2026-11-13T00:00:00Z'),meeting('live','in_progress','2026-11-05T23:00:00Z','待确认','2026-11-06T02:00:00Z')];assert.deepEqual(getUpcomingMeetings(rows,now).map(m=>m.id),['live','future']);assert.equal(meetingLocalTime('2026-11-06T00:00:00Z'),'2026-11-06T08:00');assert.equal(meetingScheduleWire('2026-11-06T08:00'),'2026-11-06T08:00:00+08:00');});

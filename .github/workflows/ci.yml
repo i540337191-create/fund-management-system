@@ -1,0 +1,296 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+      - "codex/**"
+  pull_request:
+
+jobs:
+  test-build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            server/package-lock.json
+
+      - name: Install frontend dependencies
+        run: npm ci
+
+      - name: Install API dependencies
+        run: npm --prefix server ci
+
+      - name: Check release scripts
+        run: |
+          node --check scripts/backup-postgres.mjs
+          node --check scripts/restore-postgres.mjs
+          node --check scripts/verify-server-release.mjs
+          node --check scripts/preflight-server-release.mjs
+          node --check scripts/deploy-compose-release.mjs
+          node --check scripts/drill-compose-backup-restore.mjs
+          node --check scripts/audit-serverization-phase1.mjs
+          node --check scripts/check-client-secret-exposure.mjs
+
+      - name: Run frontend tests
+        run: npm test
+
+      - name: Build frontend
+        run: npm run build
+
+      - name: Check client secret exposure
+        run: npm run check:client-secrets
+
+      - name: Run API tests
+        run: npm run test:api
+
+      - name: Build API
+        run: npm run build:api
+
+      - name: Start API for release verifier
+        run: |
+          npm --prefix server start > /tmp/fund-management-api.log 2>&1 &
+          echo $! > /tmp/fund-management-api.pid
+          for attempt in {1..30}; do
+            if curl -fsS http://127.0.0.1:8788/api/health >/dev/null; then
+              exit 0
+            fi
+            sleep 1
+          done
+          cat /tmp/fund-management-api.log
+          exit 1
+
+      - name: Run read-only release verifier
+        run: npm run verify:release -- --base-url http://127.0.0.1:8788
+
+      - name: Stop API
+        if: always()
+        run: |
+          if [ -f /tmp/fund-management-api.pid ]; then
+            kill "$(cat /tmp/fund-management-api.pid)" 2>/dev/null || true
+          fi
+
+  postgres-release-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_DB: fundapp_road_fund
+          POSTGRES_USER: fundapp
+          POSTGRES_PASSWORD: ci-postgres-password-123
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U fundapp -d fundapp_road_fund"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    env:
+      DATABASE_URL: postgres://fundapp:ci-postgres-password-123@127.0.0.1:5432/fundapp_road_fund
+      RESTORE_DATABASE_URL: postgres://fundapp:ci-postgres-password-123@127.0.0.1:5432/fundapp_road_restore
+      PGPASSWORD: ci-postgres-password-123
+      APP_AUTH_MODE: password
+      SESSION_SECRET: 0123456789abcdef0123456789abcdef
+      ADMIN_EMAIL: ops@example.com
+      ADMIN_PASSWORD: correct-horse-battery-staple
+      RELEASE_WRITE_MARKER: ci-${{ github.run_id }}-${{ github.run_attempt }}
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            server/package-lock.json
+
+      - name: Install PostgreSQL client
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y postgresql-client
+
+      - name: Install frontend dependencies
+        run: npm ci
+
+      - name: Install API dependencies
+        run: npm --prefix server ci
+
+      - name: Run PostgreSQL release preflight
+        run: npm run preflight:release -- --json
+
+      - name: Build API
+        run: npm run build:api
+
+      - name: Migrate and seed PostgreSQL
+        run: |
+          npm --prefix server run migrate
+          npm --prefix server run seed
+
+      - name: Start PostgreSQL-backed API
+        run: |
+          API_PORT=8790 npm --prefix server start > /tmp/fund-management-postgres-api.log 2>&1 &
+          echo $! > /tmp/fund-management-postgres-api.pid
+          for attempt in {1..30}; do
+            if curl -fsS http://127.0.0.1:8790/api/health >/dev/null; then
+              exit 0
+            fi
+            sleep 1
+          done
+          cat /tmp/fund-management-postgres-api.log
+          exit 1
+
+      - name: Run PostgreSQL write release verifier
+        run: npm run verify:release -- --base-url http://127.0.0.1:8790 --email "$ADMIN_EMAIL" --password "$ADMIN_PASSWORD" --write --write-marker "$RELEASE_WRITE_MARKER"
+
+      - name: Stop PostgreSQL-backed API
+        if: always()
+        run: |
+          if [ -f /tmp/fund-management-postgres-api.pid ]; then
+            kill "$(cat /tmp/fund-management-postgres-api.pid)" 2>/dev/null || true
+            rm -f /tmp/fund-management-postgres-api.pid
+            sleep 1
+          fi
+
+      - name: Restart PostgreSQL-backed API
+        run: |
+          API_PORT=8790 npm --prefix server start > /tmp/fund-management-postgres-api-restart.log 2>&1 &
+          echo $! > /tmp/fund-management-postgres-api-restart.pid
+          for attempt in {1..30}; do
+            if curl -fsS http://127.0.0.1:8790/api/health >/dev/null; then
+              exit 0
+            fi
+            sleep 1
+          done
+          cat /tmp/fund-management-postgres-api-restart.log
+          exit 1
+
+      - name: Verify PostgreSQL data after API restart
+        run: npm run verify:release -- --base-url http://127.0.0.1:8790 --email "$ADMIN_EMAIL" --password "$ADMIN_PASSWORD" --expect-write-marker "$RELEASE_WRITE_MARKER"
+
+      - name: Stop restarted PostgreSQL-backed API
+        if: always()
+        run: |
+          if [ -f /tmp/fund-management-postgres-api-restart.pid ]; then
+            kill "$(cat /tmp/fund-management-postgres-api-restart.pid)" 2>/dev/null || true
+          fi
+
+      - name: Backup PostgreSQL database
+        run: |
+          npm run backup:db -- --file /tmp/fund-management-ci.dump
+          test -s /tmp/fund-management-ci.dump
+
+      - name: Restore backup into a fresh database
+        run: |
+          createdb -h 127.0.0.1 -U fundapp fundapp_road_restore
+          DATABASE_URL="$RESTORE_DATABASE_URL" npm run restore:db -- --file /tmp/fund-management-ci.dump
+
+      - name: Start restored PostgreSQL API
+        run: |
+          DATABASE_URL="$RESTORE_DATABASE_URL" API_PORT=8791 npm --prefix server start > /tmp/fund-management-restored-api.log 2>&1 &
+          echo $! > /tmp/fund-management-restored-api.pid
+          for attempt in {1..30}; do
+            if curl -fsS http://127.0.0.1:8791/api/health >/dev/null; then
+              exit 0
+            fi
+            sleep 1
+          done
+          cat /tmp/fund-management-restored-api.log
+          exit 1
+
+      - name: Verify restored PostgreSQL data
+        run: npm run verify:release -- --base-url http://127.0.0.1:8791 --email "$ADMIN_EMAIL" --password "$ADMIN_PASSWORD" --expect-write-marker "$RELEASE_WRITE_MARKER"
+
+      - name: Stop restored PostgreSQL API
+        if: always()
+        run: |
+          if [ -f /tmp/fund-management-restored-api.pid ]; then
+            kill "$(cat /tmp/fund-management-restored-api.pid)" 2>/dev/null || true
+          fi
+
+  docker-compose-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+
+    env:
+      HTTP_PORT: 8080
+      POSTGRES_DB: fundapp_road_fund
+      POSTGRES_USER: fundapp
+      POSTGRES_PASSWORD: ci-postgres-password-123
+      APP_AUTH_MODE: password
+      SESSION_SECRET: 0123456789abcdef0123456789abcdef
+      ADMIN_EMAIL: ops@example.com
+      ADMIN_PASSWORD: correct-horse-battery-staple
+      RELEASE_WRITE_MARKER: compose-${{ github.run_id }}-${{ github.run_attempt }}
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Run Compose release preflight
+        run: npm run preflight:release -- --compose --json
+
+      - name: Validate Compose config
+        run: docker compose config
+
+      - name: Build and start Compose stack
+        run: docker compose up -d --build
+
+      - name: Migrate and seed Compose database
+        run: |
+          docker compose exec -T api npm run migrate
+          docker compose exec -T api npm run seed
+
+      - name: Wait for Nginx health route
+        run: |
+          for attempt in {1..30}; do
+            if curl -fsS "http://127.0.0.1:${HTTP_PORT}/api/health" >/dev/null; then
+              exit 0
+            fi
+            sleep 2
+          done
+          docker compose ps
+          docker compose logs api nginx
+          exit 1
+
+      - name: Verify Compose deployment through Nginx
+        run: node scripts/verify-server-release.mjs --base-url "http://127.0.0.1:${HTTP_PORT}" --email "$ADMIN_EMAIL" --password "$ADMIN_PASSWORD" --write --write-marker "$RELEASE_WRITE_MARKER"
+
+      - name: Drill Compose backup and restored API verification
+        run: npm run drill:restore:compose -- --expect-write-marker "$RELEASE_WRITE_MARKER"
+
+      - name: Print Compose logs on failure
+        if: failure()
+        run: docker compose logs
+
+      - name: Stop Compose stack
+        if: always()
+        run: docker compose down -v

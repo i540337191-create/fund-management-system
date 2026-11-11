@@ -1,0 +1,261 @@
+/* Selected target: charcoal navigation + ivory conversational workspace, 2026-11-03. */
+.fundapp-shell{--agent-nav:#27251f;--agent-nav-ink:#f4eee3;--agent-nav-muted:#c8bfb0;--agent-nav-line:#514739;--agent-nav-accent:#9a7347;--agent-nav-hover:#39332a}
+.fundapp-shell .atelier-sidebar{width:248px;background:var(--agent-nav) url('../assets/agent-sidebar-desert.png') center top/auto 100% no-repeat;color:var(--agent-nav-ink);border:0}
+.fundapp-shell .atelier-brand{--sidebar-brand-height:84px;--sidebar-header-height:69px;position:relative;height:var(--sidebar-brand-height);padding:0 24px max(0px,calc(var(--sidebar-brand-height) - var(--sidebar-header-height)));border:0;gap:12px}
+.agent-shell .atelier-brand{--sidebar-header-height:62px}
+.fundapp-shell .atelier-brand::after{content:"";position:absolute;left:0;right:0;top:calc(var(--sidebar-header-height) - 1px);border-top:1px solid var(--agent-nav-line);pointer-events:none}
+.fundapp-shell .atelier-brand img:hover{animation:sidebar-logo-turn 200ms ease-out 1}
+@keyframes sidebar-logo-turn{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){.fundapp-shell .atelier-brand img:hover{animation:none}}
+.fundapp-shell .atelier-brand img{mix-blend-mode:screen;filter:grayscale(1) invert(1) sepia(1);width:35px;height:35px}
+.fundapp-shell .atelier-brand strong{font-size:23px;letter-spacing:2px;color:var(--agent-nav-ink)}
+.fundapp-shell .atelier-navigation{flex:0 0 var(--agent-nav-height,256px);padding:4px 16px 10px;min-height:0;scrollbar-width:thin;scrollbar-color:var(--agent-nav-line) transparent}
+.fundapp-shell .navigation-section{margin:0}
+.fundapp-shell .navigation-section>p{display:none}
+.fundapp-shell .atelier-navigation button{min-height:44px;padding:10px 16px;font-size:15px;gap:15px;border-radius:10px;color:var(--agent-nav-muted);margin:3px 0}
+.fundapp-shell .atelier-navigation button:hover{background:var(--agent-nav-hover);color:var(--agent-nav-ink)}
+.fundapp-shell .atelier-navigation button.active{background:var(--agent-nav-accent) url('../assets/agent-sidebar-caravan.png') center top/100% auto no-repeat;background-blend-mode:screen;color:#fff9ed;box-shadow:inset 0 1px 0 #e3bf8b4d,0 4px 14px #0000001a;font-weight:600}
+.fundapp-shell .atelier-navigation button.active svg{stroke-width:1.8}
+.fundapp-shell #agent-history-slot{flex:1 1 auto;min-height:88px;display:flex;position:relative;background:transparent}
+.fundapp-shell #agent-history-slot .assistant-history{display:flex;background:transparent;border:0;width:100%;padding:10px 20px 0;gap:10px;--secondary:var(--agent-nav-muted);--ink:var(--agent-nav-ink);--bronze:#dab987;--line:var(--agent-nav-line);--hover:var(--agent-nav-hover)}
+.fundapp-shell #agent-history-slot .agent-history-label{order:1;padding:0 5px;font-size:12px;color:var(--agent-nav-muted)}
+.fundapp-shell #agent-history-slot .agent-history-label>svg{display:none}
+.fundapp-shell #agent-history-slot .assistant-history-top{flex-shrink:0;border:0;padding-top:0;order:0}
+.fundapp-shell #agent-history-slot .assistant-new{justify-content:center;min-height:44px;flex-shrink:0;border:1px solid #c69b66;border-radius:9px;background:#8d69452b;color:var(--agent-nav-ink);font-size:14px}
+.fundapp-shell #agent-history-slot .assistant-new:hover{background:var(--agent-nav-hover)}
+.fundapp-shell #agent-history-slot .assistant-history-search{order:2;flex-shrink:0;padding:2px 5px;font-size:11px}
+.fundapp-shell #agent-history-slot .assistant-history-search input{font-size:11px;color:var(--agent-nav-ink);background:transparent!important}
+.fundapp-shell #agent-history-slot .assistant-history-search input::placeholder{color:var(--agent-nav-muted)}
+.fundapp-shell #agent-history-slot .assistant-history-list{order:3;min-height:38px;scrollbar-color:var(--agent-nav-line) transparent}
+.fundapp-shell #agent-history-slot .assistant-history-item{min-height:52px;padding:8px 38px 8px 6px;margin:0;border-radius:7px;color:var(--agent-nav-ink);gap:9px}
+.fundapp-shell #agent-history-slot .assistant-history-item strong{font-size:12px;font-weight:400}
+.fundapp-shell #agent-history-slot .assistant-history-item small{font-size:10px;margin-top:2px;color:var(--agent-nav-muted)}
+.fundapp-shell #agent-history-slot .assistant-history-item.is-active{background:#b7925d20}
+.fundapp-shell #agent-history-slot .assistant-history-bottom{order:4;flex-shrink:0;border:0;padding:0;min-height:20px}
+.fundapp-shell #agent-history-slot .assistant-history-bottom>span{font-size:9px;color:var(--agent-nav-muted)}
+.fundapp-shell #agent-history-slot .assistant-history-bottom button{height:24px;width:24px}
+.agent-sidebar-user{display:flex;align-items:center;gap:10px;padding:17px 18px;border-top:1px solid var(--agent-nav-line);margin:0 16px;flex-shrink:0;color:var(--agent-nav-ink)}
+.agent-sidebar-user>span{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:#d1c6b6;color:var(--agent-nav);font-size:13px}
+.agent-sidebar-user strong{font-size:13px;font-weight:500;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1}
+.agent-sidebar-user button{display:grid;place-items:center;min-width:30px;min-height:32px;color:var(--agent-nav-muted)}
+.agent-shell .atelier-body{margin-left:248px;display:flex;flex-direction:column;height:100dvh;min-height:0}
+.agent-shell .atelier-topbar{flex-shrink:0;height:62px;gap:16px;padding:0 28px;background:var(--surface)}
+.agent-shell .atelier-search{width:min(460px,45%);height:36px;background:transparent}
+.agent-shell .atelier-top-actions{gap:12px}
+.agent-shell .atelier-main{padding:0;max-width:none;width:100%;flex:1;min-height:0}
+.agent-shell .atelier-main>div{height:100%}
+.agent-shell .assistant-workspace{grid-template-columns:minmax(0,1fr);margin:0;height:100%;min-height:0;border:0;border-radius:0;background:var(--surface);--agent-line:color-mix(in srgb,var(--bronze) 50%,var(--line))}
+.agent-shell .assistant-header{height:69px;padding:18px 36px 5px;border:0;align-items:center}
+.agent-title-line{display:flex;align-items:center;gap:22px;flex-wrap:wrap}
+.agent-shell .assistant-header h1{font-size:24px;font-weight:650;gap:10px;letter-spacing:-.5px}
+.agent-shell .assistant-header p{display:none}
+.agent-shell .agent-availability{font-size:12px;margin:0;gap:8px}
+.agent-shell .agent-availability>span{width:7px;height:7px}
+.agent-shell .assistant-header-actions{gap:5px}
+.agent-shell .agent-context{background:transparent;padding:3px 36px 14px;min-height:45px;border-bottom:1px solid var(--line)}
+.agent-project-selector{display:inline-flex;align-items:center;gap:8px;max-width:75%;padding:0 10px;border:1px solid var(--line);border-radius:8px;background:var(--paper);color:var(--bronze)}
+.agent-shell .agent-project-selector select{background:transparent;color:var(--ink);border:0;min-width:0;max-width:360px;font-size:12px;padding:5px 0;min-height:30px}
+.agent-shell .agent-context>span{font-size:11px;color:var(--secondary)}
+.agent-shell .assistant-log{padding:26px 38px 4px}
+.agent-shell .assistant-transcript{max-width:1040px;gap:32px;padding-bottom:12px}
+.agent-shell .assistant-message-user{max-width:83%;padding:12px 17px;background:var(--inset);border-radius:12px;position:relative;margin-bottom:16px}
+.agent-shell .assistant-message-user .assistant-message-author{position:absolute;right:3px;bottom:-27px;margin:0;min-height:20px;font-size:11px;color:var(--muted)}
+.agent-shell .assistant-message-user .assistant-markdown{line-height:1.8;font-size:14px}
+.agent-shell .assistant-message-assistant{padding-left:48px;position:relative}
+.agent-shell .assistant-message-assistant .assistant-message-author{gap:9px;font-size:13px;margin:0 0 9px;min-height:24px}
+.agent-shell .assistant-message-author time{font-size:11px;color:var(--secondary);font-weight:400}
+.agent-shell .agent-avatar{position:absolute;left:0;top:0;width:35px;height:35px;border-radius:50%;background:var(--bronze);overflow:hidden}
+.agent-shell .agent-avatar img{width:23px;height:23px;object-fit:cover;mix-blend-mode:screen;filter:grayscale(1) invert(1) sepia(1)}
+.agent-shell .assistant-markdown{font-size:15px;line-height:1.9;max-width:78ch}
+.agent-shell .assistant-markdown .assistant-heading{font-size:21px;margin:16px 0 9px;line-height:1.55;font-weight:650}
+.agent-shell .assistant-markdown .assistant-heading:first-child{margin-top:0}
+.agent-shell .assistant-markdown p{margin-bottom:10px}
+.agent-shell .assistant-markdown strong{color:var(--bronze);font-weight:650}
+.agent-shell .assistant-citations{margin:12px 0;border:0;padding:0;max-width:100%}
+.agent-shell .assistant-citations summary{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);padding:5px 10px;border-radius:8px;font-size:12px;min-height:30px;color:var(--ink);background:var(--paper);list-style:none}
+.agent-shell .assistant-citations summary::-webkit-details-marker{display:none}
+.agent-shell .assistant-citations summary>svg:first-child{color:var(--bronze)}
+.agent-shell .assistant-citations[open]{padding-bottom:8px}
+.agent-process{margin:16px 0 0}
+.agent-process-strip{display:flex;flex-wrap:wrap;align-items:center;gap:10px 22px;background:var(--paper);padding:10px 14px;border-radius:10px;font-size:12px}
+.agent-process-strip>span{display:flex;align-items:center;gap:7px;min-width:0}
+.agent-process-strip>span>span{overflow-wrap:anywhere}
+.agent-process-strip>span>svg:not(.agent-process-separator){color:var(--bronze);flex-shrink:0}
+.agent-process-strip>span[data-state=complete]>svg:not(.agent-process-separator){background:var(--success);color:var(--surface);padding:2px;width:17px;height:17px;border-radius:50%}
+.agent-process-strip>span[data-state=error]>svg:not(.agent-process-separator){color:var(--danger)}
+.agent-process-separator{color:var(--muted);margin-right:6px;flex-shrink:0}
+.agent-shell .agent-activity{background:transparent;padding:0 4px;margin:1px 0 0;font-size:11px}
+.agent-shell .agent-activity summary{min-height:28px;color:var(--secondary)}
+.agent-shell .agent-activity ol{padding-left:16px}
+.agent-shell .assistant-message-actions{margin-top:4px;gap:17px;opacity:.75}
+.agent-shell .assistant-message-actions button{font-size:10px;min-height:28px}
+.agent-shell .agent-actions{padding-top:12px;margin-left:48px}
+.agent-shell .agent-actions.has-actions{border:0;padding-top:8px}
+.agent-shell .agent-actions-header{margin-bottom:10px;gap:8px;align-items:center}
+.agent-shell .agent-actions-header h2{font-size:12px;font-weight:500;color:var(--secondary)}
+.agent-shell .agent-actions-header p{display:none}
+.agent-shell .agent-actions-tools .assistant-icon{width:28px;height:28px}
+.agent-shell .agent-manual-action{font-size:11px;min-height:28px}
+.agent-shell .agent-action-card{border:1px solid var(--agent-line);border-radius:12px;background:var(--surface);box-shadow:0 3px 10px #34261708}
+.agent-shell .agent-action-card>header{padding:12px 20px;background:var(--paper);gap:10px;border-bottom:1px solid var(--line)}
+.agent-shell .agent-action-card h3{font-size:15px;font-weight:600}
+.agent-shell .agent-action-state{font-size:12px;color:var(--warning)}
+.agent-shell .agent-action-state>svg{width:8px;height:8px;fill:currentColor;stroke-width:0}
+.agent-action-subject{display:flex;align-items:center;gap:12px;padding:18px 22px 4px;min-width:0}
+.agent-action-subject>span{display:grid;place-items:center;width:36px;height:36px;border-radius:9px;background:var(--accent-soft);color:var(--ink);font-size:19px;font-weight:600;flex-shrink:0}
+.agent-action-subject h4{font-size:19px;font-weight:650;line-height:1.5;overflow-wrap:anywhere}
+.agent-shell .agent-action-fields{padding:12px 22px 18px;gap:12px 28px;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr)}
+.agent-shell .agent-action-fields>div{display:grid;grid-template-columns:70px minmax(0,1fr);align-items:baseline;gap:10px}
+.agent-shell .agent-action-fields>div.is-long{display:block}
+.agent-shell .agent-action-fields dt{font-size:12px;margin:0;color:var(--secondary)}
+.agent-shell .agent-action-fields dd{font-size:13px;line-height:1.8}
+.agent-shell .agent-action-fields [data-field=优先级] .agent-field-value{display:inline-block;background:var(--accent-soft);color:var(--bronze);padding:0 10px;border-radius:5px}
+.agent-shell .agent-action-card>footer{margin:0 22px;padding:12px 0;border-top:1px solid var(--line);gap:10px}
+.agent-shell .agent-action-card footer p{font-size:11px}
+.agent-shell .agent-action-card footer .assistant-modal-primary{background:var(--bronze);min-height:35px;padding:7px 17px;box-shadow:inset 0 1px 0 #ffffff22;border-color:var(--bronze);font-size:12px}
+.agent-shell .agent-action-card footer .assistant-modal-secondary{min-height:35px;font-size:12px;padding:7px 14px}
+.agent-shell .assistant-composer-area{padding:12px 32px 12px;background:var(--surface)}
+.agent-shell .assistant-compose-inner{max-width:1088px}
+.agent-shell .assistant-composer{border:1px solid var(--line);border-radius:17px;box-shadow:0 5px 17px #2b21120d;background:var(--surface)}
+.agent-shell .assistant-composer:focus-within{border-color:var(--agent-line);box-shadow:0 5px 17px #2b21120d,0 0 0 2px var(--accent-soft)}
+.agent-shell .assistant-composer textarea{background:transparent;min-height:58px;padding:15px 18px 4px;font-size:15px;line-height:1.7}
+.agent-shell .assistant-composer-tools{padding:3px 13px 12px;border:0}
+.agent-shell .assistant-scope{display:inline-flex;align-items:center;gap:5px;border:1px solid var(--line);border-radius:18px;padding:0 10px;max-width:330px;margin-left:4px;background:var(--paper);color:var(--bronze)}
+.agent-shell .assistant-scope select{padding:3px 0;min-height:29px;color:var(--ink);font-size:12px;background:transparent}
+.agent-shell .assistant-send{width:42px;height:34px;border-radius:10px;background:var(--bronze);color:var(--on-accent)}
+.agent-shell .assistant-send:disabled{background:var(--accent-soft);color:var(--bronze);opacity:.5}
+.agent-shell .assistant-footer{font-size:10px;margin:4px 4px 0;min-height:21px}
+.agent-shell .assistant-footnote{font-size:10px;margin-top:0;color:var(--secondary)}
+@media(min-width:761px){.agent-shell .assistant-mobile-only{display:none}}
+@media(max-height:700px) and (min-width:761px){.fundapp-shell .atelier-brand{--sidebar-brand-height:68px}.fundapp-shell #agent-history-slot{min-height:88px}.fundapp-shell .agent-sidebar-art{height:88px}.agent-sidebar-user{padding-block:10px}}
+@media(max-width:1100px) and (min-width:761px){.fundapp-shell .atelier-sidebar{width:224px}.agent-shell .atelier-body{margin-left:224px}.agent-shell .atelier-top-actions{gap:6px}.agent-shell .atelier-topbar{padding-inline:18px}.agent-shell .atelier-search{width:32%}.agent-shell .atelier-demo-toggle span{display:none}.agent-shell .assistant-header{padding-inline:26px}.agent-shell .agent-context{padding-inline:26px}.agent-shell .assistant-log{padding-inline:26px}.agent-shell .assistant-composer-area{padding-inline:22px}.agent-shell .agent-action-fields{grid-template-columns:1fr 1fr;gap:12px 16px}.agent-shell .agent-action-fields>div{display:block}.agent-shell .agent-action-fields dt{margin-bottom:3px}}
+@media(max-width:760px){.agent-shell .atelier-body{margin-left:0}.agent-shell .atelier-topbar{height:auto;min-height:60px;padding:9px 12px;gap:8px}.agent-shell .atelier-search{width:auto;min-width:160px}.agent-shell .atelier-top-actions{gap:7px}.agent-shell .atelier-top-actions .atelier-user,.agent-shell .atelier-demo-toggle span{display:none}.agent-shell .assistant-header{height:62px;padding:12px 15px 3px}.agent-shell .assistant-header h1{font-size:19px}.agent-title-line{gap:10px}.agent-shell .assistant-header h1 svg{display:inline-flex;width:20px}.agent-shell .assistant-header-actions{gap:0}.agent-shell .assistant-header-actions .assistant-icon{width:29px;height:32px}.agent-shell .agent-availability{font-size:10px}.agent-shell .agent-context{padding:4px 16px 10px;min-height:42px}.agent-shell .agent-context>span{display:none}.agent-project-selector{max-width:100%;width:auto}.agent-shell .agent-project-selector select{max-width:250px;font-size:11px}.agent-shell .assistant-log{padding:22px 15px 4px}.agent-shell .assistant-message-user{max-width:94%;padding:11px 14px}.agent-shell .assistant-message-assistant{padding-left:0}.agent-shell .assistant-message-assistant .assistant-message-author{padding-left:37px;min-height:30px;margin-bottom:10px}.agent-shell .agent-avatar{width:28px;height:28px}.agent-shell .agent-avatar img{width:19px;height:19px}.agent-shell .assistant-markdown{font-size:14px;line-height:1.9}.agent-shell .assistant-markdown .assistant-heading{font-size:18px}.agent-process-strip{font-size:11px;padding:10px;gap:7px 12px}.agent-process-separator{display:none}.agent-shell .agent-actions{margin-left:0}.agent-shell .agent-action-card>header{padding:12px 14px}.agent-shell .agent-action-card h3{font-size:14px}.agent-action-subject{padding:15px 14px 4px;gap:9px}.agent-action-subject h4{font-size:16px}.agent-shell .agent-action-fields{padding:13px 14px;grid-template-columns:1fr;gap:10px}.agent-shell .agent-action-fields>div{grid-template-columns:64px minmax(0,1fr)}.agent-shell .agent-action-card>footer{margin-inline:14px}.agent-shell .agent-action-card footer>div{width:100%}.agent-shell .assistant-composer-area{padding:9px 10px 8px}.agent-shell .assistant-composer textarea{min-height:60px;padding:13px 13px 4px;font-size:14px}.agent-shell .assistant-composer-tools{padding:4px 8px 9px}.agent-shell .assistant-scope{max-width:178px;padding-inline:7px}.agent-shell .assistant-scope select{font-size:10px;min-height:28px}.agent-shell .assistant-scope>svg{display:none}.agent-shell .assistant-send{width:35px;height:32px}.agent-shell .assistant-footnote{font-size:9px}.agent-shell .assistant-empty{min-height:280px;padding:15px 0}.agent-shell .assistant-empty h2{font-size:27px}.agent-shell .assistant-empty>p{font-size:13px}.agent-shell .assistant-history-open .assistant-history{background:var(--paper)}.agent-shell .assistant-jump{bottom:180px}}
+
+.fundapp-shell .atelier-mobile-dialog{background:var(--agent-nav);color:var(--agent-nav-ink);border-color:var(--agent-nav-line)}
+.fundapp-shell .atelier-mobile-dialog .atelier-dialog-title{color:var(--agent-nav-ink)}
+
+/* Task details stay available without turning the main card into a form. */
+.agent-shell .agent-action-extra{margin:0 22px 12px;border-top:1px solid var(--line);padding-top:7px}
+.agent-shell .agent-action-extra>summary{display:inline-flex;align-items:center;gap:6px;font-size:11px;color:var(--secondary);cursor:pointer;min-height:30px;list-style:none}
+.agent-shell .agent-action-extra>summary::-webkit-details-marker{display:none}
+.agent-shell .agent-action-extra[open]>summary>svg{transform:rotate(90deg)}
+.agent-shell .agent-action-extra .agent-action-fields{padding:6px 0 8px}
+.fundapp-shell .atelier-navigation button{font-size:15px}
+.agent-shell .assistant-markdown{font-size:16px}
+.agent-shell .agent-action-fields dt{font-size:13px}
+.agent-shell .agent-action-fields dd{font-size:15px}
+.agent-shell .agent-action-subject h4{font-size:21px}
+@media(max-width:760px){.agent-shell .assistant-markdown{font-size:14px}.agent-shell .agent-action-fields dd{font-size:14px}.agent-shell .agent-action-subject h4{font-size:17px}.agent-shell .agent-action-extra{margin-inline:14px}}
+
+.agent-process-warning{display:flex;align-items:flex-start;gap:6px;color:var(--warning);font-size:11px;line-height:1.8;margin-top:5px}
+.agent-process-warning svg{flex-shrink:0;margin-top:3px}
+.agent-process.has-errors .agent-activity-symbol{color:var(--warning)}
+
+/* Illustration owns its space; history and business navigation scroll independently. */
+.fundapp-shell .agent-sidebar-art{height:132px;flex-shrink:0;overflow:hidden;pointer-events:none}
+.fundapp-shell .agent-sidebar-art img{display:block;width:100%;height:100%;object-fit:cover;object-position:center;mask-image:linear-gradient(to bottom,transparent,#000 28%,#000 82%,transparent)}
+.fundapp-shell .atelier-sidebar{box-shadow:inset -1px 0 0 #ffffff08}
+.fundapp-shell .atelier-sidebar .navigation-section{margin-bottom:7px}
+.fundapp-shell .atelier-sidebar .navigation-section:last-child{margin-bottom:0}
+.fundapp-shell .atelier-navigation button span{line-height:24px;white-space:nowrap}
+.fundapp-shell .atelier-navigation:focus-visible{outline:1px solid #c69b66;outline-offset:-4px}
+.fundapp-shell .agent-sidebar-user{padding:16px 6px;margin:0 22px;min-height:66px}
+.fundapp-shell .agent-sidebar-user strong{font-size:14px}
+@media(max-height:700px) and (min-width:761px){.fundapp-shell .agent-sidebar-art{height:88px}}
+
+.fundapp-shell .atelier-sidebar .atelier-navigation::-webkit-scrollbar{width:4px}
+.fundapp-shell .atelier-sidebar .atelier-navigation::-webkit-scrollbar-thumb{background:#73624b;border-radius:4px}
+.fundapp-shell .atelier-sidebar .atelier-navigation::-webkit-scrollbar-track{background:transparent}
+.fundapp-shell .agent-sidebar-art img{opacity:.8}
+
+@media(min-width:761px){.fundapp-shell .atelier-sidebar{overflow-y:auto}}
+
+
+/* A user-sized navigation pane, with a real pointer/keyboard separator. */
+.fundapp-shell .agent-sidebar-resizer{height:24px;flex:0 0 24px;position:relative;margin:0 20px;display:flex;align-items:center;justify-content:center;cursor:row-resize;touch-action:none;user-select:none;color:#aa9270}
+.fundapp-shell .agent-sidebar-resizer::before{content:"";position:absolute;left:0;right:0;top:11px;border-top:1px solid var(--agent-nav-line)}
+.fundapp-shell .agent-sidebar-resizer>svg{position:relative;background:var(--agent-nav);padding:0 4px;box-sizing:content-box}
+.fundapp-shell .agent-sidebar-resizer:hover,.fundapp-shell .agent-sidebar-resizer:focus-visible,.fundapp-shell .agent-sidebar-resizer[data-dragging=true]{color:#e3c08a}
+.fundapp-shell .agent-sidebar-resizer:is(:hover,:focus-visible,[data-dragging=true])::before{border-color:#c69b66}
+.fundapp-shell .agent-sidebar-resizer:focus-visible{outline:1px solid #c69b66;outline-offset:1px;border-radius:4px}
+.fundapp-shell .atelier-sidebar.is-nav-resizing,.fundapp-shell .atelier-sidebar.is-nav-resizing *{cursor:row-resize!important;user-select:none!important}
+.fundapp-shell #agent-history-slot .assistant-history{overflow-y:auto;padding-top:4px}
+.fundapp-shell #agent-history-slot .agent-history-label{flex-shrink:0}
+.fundapp-shell #agent-history-slot .assistant-history-list{flex:1 0 38px}
+.fundapp-shell #agent-history-slot .assistant-history-bottom{justify-content:flex-end}
+
+/* Navigation is shared across every module; only chat layout and history are AI-specific. */
+.fundapp-shell .atelier-body{margin-left:248px}
+.fundapp-shell #agent-history-slot .assistant-history{position:static;flex-direction:column;min-height:0;box-shadow:none}
+@media(max-width:1100px) and (min-width:761px){.fundapp-shell .atelier-body{margin-left:224px}}
+@media(max-width:760px){.fundapp-shell .atelier-body{margin-left:0}}
+
+/* One conversation action across modules; the history pane no longer repeats it. */
+.fundapp-shell .sidebar-new-conversation{padding:4px 20px 12px;flex-shrink:0}
+.fundapp-shell .sidebar-new-conversation>button{display:flex;align-items:center;justify-content:center;gap:9px;min-height:44px;width:100%;border:1px solid #c69b66;border-radius:9px;background:linear-gradient(135deg,#655039 0%,#4b3c2c 48%,#372e24 100%);color:var(--agent-nav-ink);font-size:14px;font-weight:500;box-shadow:inset 0 1px 0 #f4d5a933,inset 0 -1px 0 #21190f66,0 3px 8px #100b0633;transition:transform 160ms ease-out}
+@media(hover:hover) and (pointer:fine){.fundapp-shell .sidebar-new-conversation>button:hover{transform:translateY(-2px);border-color:#dfb97f;box-shadow:inset 0 1px 0 #ffe1b54d,0 7px 16px #100b0652}}
+.fundapp-shell .sidebar-new-conversation>button:focus-visible{outline:2px solid #e7c08b;outline-offset:3px}
+.fundapp-shell .sidebar-new-conversation>button:active{transform:translateY(0);box-shadow:inset 0 2px 5px #17100866,0 1px 3px #100b0633}
+.fundapp-shell .sidebar-new-conversation>button{position:relative;overflow:hidden}
+.fundapp-shell .sidebar-new-conversation>button::before,.fundapp-shell .sidebar-new-conversation>button::after{content:'';position:absolute;left:0;top:0;width:42%;height:1px;background:linear-gradient(90deg,transparent,#b88f4b55 40%,#f3d9aab3 78%,#fff4da 92%,transparent);box-shadow:0 0 4px #e8bf7640;transform:translateX(-120%);pointer-events:none;opacity:0}
+.fundapp-shell .sidebar-new-conversation>button::after{top:auto;bottom:0;width:36%;background:linear-gradient(90deg,transparent,#bc96534d 40%,#eed3a5b3 82%,#ffecc9 94%,transparent)}
+@media(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){
+ .fundapp-shell .sidebar-new-conversation>button:is(:hover,:focus-visible)::before{animation:conversation-edge-comet 1200ms cubic-bezier(.3,0,.2,1) both}
+ .fundapp-shell .sidebar-new-conversation>button:is(:hover,:focus-visible)::after{animation:conversation-edge-comet 1200ms 150ms cubic-bezier(.3,0,.2,1) both}
+}
+@keyframes conversation-edge-comet{0%{transform:translateX(-120%);opacity:0}8%{opacity:1}88%{opacity:1}100%{transform:translateX(330%);opacity:0}}
+@media(prefers-reduced-motion:reduce){.fundapp-shell .sidebar-new-conversation>button{transition:none}.fundapp-shell .sidebar-new-conversation>button:hover{transform:none}}
+.fundapp-shell #agent-history-slot .assistant-history-top{display:none}
+/* Textarea outlines were clipped by the form, leaving a line across its toolbar. */
+.agent-shell .assistant-composer{padding:4px 4px 0;border-radius:18px;border-color:var(--line);background:var(--surface);box-shadow:0 5px 20px #2b211209}
+.agent-shell .assistant-composer:focus-within{border-color:color-mix(in srgb,var(--bronze) 65%,var(--line));box-shadow:0 5px 20px #2b211209,0 0 0 3px color-mix(in srgb,var(--bronze) 9%,transparent)}
+.agent-shell .assistant-composer textarea,.agent-shell .assistant-composer textarea:focus,.agent-shell .assistant-composer textarea:focus-visible{border:0;outline:none;box-shadow:none;background:transparent;border-radius:0}
+.agent-shell .assistant-composer textarea{min-height:76px;padding:14px 16px 6px;font-size:15px;line-height:1.8}
+.agent-shell .assistant-composer-tools{border:0;background:transparent;padding:5px 10px 12px}
+@media(max-width:760px){.agent-shell .assistant-composer textarea{min-height:64px;padding:12px 11px 4px;font-size:14px}.agent-shell .assistant-composer-tools{padding:4px 5px 9px}}
+
+/* History and its trailing illustration scroll together; the account stays outside. */
+.fundapp-shell .sidebar-history-scroll{background:var(--agent-nav);flex:1 1 auto;min-height:160px;overflow-y:auto;overflow-x:hidden;scrollbar-width:thin;scrollbar-color:var(--agent-nav-line) transparent}
+.fundapp-shell .sidebar-history-scroll #agent-history-slot{display:block;min-height:0}
+.fundapp-shell .sidebar-history-scroll #agent-history-slot .assistant-history{overflow:visible}
+.fundapp-shell .sidebar-history-scroll #agent-history-slot .assistant-history-list{flex:none;overflow:visible}
+.fundapp-shell .sidebar-history-scroll .agent-sidebar-art{margin-top:12px}
+
+/* The welcome uses the same Fund Management landscape and bronze as the shared navigation. */
+.agent-shell .assistant-empty{max-width:1040px;width:100%;min-height:0;padding:8px 0 20px;margin:auto}
+.agent-welcome-hero{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(200px,1fr);width:100%;overflow:hidden;border:1px solid var(--line);border-radius:18px;background:var(--paper)}
+.agent-welcome-copy{padding:30px 0 30px 32px;position:relative;z-index:1}
+.agent-shell .assistant-empty-mark{display:flex;align-items:center;gap:10px;margin:0 0 22px;color:var(--bronze);font-size:11px;letter-spacing:1px}
+.agent-shell .assistant-empty-mark img{width:26px;height:26px;border-radius:50%;mix-blend-mode:multiply}
+.agent-shell .agent-welcome-copy h2{font-size:clamp(24px,2.4vw,36px);line-height:1.45;letter-spacing:-.025em;font-weight:650;text-wrap:balance}
+.agent-welcome-copy>p{font-size:13px;line-height:1.9;color:var(--secondary);margin-top:14px}
+.agent-welcome-copy .agent-abilities{margin-top:22px;gap:16px;font-size:11px;flex-wrap:wrap}
+.agent-welcome-landscape{position:relative;min-height:280px;background:url('../assets/agent-sidebar-caravan.png') center/cover no-repeat;mask-image:linear-gradient(to right,transparent,#000 32%)}
+.agent-welcome-landscape span{position:absolute;right:22px;bottom:22px;font-size:10px;letter-spacing:2px;color:#f4dfbc}
+.agent-shell .assistant-suggestions{width:100%;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:18px;border:0}
+.agent-shell .assistant-suggestions button{display:grid;grid-template-columns:24px 1fr 16px;align-items:center;gap:10px;padding:18px 14px;min-height:78px;border:1px solid var(--line);border-radius:12px;background:var(--surface);text-align:left;font-size:13px;line-height:1.7;transition:transform 160ms ease-out}
+.agent-shell .assistant-suggestions button>svg:first-child{color:var(--bronze)}
+.agent-shell .assistant-suggestions button>svg:last-child{color:var(--secondary)}
+.agent-shell .assistant-suggestions button:focus-visible{outline:2px solid var(--bronze);outline-offset:3px}
+@media(hover:hover) and (pointer:fine){.agent-shell .assistant-suggestions button:hover{transform:translateY(-2px);background:var(--paper);border-color:var(--bronze)}}
+@media(max-width:900px){.agent-welcome-copy{padding:24px}.agent-welcome-hero{grid-template-columns:minmax(0,1fr) 180px}.agent-welcome-landscape{min-width:0}.agent-shell .assistant-suggestions{grid-template-columns:1fr}.agent-shell .assistant-suggestions button{min-height:54px;padding:12px 16px}}
+@media(max-width:600px){.agent-welcome-hero{grid-template-columns:1fr}.agent-welcome-copy{padding:24px 20px}.agent-shell .agent-welcome-copy h2{font-size:25px;max-width:none}.agent-welcome-landscape{min-height:90px;max-height:90px;mask-image:linear-gradient(to bottom,transparent,#000 55%);background-position:center 66%}.agent-welcome-landscape span{bottom:12px;right:16px}.agent-welcome-copy .agent-abilities{gap:12px;margin-top:18px}.agent-shell .assistant-empty{padding-top:0}.agent-shell .assistant-empty-mark{margin-bottom:16px}}
+@media(prefers-reduced-motion:reduce){.agent-shell .assistant-suggestions button{transition:none}.agent-shell .assistant-suggestions button:hover{transform:none}}
+.assistant-markdown a{color:var(--bronze);text-decoration:underline;text-underline-offset:4px}.assistant-markdown a:focus-visible{outline:2px solid var(--bronze);outline-offset:4px;border-radius:2px}
+.assistant-main>.aw-tabs{flex:0 0 auto;margin:0;padding:0 24px;gap:24px;overflow-x:auto;white-space:nowrap}
+.fundapp-shell .agent-sidebar-user{position:relative;isolation:isolate;overflow:hidden;margin:0;padding:16px 28px;min-height:66px}
+.agent-sidebar-caravan{position:absolute;inset:0;z-index:-1;pointer-events:none}
+.agent-sidebar-caravan img{display:block;width:100%;height:100%;object-fit:cover;object-position:center}
+.agent-sidebar-caravan::after{content:"";position:absolute;inset:0;background:linear-gradient(to right,rgb(22 20 17 / .8),rgb(22 20 17 / .3))}
+.aw-grid .aw-template-preview>summary{color:var(--danger)}
+
+:root[data-color-mode=dark] .agent-shell .assistant-empty-mark img{mix-blend-mode:screen;filter:grayscale(1) invert(1) sepia(1)}
+/* Give blended logo pixels the same opaque backdrop as the welcome panel. */
+.agent-welcome-copy{background:var(--paper)}
+
+/* The account avatar is a direct, keyboard-accessible entry without changing sidebar geometry. */
+:root.atelier-theme .fundapp-shell .agent-sidebar-user .sidebar-account-avatar{display:grid;place-items:center;flex-shrink:0;width:30px;height:30px;border-radius:50%;background:#d1c6b6;color:var(--agent-nav);font-size:13px;text-decoration:none;cursor:pointer;transition:transform 160ms ease-out,box-shadow 160ms ease-out}
+.fundapp-shell .agent-sidebar-user .sidebar-account-avatar:is(:hover,:focus-visible){transform:translateY(-2px);box-shadow:0 4px 9px #0003;text-decoration:none}
+.fundapp-shell .agent-sidebar-user .sidebar-account-avatar:focus-visible{outline:2px solid #e7c991;outline-offset:3px}
+.fundapp-shell .agent-sidebar-user .sidebar-account-avatar:active{transform:translateY(0)}
+@media(prefers-reduced-motion:reduce){:root.atelier-theme .fundapp-shell .agent-sidebar-user .sidebar-account-avatar{transition:none;transform:none!important}}

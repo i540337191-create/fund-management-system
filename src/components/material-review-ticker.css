@@ -1,0 +1,17 @@
+.material-review-ticker{display:flex;align-items:center;gap:12px;flex-shrink:0;min-height:44px;margin:-4px 0 16px;padding:6px 12px;border:1px solid color-mix(in srgb,var(--bronze) 30%,var(--line));border-radius:7px;background:var(--surface);color:var(--ink);font-size:12px;min-width:0}
+.material-ticker-label{display:flex;align-items:center;gap:6px;flex-shrink:0;color:var(--bronze);padding-right:12px;border-right:1px solid var(--line)}
+.material-ticker-label strong{font-weight:600}
+.material-ticker-content{min-width:0;flex:1;display:flex;align-items:center;gap:8px}
+.material-ticker-content>p{color:var(--secondary);line-height:1.6}
+.material-ticker-kind{flex-shrink:0;color:var(--bronze);font-size:11px}
+:root.atelier-theme .material-ticker-content>.material-ticker-message{display:block;background:transparent;color:var(--ink);border:0;padding:4px 0;text-align:left;box-shadow:none;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%;font-size:12px;line-height:20px}
+.material-ticker-message strong{font-weight:600}
+.material-ticker-controls{display:flex;align-items:center;gap:5px;flex-shrink:0}
+.material-ticker-controls button{min-width:28px;min-height:28px;display:inline-flex;align-items:center;justify-content:center;border-radius:5px;color:var(--bronze);background:var(--accent-soft)}
+:root.atelier-theme .material-ticker-controls button[data-ui]{min-height:28px;padding:4px 8px;font-size:11px}
+.material-ticker-count{color:var(--secondary);font-size:11px;font-variant-numeric:tabular-nums;min-width:28px;text-align:center}
+@media(min-width:1101px){.materials-c:has(.material-review-ticker) .material-c-body{height:clamp(420px,calc(100dvh - 330px),780px)}}
+@media(max-width:1100px){.material-review-ticker{flex-wrap:wrap;gap:8px}.material-ticker-content{flex-basis:70%}.material-ticker-controls{margin-left:auto}}
+@media(max-width:600px){.material-review-ticker{padding:10px}.material-ticker-label{border-right:0}.material-ticker-content{flex-basis:100%;order:2}.material-ticker-controls{flex-wrap:wrap;order:3}.material-ticker-controls button{min-width:32px;min-height:32px}.material-ticker-content>.material-ticker-message{white-space:normal}.material-ticker-kind{align-self:flex-start;padding-top:6px}}
+@media(min-width:1101px){.material-review-ticker{height:44px}.material-ticker-content>p{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}}
+@media(max-width:600px){.material-review-ticker{min-height:144px;align-content:space-between}.material-ticker-content{min-height:40px;max-height:60px;overflow:hidden}}

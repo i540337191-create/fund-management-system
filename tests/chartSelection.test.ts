@@ -1,0 +1,12 @@
+import {test} from 'node:test';
+import assert from 'node:assert/strict';
+import {taskDeadlineSummary,isOverdueTask} from '../src/lib/taskDeadlineSummary.ts';
+import {cashflowTrend} from '../src/lib/cashflowTrend.ts';
+import type {InvestmentCashflow} from '../src/lib/investmentCashflowTypes.ts';
+const row=(date:string,amount:string,extra:Partial<InvestmentCashflow>={})=>({date,amount,kind:'investment_payment',currency:'CNY',status:'posted',...extra} as InvestmentCashflow);
+test('deadlines use seven consecutive dates, exclude closed tasks and distinguish overdue',()=>{const r=taskDeadlineSummary([{dueDate:'2026-12-31',status:'未开始'},{dueDate:'2026-12-30',status:'进行中'},{dueDate:'2026-12-29',status:'已完成'},{dueDate:'2027-01-01',status:'已取消'},{dueDate:'2027-01-01',status:'未开始'}],'2026-12-31');assert.equal(r.overdue,1);assert.equal(r.days.length,7);assert.deepEqual(r.days[0],{date:'2026-12-31',count:1});assert.deepEqual(r.days[1],{date:'2027-01-01',count:1});assert.equal(r.days[6].date,'2027-01-06');});
+test('empty and sparse amounts do not earn a trend chart',()=>{assert.deepEqual(cashflowTrend([]),[]);assert.deepEqual(cashflowTrend([row('2026-01-01','1.00'),row('2026-02-01','2.00')]),[]);assert.deepEqual(cashflowTrend([row('2026-01-01','1.00'),row('2026-01-02','2.00'),row('2026-01-03','3.00')]),[]);});
+test('trend keeps exact cents, gaps and reversal/source boundaries',()=>{const rows=[row('2026-01-01','9007199254740993.01'),row('2026-01-02','0.09'),row('2026-03-01','2.03',{kind:'project_fee'}),row('2026-03-02','100.00',{status:'reversed'})];const r=cashflowTrend(rows);assert.equal(r[0].amount,'9007199254740993.10');assert.equal(r[0].height,1);assert.deepEqual(r.map(d=>d.month),['2026-01','2026-03']);assert.equal(r[1].amount,'2.03');assert.deepEqual(cashflowTrend(rows,true),[]);});
+test('unsupported money or invalid dates hide trend rather than create false zero',()=>{const rows=[row('2026-01-01','1.00'),row('2026-02-02','2.00'),row('2026-02-03','3.00')];assert.deepEqual(cashflowTrend([...rows,row('2026-02-04','unknown')]),[]);assert.deepEqual(cashflowTrend([...rows,row('2026-02-30','5.00')]),[]);assert.deepEqual(cashflowTrend([...rows,row('2026-02-04','5.00',{currency:'USD' as 'CNY'})]),[]);});
+
+test('undated tasks are not falsely included in overdue drilldown',()=>{assert.equal(isOverdueTask({dueDate:'',status:'未开始'},'2026-11-04'),false);assert.equal(isOverdueTask({dueDate:'2026-11-03',status:'已完成'},'2026-11-04'),false);assert.equal(isOverdueTask({dueDate:'2026-11-03',status:'进行中'},'2026-11-04'),true);});

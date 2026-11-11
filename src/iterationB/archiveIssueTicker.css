@@ -1,0 +1,13 @@
+.archive-issue-ticker{box-sizing:border-box;display:flex;align-items:center;gap:12px;width:100%;height:38px;min-height:38px;margin:0 0 10px;padding:2px 12px;border:1px solid color-mix(in srgb,var(--danger) 30%,var(--line));border-radius:3px;background:linear-gradient(105deg,var(--danger-bg),color-mix(in srgb,var(--danger-bg) 45%,var(--surface)));color:var(--danger);font:13px/24px 'PingFang SC','Microsoft YaHei',sans-serif}
+.archive-issue-ticker>strong{display:flex;align-items:center;gap:7px;white-space:nowrap;font-size:13px;font-weight:600}
+.archive-issue-message{flex:1;min-width:0;overflow:hidden}
+:root.atelier-theme .archive-issue-ticker .archive-issue-message>button,.archive-issue-message>p{display:block;width:100%;min-height:0;margin:0;padding:0;border:0;border-radius:0;background:transparent!important;box-shadow:none!important;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;text-align:left;font:inherit;color:inherit}
+.archive-issue-controls{display:flex;align-items:center;gap:4px;flex-shrink:0}
+:root.atelier-theme .archive-issue-ticker .archive-issue-controls>button{display:inline-flex;align-items:center;justify-content:center;min-height:28px;height:28px;min-width:26px;width:auto;padding:3px 5px;margin:0!important;border:0;border-radius:3px;background:transparent!important;box-shadow:none!important;font-family:inherit;font-size:12px;line-height:20px;color:var(--danger)!important}
+.archive-issue-ticker button:focus-visible{outline:2px solid var(--danger);outline-offset:1px}
+.archive-issue-detail{padding:16px 0;border-bottom:1px solid var(--line);font-size:14px;line-height:1.8}.archive-issue-detail>p{white-space:pre-wrap;margin:8px 0}
+@media(max-width:700px){.archive-issue-ticker{gap:6px;padding-inline:7px}.archive-issue-ticker>strong{font-size:12px}.archive-issue-controls{gap:0}.archive-issue-controls>span{display:none}}
+
+.archive-issue-message>button{animation:archive-issue-enter 180ms ease-out}
+@keyframes archive-issue-enter{from{transform:translateY(8px);opacity:.4}to{transform:translateY(0);opacity:1}}
+@media(prefers-reduced-motion:reduce){.archive-issue-message>button{animation:none}}

@@ -1,0 +1,53 @@
+/* Reuse the fund ledger's approved landscape and typography. */
+.projects-workspace{min-width:0}
+.project-ledger-overview{margin-bottom:18px;color:var(--ink);container-type:inline-size}
+.project-ledger-landscape{display:flex;align-items:center;gap:28px;min-height:210px;padding:20px 32px;background:url('/images/fund-ledger-ribbon.png') center 58% / 100% auto no-repeat}
+.project-ledger-total{display:flex;align-items:baseline;gap:12px;white-space:nowrap}
+.project-ledger-total>strong{font:italic 72px/1.1 Georgia,serif;color:var(--bronze);font-variant-numeric:tabular-nums}
+.project-ledger-total>span{font:600 23px/1.5 'Songti SC','STSong',serif}
+.project-ledger-stages{display:flex;flex:1;flex-wrap:wrap;align-items:center;justify-content:space-around;gap:12px;min-width:0}
+:root.atelier-theme .project-ledger-stages>button{display:flex;flex-direction:column;align-items:center;gap:5px;flex:1 1 100px;min-height:100px;padding:12px;border:1px solid transparent;background:transparent;box-shadow:none;color:var(--ink);border-radius:10px}
+.project-ledger-stages>button>span:first-child{font-size:20px;font-weight:600}
+.project-ledger-stages strong{font:italic 40px/1.1 Georgia,serif;color:var(--bronze);font-variant-numeric:tabular-nums}
+.project-ledger-stages strong small{font:14px 'PingFang SC',sans-serif;color:var(--ink)}
+.project-ledger-share{font-size:12px;color:var(--secondary)}
+.project-ledger-distribution{display:flex;align-items:center;gap:18px;padding:10px 16px;background:var(--inset);border-radius:8px;font-size:13px}
+.project-ledger-distribution>span{font-weight:600;white-space:nowrap}
+.project-ledger-band{display:flex;flex:1;height:8px;gap:3px;min-width:0}
+:root.atelier-theme .project-ledger-band>button{flex-basis:0;min-width:8px;min-height:8px;height:8px;padding:0;border:0;border-radius:3px;background:var(--bronze);box-shadow:none}
+:root.atelier-theme .project-ledger-band>[data-stage-tone="1"]{background:color-mix(in srgb,var(--bronze) 65%,var(--surface))}
+:root.atelier-theme .project-ledger-band>[data-stage-tone="2"]{background:color-mix(in srgb,var(--bronze) 35%,var(--surface))}
+:root.atelier-theme .project-ledger-band>[data-stage-tone="3"]{background:var(--secondary)}
+.project-ledger-distribution>[data-ui]{min-height:32px;font-size:12px}
+.project-ledger-empty{padding:16px;color:var(--secondary);font-size:14px}
+:root.atelier-theme .projects-workspace>.project-register{padding:0;background:transparent;border:0;box-shadow:none}
+.project-ledger-register-heading{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin:22px 0 16px}
+.project-ledger-register-heading h2{font-size:20px;font-weight:650;color:var(--ink)}
+.project-ledger-register-heading p{font-size:13px;color:var(--secondary);margin-top:5px}
+.project-ledger-register-heading>span{font-size:12px;color:var(--secondary)}
+.projects-workspace .project-origin-note{position:relative;font-size:12px;padding:9px 40px 9px 14px;color:var(--bronze);background:var(--accent-soft);border-color:var(--line)}
+.projects-workspace .project-filter-groups{gap:12px}
+.projects-workspace .project-register table td{padding-top:13px;padding-bottom:13px}
+.projects-workspace :is(button,input):focus-visible{outline:2px solid var(--bronze);outline-offset:3px}
+@media(max-width:900px){.project-ledger-landscape{padding:16px;gap:16px;min-height:180px}.project-ledger-total{flex-direction:column;gap:0}.project-ledger-total>strong{font-size:52px}.project-ledger-total>span{font-size:17px}.project-ledger-stages>button>span:first-child{font-size:16px}.project-ledger-stages strong{font-size:32px}}
+@media(max-width:600px){.project-ledger-landscape{flex-direction:column;align-items:stretch;background-size:auto 100%}.project-ledger-total{flex-direction:row;align-items:baseline;gap:10px}.project-ledger-stages{gap:4px}.project-ledger-distribution{gap:10px;flex-wrap:wrap}.project-ledger-band{min-width:100px}.project-ledger-distribution>span{font-size:12px}.project-ledger-distribution>[data-ui]{margin-left:auto}.project-ledger-register-heading{margin-top:18px}}
+:root.atelier-theme .projects-workspace .project-ledger-stages>button{background:transparent!important;border-color:transparent!important;box-shadow:none!important;color:var(--ink)!important;border-radius:8px!important}
+:root.atelier-theme .projects-workspace .project-ledger-band>button{background:var(--bronze)!important;border:0!important;box-shadow:none!important;min-height:8px!important;height:8px!important;padding:0!important}
+:root.atelier-theme .projects-workspace .project-ledger-band>[data-stage-tone="1"]{background:color-mix(in srgb,var(--bronze) 65%,var(--surface))!important}
+:root.atelier-theme .projects-workspace .project-ledger-band>[data-stage-tone="2"]{background:color-mix(in srgb,var(--bronze) 35%,var(--surface))!important}
+:root.atelier-theme .projects-workspace .project-ledger-band>[data-stage-tone="3"]{background:var(--secondary)!important}
+.project-ledger-landscape{min-height:170px}
+
+:root.atelier-theme .projects-workspace .project-ledger-stages>button{transform:none!important;filter:none!important}
+.project-stage-number{display:inline-block;transition:transform 160ms ease-out}
+@media(hover:hover) and (prefers-reduced-motion:no-preference){.project-ledger-stages strong:hover .project-stage-number{transform:translateY(-2px)}}
+.project-ledger-stages>button>span:first-child{padding:3px 10px;margin:-3px -10px;border-radius:4px}
+.project-ledger-stages>button[aria-pressed=true]>span:first-child{text-decoration:none;background:var(--accent-soft);box-shadow:0 4px 12px color-mix(in srgb,var(--bronze) 28%,transparent)}
+:root.atelier-theme .projects-workspace button.project-ledger-total{padding:0;background:transparent!important;border:0!important;box-shadow:none!important;color:var(--ink)!important;transform:none;filter:none;text-align:left}
+@media(hover:hover) and (prefers-reduced-motion:no-preference){.project-ledger-total>strong{transition:transform 160ms ease-out}.project-ledger-total:hover>strong{transform:translateY(-2px)}}
+:root.atelier-theme .projects-workspace .project-origin-dismiss{display:inline-flex;align-items:center;justify-content:center;position:absolute;right:10px;top:50%;margin:0;width:20px;height:20px;min-height:20px;padding:2px;background:transparent!important;border:0!important;box-shadow:none!important;color:var(--danger);border-radius:0;transform:translateY(-50%)}
+:root.atelier-theme .projects-workspace .project-origin-dismiss:hover{color:var(--ink)}
+/* Keep the landscape behind the theme's ink instead of putting light ink on white paper. */
+:root[data-color-mode=dark] .project-ledger-landscape{position:relative;isolation:isolate;background-image:none}
+:root[data-color-mode=dark] .project-ledger-landscape::before{content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;background:url('/images/fund-ledger-ribbon.png') center 58% / 100% auto no-repeat;opacity:.08;mix-blend-mode:luminosity}
+@media(max-width:600px){:root[data-color-mode=dark] .project-ledger-landscape::before{background-size:auto 100%}}

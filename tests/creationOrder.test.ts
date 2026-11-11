@@ -1,0 +1,2 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {creationOrder} from '../src/lib/creationOrder.ts';
+test('default client creation order preserves server precision, stable ties and unknown history without mutating inputs',()=>{const input=[{id:'old'},{id:'a',createdAt:'2026-11-06T01:00:00.000001Z'},{id:'b',createdAt:'2026-11-06T01:00:00.000002Z'},{id:'c',createdAt:'2026-11-06T01:00:00.000002Z'}];assert.deepEqual(creationOrder(input).map(r=>r.id),['b','c','a','old']);assert.equal(input[0].createdAt,undefined);assert.equal(input[0].id,'old');});

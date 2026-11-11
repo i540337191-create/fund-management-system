@@ -1,0 +1,191 @@
+.fund-dossier{--dossier-border:#e6d3b7;--dossier-gold:#986a33;width:100%;min-width:0;margin:0;color:var(--ink)}
+.fund-dossier-header{padding:0 12px 18px;background:var(--surface);border-radius:12px}
+.fund-dossier-cover{position:relative;isolation:isolate;min-height:192px;margin:0 -12px;padding:20px 24px 24px;border-radius:12px 12px 0 0;overflow:hidden}
+.dossier-header-art{position:absolute;z-index:-1;inset:0;width:100%;height:100%;object-fit:cover;object-position:right bottom;pointer-events:none}
+.dossier-titlebar{display:flex;align-items:center;justify-content:space-between;gap:16px;position:relative}
+.fund-dossier-page-title{font-family:"PingFang SC","Microsoft YaHei",sans-serif;font-size:28px;font-weight:600;line-height:36px;color:var(--ink);margin:0 0 10px;padding:0 0 10px;min-height:48px;border-bottom:1px solid var(--line)}
+.dossier-titlebar>div{margin-left:auto;display:flex;flex-wrap:wrap;gap:10px}
+.fund-dossier button{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:36px;font-size:13px;font-weight:600;line-height:1.5;white-space:normal}
+.dossier-titlebar button{padding:8px 15px;border-radius:8px}
+.fund-dossier h1{position:relative;margin:20px 0 13px;max-width:calc(100% - 320px);font-family:"Songti SC","STSong","Noto Serif SC",serif;font-size:46px;line-height:1.3;font-weight:700;overflow-wrap:anywhere;color:#2e241a}
+.dossier-metadata{position:relative;display:flex;gap:10px;align-items:center;flex-wrap:wrap;font-size:13px;font-weight:600}
+.dossier-stage,.dossier-manager{padding:4px 10px;border-radius:6px;background:var(--accent-soft);color:#76532e}.dossier-manager{background:var(--surface);color:var(--ink);border:1px solid var(--line)}
+.dossier-finance{position:relative;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));padding:16px 22px 28px;border:1px solid var(--dossier-border);border-radius:12px;background:var(--surface);box-shadow:0 4px 14px #8e602215,inset 0 1px 0 #fff}
+.dossier-finance>div{padding:0 22px;min-width:0;border-right:1px solid var(--dossier-border)}.dossier-finance>div:first-child{padding-left:0}.dossier-finance>div:nth-child(4){border-right:0}
+.dossier-finance dt{font-size:14px;font-weight:600;margin-bottom:5px}.dossier-finance dd{font-family:"Times New Roman","Songti SC",serif;font-size:36px;line-height:1.2;font-weight:600;color:var(--dossier-gold);overflow-wrap:anywhere;font-variant-numeric:tabular-nums}
+.dossier-finance-wrap>p{position:absolute;bottom:6px;right:18px;font-size:11px;color:var(--secondary)}
+.dossier-navigation{display:flex;gap:0;margin:16px 0 26px;padding:3px;border:1px solid var(--dossier-border);border-radius:11px;background:var(--surface);box-shadow:0 3px 10px #8c622013;overflow-x:auto}
+:root.atelier-theme .dossier-navigation>button{position:relative;flex:1 0 auto;border:0;border-radius:7px;padding:10px 11px;min-height:46px;background:transparent;box-shadow:none;color:#5d442d;font-size:13px;gap:6px}
+:root.atelier-theme .dossier-navigation>button:not([aria-current]):hover{background:var(--accent-soft)}
+:root.atelier-theme .dossier-navigation>button[aria-current]{background:var(--bronze);color:var(--on-accent);box-shadow:inset 0 1px 0 #ffffff80,0 2px 6px #70451b30}
+.dossier-navigation>button+button:before{content:'';position:absolute;left:0;top:11px;bottom:11px;border-left:1px solid var(--dossier-border)}.dossier-navigation>button[aria-current]:before,.dossier-navigation>button[aria-current]+button:before{display:none}
+.dossier-overview{display:grid;grid-template-columns:minmax(0,1.38fr) minmax(0,1fr);gap:18px;align-items:stretch}
+.dossier-work,.dossier-shortcuts{min-width:0;border:1px solid var(--dossier-border);background:var(--surface);border-radius:12px;padding:20px;box-shadow:0 3px 10px #8e60220b}
+.fund-dossier h2{font-family:"Songti SC","STSong",serif;font-size:28px;line-height:1.4;font-weight:700;color:#35261a;display:flex;gap:12px;align-items:center}
+.fund-dossier h2:before{content:'';width:4px;height:28px;flex-shrink:0;background:#bc914d;border-radius:2px}
+.dossier-work>header{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-bottom:18px}.dossier-work>header>button{margin-left:auto;padding:9px 14px;border-radius:8px}
+.dossier-pending{font-size:15px;font-weight:600;color:var(--danger)}.dossier-pending strong{font-size:20px;font-family:"Times New Roman",serif}
+.dossier-action-list{border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.dossier-action-row{display:flex;gap:12px;align-items:center;padding:21px 0;min-height:94px}.dossier-action-row+.dossier-action-row{border-top:1px solid var(--line)}.dossier-action-row>svg{color:var(--bronze);flex-shrink:0}.dossier-action-row:has(>svg.lucide-triangle-alert)>svg{color:var(--danger)}
+.dossier-action-row>p{font-size:16px;font-weight:600;line-height:1.75;flex:1;min-width:0;overflow-wrap:anywhere}.dossier-action-row>button{flex-shrink:0;padding:7px 11px;border-radius:7px}
+.dossier-work>footer{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:20px;font-size:13px;color:var(--secondary)}.dossier-work>footer strong{font-family:"Songti SC",serif;color:var(--dossier-gold);font-size:17px}.dossier-work>footer button{font-size:12px;padding:4px 7px}
+.dossier-shortcuts>h2{margin-bottom:16px}
+:root.atelier-theme .dossier-shortcuts>.dossier-entry{display:flex;width:100%;justify-content:flex-start;text-align:left;position:relative;margin-bottom:12px;min-height:104px;border:1px solid var(--dossier-border);border-radius:9px;padding:7px 10px;background:var(--surface);box-shadow:0 3px 7px #8f64251a;gap:9px}
+.dossier-entry>img{width:96px;height:96px;object-fit:contain;flex-shrink:0}.dossier-entry>span{min-width:0}.dossier-entry strong{display:block;font-family:"Songti SC","STSong",serif;font-weight:700;font-size:22px;color:var(--ink);margin-bottom:4px}.dossier-entry small{display:block;font-size:12px;font-weight:400;color:var(--secondary)}.dossier-entry small b{color:var(--dossier-gold);font-family:"Times New Roman",serif;font-size:22px;font-weight:600}
+.dossier-entry .dossier-entry-action{display:flex;gap:5px;align-items:center;margin-left:auto;font-size:12px;color:var(--dossier-gold);flex-shrink:0}
+:root.atelier-theme .dossier-shortcuts>.dossier-entry:hover{border-color:#bf975f;box-shadow:0 4px 10px #8f64252a}
+:root.atelier-theme .dossier-shortcuts>.dossier-template-link{display:flex;margin:15px 0 0 auto;padding:3px 5px;background:transparent;border:0;box-shadow:none;font-size:12px;color:#6f5437}
+.dossier-support{grid-column:1/-1;display:flex;gap:12px;align-items:center;flex-wrap:wrap;padding:9px 14px;border:1px solid var(--line);border-radius:8px;background:var(--surface);font-size:12px;color:var(--secondary)}.dossier-support>button{font-size:12px;padding:3px 7px}.dossier-support>button:nth-last-child(2){margin-left:auto}
+.dossier-custom-fields{grid-column:1/-1}.dossier-custom-fields:empty{display:none}
+.dossier-tab-content{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:20px;min-width:0;overflow-wrap:anywhere}.dossier-tab-content>section.my-5{margin-top:0}
+:root[data-color-mode=dark] .fund-dossier{--dossier-border:var(--line);--dossier-gold:var(--bronze)}:root[data-color-mode=dark] .dossier-header-art{opacity:.24}:root[data-color-mode=dark] .fund-dossier :is(h1,h2){color:var(--ink)}:root[data-color-mode=dark] .dossier-stage{color:var(--ink)}:root[data-color-mode=dark] .dossier-navigation>button{color:var(--ink)}
+@media(min-width:1650px){.fund-dossier-cover{min-height:210px}.fund-dossier h1{font-size:46px}.dossier-finance{padding-top:20px;padding-bottom:30px}.dossier-finance dd{font-size:36px}.dossier-work,.dossier-shortcuts{padding:24px}.dossier-action-row{min-height:90px}}
+@media(max-width:1200px){.dossier-overview{grid-template-columns:minmax(0,1fr)}.dossier-shortcuts{display:grid;grid-template-columns:1fr 1fr;gap:12px}.dossier-shortcuts>h2,.dossier-template-link{grid-column:1/-1}.dossier-shortcuts>h2{margin-bottom:0}.dossier-shortcuts>.dossier-entry{margin-bottom:0!important}.fund-dossier h1{font-size:34px;max-width:calc(100% - 230px)}.dossier-navigation{margin-bottom:18px}.dossier-finance>div{padding:0 12px}}
+@media(max-width:760px){.fund-dossier-header{padding:0 0 12px}.fund-dossier-cover{margin:0;padding:14px 12px 18px}.dossier-titlebar{align-items:flex-start}.dossier-titlebar>div{justify-content:flex-end;gap:6px}.dossier-titlebar button{font-size:11px;padding:6px 9px}.fund-dossier h1{font-size:29px;max-width:100%;margin-top:20px}.dossier-header-art{opacity:.25}.dossier-metadata{font-size:12px;gap:6px}.dossier-finance{grid-template-columns:1fr 1fr;padding:14px 14px 27px;gap:15px}.dossier-finance>div{padding:0;border:0}.dossier-finance dd{font-size:27px}.dossier-finance dt{font-size:12px}.dossier-navigation>button{min-height:42px}.dossier-work,.dossier-shortcuts{padding:15px}.fund-dossier h2{font-size:22px}.dossier-work>header{gap:9px}.dossier-work>header>button{margin-left:0}.dossier-action-row{gap:8px;flex-wrap:wrap}.dossier-action-row>p{font-size:13px;min-width:calc(100% - 35px)}.dossier-action-row>button{margin-left:28px}.dossier-shortcuts{grid-template-columns:1fr}.dossier-work>footer{flex-wrap:wrap}.dossier-entry>img{width:68px;height:78px}.dossier-entry strong{font-size:20px}.dossier-tab-content{padding:12px}.dossier-support>button:nth-last-child(2){margin-left:0}}
+
+:root.atelier-theme .fund-dossier button[data-ui="primary"]{background:var(--action-create-fill)!important;color:var(--action-primary-ink)!important;border-color:#b89056!important;box-shadow:0 3px 7px #8d5b2726,inset 0 1px 0 #fff2ce70!important}
+:root.atelier-theme .fund-dossier .dossier-navigation>button{min-height:50px!important;padding:10px 11px!important;font-size:14px!important;border:0!important;background:transparent!important;box-shadow:none!important}
+:root.atelier-theme .fund-dossier .dossier-navigation>button:not([aria-current]):hover{background:var(--accent-soft)!important}
+:root.atelier-theme .fund-dossier .dossier-navigation>button[aria-current]{background:var(--action-create-fill)!important;color:var(--action-primary-ink)!important;box-shadow:0 2px 6px #70451b30,inset 0 1px 0 #fff5df80!important}
+:root.atelier-theme .fund-dossier .dossier-titlebar button,:root.atelier-theme .fund-dossier .dossier-work>header>button{font-size:14px!important;min-height:40px!important;padding:9px 15px!important}
+.fund-dossier-document-use{border:1px solid var(--line);border-radius:8px;padding:14px}.fund-dossier-document-use>summary{font-size:15px;font-weight:600;color:var(--danger);cursor:pointer}.fund-dossier-document-use[open]>section{padding-top:18px}
+.document-template-settings{margin-top:24px;padding:22px;background:var(--surface);border:1px solid var(--line);border-radius:10px}
+@media(max-width:760px){:root.atelier-theme .fund-dossier .dossier-navigation>button{min-height:42px!important;font-size:13px!important}:root.atelier-theme .fund-dossier .dossier-titlebar button{font-size:11px!important;padding:6px 9px!important;min-height:34px!important}}
+
+.dossier-work{display:flex;flex-direction:column}.dossier-work>footer{margin-top:auto;padding-top:20px}
+
+.dossier-work,:root.atelier-theme .dossier-shortcuts>.dossier-entry{background-image:url('../assets/fund-dossier/paper-dunes.webp');background-size:100% auto;background-position:right bottom;background-repeat:no-repeat}
+:root[data-color-mode=dark] .dossier-work,:root.atelier-theme[data-color-mode=dark] .dossier-shortcuts>.dossier-entry{background-image:none}
+
+.dossier-finance-wrap{position:relative}
+
+/* Business pages share the overview's paper, bronze and typographic hierarchy. */
+.fund-dossier .dossier-tab-content{padding:0 8px 24px;border:0;border-radius:0;background:transparent;font-family:'PingFang SC','Microsoft YaHei',sans-serif;font-size:14px;line-height:1.65}
+.dossier-business-heading{display:flex;align-items:baseline;gap:18px;flex-wrap:wrap;margin-bottom:22px;padding:0 0 14px;border-bottom:1px solid var(--line)}
+.fund-dossier .dossier-business-heading h2{font-size:27px;line-height:1.4}
+.fund-dossier .dossier-business-heading h2:before{display:none}
+.dossier-business-heading>p{font-size:13px;color:var(--secondary)}
+.dossier-sections{display:grid;grid-template-columns:166px minmax(0,1fr);gap:28px;align-items:start;min-width:0}
+.dossier-section-directory{display:flex;flex-direction:column;gap:4px;padding:0 20px 16px 0;border-right:1px solid var(--line)}
+:root.atelier-theme .fund-dossier .dossier-section-directory>button{position:relative;justify-content:flex-start;text-align:left;min-height:42px;padding:9px 12px;border:0;border-radius:4px;background:transparent!important;box-shadow:none!important;font-size:14px;font-weight:500;color:var(--secondary)}
+:root.atelier-theme .fund-dossier .dossier-section-directory>button[aria-current]{background:var(--accent-soft)!important;color:var(--ink);font-weight:650}
+
+:root.atelier-theme .fund-dossier .dossier-section-directory>button:hover{color:var(--ink);background:var(--hover)!important}
+.dossier-section-panels,.dossier-section-panels>section{min-width:0}
+.dossier-section-panels>section[hidden]{display:none!important}
+.dossier-section-panels>.dossier-sections{margin:0}
+.dossier-sections .dossier-sections{display:block}
+.dossier-sections .dossier-sections>.dossier-section-directory{flex-direction:row;flex-wrap:wrap;gap:5px;padding:0 0 12px;margin-bottom:18px;border-right:0;border-bottom:1px solid var(--line)}
+.dossier-sections .dossier-sections>.dossier-section-directory>button{font-size:13px;min-height:36px;padding:6px 12px}
+.dossier-business-actions{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:20px}
+.dossier-business-note,.dossier-record-count{font-size:13px;color:var(--secondary);margin-bottom:16px}
+.fund-account-metrics{margin-bottom:26px}
+.fund-account-metrics>dl{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;padding:4px 0 20px;border-bottom:1px solid var(--line)}
+.fund-account-metrics dt{color:var(--secondary);font-size:13px;margin-bottom:8px}
+.fund-account-metrics dd{font-family:'Times New Roman','Songti SC',serif;color:var(--dossier-gold);font-size:28px;line-height:1.3;font-weight:600;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.fund-account-metrics>p{font-size:12px;color:var(--secondary);margin-top:10px}
+.fund-dossier .dossier-tab-content :is(h3,h4){color:var(--ink);font-family:'Songti SC','STSong',serif;line-height:1.5;font-weight:650}
+.fund-dossier .dossier-tab-content h3{font-size:20px}
+.fund-dossier .dossier-tab-content h4{font-size:17px}
+.fund-dossier .dossier-tab-content :is(section.my-5,.fund-operations-summary,article.rounded-lg,.surface-card){border:0;border-radius:0;box-shadow:none;background:transparent;background-image:none}
+.fund-dossier .dossier-tab-content :is(section.my-5,.fund-operations-summary){padding:0;margin:0}
+.fund-dossier .dossier-tab-content article.rounded-lg{padding:18px 0;border-bottom:1px solid var(--line)}
+.fund-dossier .dossier-tab-content .fund-summary-heading{padding:0 0 15px}
+.fund-dossier .dossier-tab-content .fund-summary-heading h2{font-size:20px}
+.fund-dossier .dossier-tab-content .fund-summary-heading h2:before,.fund-dossier .dossier-tab-content .fund-summary-icon{display:none}
+.fund-dossier .dossier-tab-content .fund-summary-heading p{font-size:12px}
+.fund-dossier .dossier-tab-content .capital-snapshot{border:0;border-radius:0;box-shadow:none;background:var(--accent-soft);padding:16px}
+.fund-dossier .dossier-tab-content .metric-card{padding:14px 0!important;border-bottom:1px solid var(--line)!important}
+.fund-dossier .dossier-tab-content .metric-icon{display:none}
+.fund-dossier .dossier-tab-content .metric-card .border-t{border:0;padding-top:0}
+.fund-dossier .dossier-tab-content .metric-card .number-font{font-family:'Times New Roman','Songti SC',serif;font-size:27px;color:var(--dossier-gold)}
+:root.atelier-theme .fund-dossier .dossier-tab-content :is(button,a)[data-ui]{border-radius:5px;min-height:36px;font-size:13px;padding:6px 12px;gap:6px}
+:root.atelier-theme .fund-dossier .dossier-tab-content :is(button,a)[data-ui=secondary]{background:var(--accent-soft)!important;box-shadow:none!important;color:var(--ink);border:1px solid var(--line)}
+.fund-dossier .dossier-tab-content :is(input:not([type=checkbox]):not([type=radio]),select,textarea){border-radius:5px;font-family:inherit;font-size:14px;color:var(--ink);background-color:var(--surface)}
+.fund-dossier .dossier-tab-content :is(button,a):hover{text-decoration:none}
+.fund-dossier .dossier-tab-content :is(button,a,input,select,textarea,summary):focus-visible{outline:2px solid var(--bronze);outline-offset:3px}
+.fund-dossier .dossier-tab-content details{border:0;border-radius:0;background:transparent;box-shadow:none}
+.fund-dossier .dossier-tab-content summary{min-height:38px;padding:9px 0;color:var(--danger);font-weight:600;font-size:13px;cursor:pointer}
+.fund-dossier .dossier-tab-content details[open]>summary{margin-bottom:8px}
+.fund-dossier .dossier-tab-content table{font-size:13px;line-height:1.6}
+.fund-dossier .dossier-tab-content table :is(th,td){padding:12px 14px;vertical-align:middle}
+.fund-dossier .dossier-tab-content thead{background:var(--inset);color:var(--secondary)}
+.fund-dossier .dossier-tab-content :is(.business-table-shell,.business-table-scroll){border-radius:0;box-shadow:none}
+.fund-dossier .dossier-tab-content .lp-register-table>header>div>p{font-size:12px;line-height:1.7}
+.fund-dossier .dossier-tab-content .archive-documents-grid{display:grid;grid-template-columns:150px minmax(0,1fr);gap:22px}
+.fund-dossier .dossier-tab-content .archive-document-folders{border:0;border-right:1px solid var(--line);border-radius:0;background:transparent;padding:0 16px 0 0}
+.fund-dossier .dossier-tab-content .archive-document-folders h3{font-family:inherit;font-size:13px;color:var(--secondary);margin:0 0 10px}
+.fund-dossier .dossier-tab-content .archive-document-inspector{grid-column:2;border:0;border-top:1px solid var(--line);border-radius:0;background:transparent;padding:18px 0}
+.fund-dossier .dossier-tab-content .archive-document-inspector dl{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.dossier-case-selector{display:flex;flex-wrap:wrap;gap:8px;padding:0 0 16px}
+:root.atelier-theme .fund-dossier .dossier-case-selector>button{display:flex;align-items:center;gap:12px;background:var(--surface);border:1px solid var(--line);box-shadow:none;text-align:left;justify-content:flex-start}
+:root.atelier-theme .fund-dossier .dossier-case-selector>button[aria-current]{background:var(--accent-soft);border-color:var(--bronze)}
+.dossier-case-selector small{font-size:12px;color:var(--secondary);font-weight:400}
+.dossier-audit>ol{list-style:none;padding:0}
+.dossier-audit li{padding:16px 0;border-bottom:1px solid var(--line)}
+.dossier-audit li>p:first-child{font-size:14px;font-weight:600;color:var(--ink)}
+.dossier-audit li>p+p{font-size:13px;color:var(--secondary);margin-top:6px}
+.dossier-empty{padding:24px 0;color:var(--secondary)}
+.fund-dossier .dossier-tab-content dialog{background:var(--surface);color:var(--ink);border-color:var(--line);border-radius:10px}
+.fund-dossier .dossier-tab-content dialog :is(h2,h3){font-family:'Songti SC','STSong',serif;font-size:22px}
+.fund-dossier .dossier-tab-content dialog h2:before{display:none}
+@media(max-width:1100px){.dossier-sections{grid-template-columns:145px minmax(0,1fr);gap:20px}.fund-account-metrics>dl{grid-template-columns:repeat(2,minmax(0,1fr))}.fund-dossier .dossier-tab-content .archive-document-inspector dl{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:760px){.fund-dossier .dossier-tab-content{padding:0 0 16px}.dossier-business-heading{gap:6px;margin-bottom:16px}.dossier-business-heading>p{flex-basis:100%}.dossier-sections{display:block}.dossier-section-directory{flex-direction:row;flex-wrap:wrap;padding:0 0 12px;margin-bottom:18px;border-right:0;border-bottom:1px solid var(--line)}.fund-account-metrics>dl{gap:16px}.fund-account-metrics dd{font-size:24px}.fund-dossier .dossier-tab-content .archive-documents-grid{grid-template-columns:minmax(0,1fr)}.fund-dossier .dossier-tab-content .archive-document-folders{display:flex;flex-wrap:wrap;border:0;padding:0;gap:6px}.fund-dossier .dossier-tab-content .archive-document-folders h3{flex-basis:100%}.fund-dossier .dossier-tab-content .archive-document-inspector{grid-column:1}.fund-dossier .dossier-tab-content table :is(th,td){padding:10px}}
+.dossier-journal-toolbar{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:16px;font-size:13px;color:var(--secondary)}
+.dossier-journal-toolbar label{display:grid;gap:6px;width:min(100%,360px)}
+.dossier-journal-toolbar input{padding:8px 12px;border:1px solid var(--line);min-height:38px}
+.dossier-journal-row{display:grid;grid-template-columns:150px minmax(0,1fr) minmax(120px,auto);gap:20px;align-items:baseline;font-size:13px}
+.dossier-journal-row time,.dossier-journal-row>span{color:var(--secondary);font-size:12px;font-variant-numeric:tabular-nums}
+.dossier-audit li{padding:12px 0}.dossier-audit li details>summary{padding:4px 0!important;min-height:24px!important;font-size:12px!important}
+.dossier-audit li details>p{font-size:12px;color:var(--secondary);white-space:pre-wrap;overflow-wrap:anywhere}
+@media(max-width:760px){.dossier-journal-row{grid-template-columns:minmax(0,1fr);gap:3px}.dossier-journal-toolbar{flex-wrap:wrap;gap:10px}}
+.fund-dossier .dossier-tab-content .fund-summary-record{padding:16px 0;border:0;border-top:1px solid var(--line);border-radius:0;background:transparent;box-shadow:none}
+
+.fund-dossier .dossier-tab-content .dossier-audit li details{margin:0}
+.fund-dossier .lp-dossier-totals .number-font{font-family:'Times New Roman','Songti SC',serif;font-size:28px;color:var(--dossier-gold)}
+.fund-dossier .dossier-tab-content .capital-snapshot-available strong{font-family:'Times New Roman','Songti SC',serif;color:var(--dossier-gold)}
+@media(min-width:1300px){.fund-dossier .dossier-tab-content .archive-documents-grid{grid-template-columns:140px minmax(0,1fr) 230px;gap:20px}.fund-dossier .dossier-tab-content .archive-document-inspector{grid-column:3;align-self:start;position:sticky;top:20px;border-top:0;border-left:1px solid var(--line);padding:0 0 0 18px}.fund-dossier .dossier-tab-content .archive-document-inspector dl{grid-template-columns:minmax(0,1fr)}}
+:root.atelier-theme .fund-dossier .dossier-tab-content :is(button,a)[data-ui=info]{background:var(--accent-soft)!important;color:var(--ink)!important;border:1px solid var(--dossier-border);box-shadow:none!important}
+:root.atelier-theme .fund-dossier .dossier-tab-content button.bg-gold{background:var(--action-create-fill)!important;color:var(--action-primary-ink)!important;border-color:#b89056!important;box-shadow:inset 0 1px 0 #fff2ce70!important;border-radius:5px}
+:root.atelier-theme .fund-dossier .dossier-tab-content table button[data-ui=navigation]{display:block;justify-content:flex-start;max-width:100%;min-height:0;padding:0!important;border:0;border-radius:0;background:transparent!important;box-shadow:none!important;color:var(--ink)!important;text-align:left;white-space:normal;overflow-wrap:anywhere;line-height:1.7}
+:root.atelier-theme .fund-dossier .dossier-tab-content table button[data-ui=navigation]:hover{color:var(--dossier-gold)!important;box-shadow:none!important}
+:root.atelier-theme .fund-dossier .dossier-tab-content .archive-document-folders>button{display:flex;width:100%;justify-content:space-between;gap:8px;min-height:36px;padding:7px 9px;border:0;border-radius:4px;background:transparent!important;box-shadow:none!important;color:var(--secondary);font-weight:500;text-align:left}
+:root.atelier-theme .fund-dossier .dossier-tab-content .archive-document-folders>button[aria-current]{background:var(--accent-soft)!important;color:var(--ink);font-weight:600}
+.fund-dossier .archive-document-list table{table-layout:fixed;width:100%}
+.fund-dossier .archive-document-list table th:nth-child(1){width:40%}
+.fund-dossier .archive-document-list table th:nth-child(2){width:15%}
+.fund-dossier .archive-document-list table th:nth-child(3){width:12%}
+.fund-dossier .archive-document-list table th:nth-child(4){width:17%}
+.fund-dossier .archive-document-list table th:nth-child(5){width:16%}
+.fund-dossier .archive-document-list table td{white-space:normal;overflow-wrap:anywhere}
+.fund-dossier .archive-document-list table th{white-space:normal}
+@media(max-width:760px){.fund-dossier .archive-document-list table{min-width:0}:root.atelier-theme .fund-dossier .dossier-tab-content .archive-document-folders>button{width:auto;gap:12px}}
+.fund-dossier .dossier-tab-content .fund-summary-record{border:0!important;border-top:1px solid var(--line)!important;border-radius:0!important;background:transparent!important;box-shadow:none!important}
+
+/* Refresh is a trailing utility, separate from business actions. */
+.fund-dossier .business-refresh{order:99;margin-left:auto!important;flex-shrink:0}
+.dossier-at-a-glance{grid-column:1/-1;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;padding:0 0 20px;border-bottom:1px solid var(--line)}
+:root.atelier-theme .fund-dossier .dossier-at-a-glance>button{display:flex;justify-content:flex-start;align-items:baseline;flex-wrap:wrap;gap:10px;padding:8px 0;border:0;border-radius:0;box-shadow:none!important;background:transparent!important;color:var(--ink);--control-hover:transparent;--control-ink:var(--ink);--control-line:transparent}
+.dossier-at-a-glance strong{font:600 32px/1.2 'Times New Roman',serif;color:var(--dossier-gold)}
+.dossier-at-a-glance>button>span:last-child{margin-left:auto;font-size:12px;color:var(--secondary)}
+.dossier-introduction{grid-column:1/-1;padding:8px 0 20px;border-bottom:1px solid var(--line)}
+.dossier-introduction>header{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:12px}
+.dossier-introduction>p{font-size:15px;line-height:1.8;margin:12px 0 18px;color:var(--ink)}
+.dossier-introduction>dl,.fund-bank-numbers{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;font-size:14px}
+.dossier-introduction dt,.fund-bank-numbers dt{color:var(--secondary);font-size:13px;margin-bottom:6px}
+.dossier-introduction dd{color:var(--ink);overflow-wrap:anywhere}
+.fund-bank-numbers{padding:12px 0 20px}.fund-bank-numbers dd{font:600 25px/1.4 'Times New Roman','Songti SC',serif;color:var(--dossier-gold)}
+.fund-project-register td p{font-size:12px;color:var(--secondary);margin-top:4px}
+.fund-project-register table td{border-bottom:1px solid var(--line)}
+.fund-project-register table td:first-child{min-width:200px}.fund-project-register table td:nth-last-child(2){min-width:180px}
+@media(max-width:760px){.dossier-at-a-glance,.dossier-introduction>dl,.fund-bank-numbers{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.dossier-at-a-glance>button>span:last-child{display:none}.dossier-introduction>header{flex-wrap:wrap}}
+
+@media(min-width:1500px){.fund-account-metrics>dl{grid-template-columns:repeat(6,minmax(0,1fr))}}
+.fund-dossier .fee-metrics{padding:12px 0 20px;border:0;border-bottom:1px solid var(--line);border-radius:0;background:transparent}
+.fund-dossier .fee-table-scroll{border:0;border-radius:0}
+.fund-dossier .fee-empty{padding:16px 0;border:0;border-top:1px solid var(--line);border-radius:0}
+
+/* Fund dossier uses flat surfaces and text links in every pointer state. */
+:root.atelier-theme .fund-dossier :is(.dossier-finance,.dossier-navigation,.dossier-work,.dossier-shortcuts,.dossier-entry){box-shadow:none!important}
+:root.atelier-theme .fund-dossier :is(button,a)[data-ui]{box-shadow:none!important}
+:root.atelier-theme .fund-dossier .dossier-at-a-glance>button:hover{color:var(--dossier-gold)}

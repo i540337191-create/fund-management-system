@@ -1,0 +1,20 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {randomUUID} from 'node:crypto';
+import {createTestServer as createServer,registeredCookie} from './auth-fixture.ts';import {createMemoryLedgerStore} from '../src/ledger/store.ts';
+test('manual risk CRUD persists into project evidence, protects roles and rejects stale writes',async t=>{
+ const store=createMemoryLedgerStore(),server=createServer({ledgerStore:store,auth:{mode:'password',sessionSecret:'risk-entry-test'}});t.after(()=>server.close());const project=store.listProjects()[0],secret='risk-entry-test';
+ const cookie=await registeredCookie(server,{id:'user-admin',name:'管理员',email:'admin',role:'admin'},secret);const viewer=await registeredCookie(server,{id:'risk-viewer',name:'只读',email:'risk-viewer@test',role:'viewer'},secret);
+ const base=`/api/projects/${project.id}/manual-risks`,id='risk-'+randomUUID();const fields={id,title:'核对现金流压力',type:'经营风险',level:'高',source:'经营报告第3页',time:'2026-11-04',summary:'客户回款延期，待核实影响。'};
+ const write=(body:unknown,session=cookie)=>server.inject({method:'POST',url:base+'/actions',headers:{cookie:session},payload:body});const input={...fields,action:'create',requestId:randomUUID()};
+ assert.equal((await write(input,viewer)).statusCode,403);
+ const first=await write(input);assert.equal(first.statusCode,200,first.body);assert.equal(first.json().risk.version,1);assert.equal((await write(input)).json().risk.id,id);
+ const bulk=await server.inject({url:'/api/risks/records?projectId='+project.id,headers:{cookie}});assert.equal(bulk.statusCode,200,bulk.body);assert.equal(bulk.json().risks.find((r:any)=>r.id===id).version,1);
+ await store.accessTransaction(s=>{s.data.projects[project.id]={visibility:'members',memberIds:[],revision:1};});const hidden=await server.inject({url:'/api/risks/records',headers:{cookie:viewer}});assert.equal(hidden.statusCode,200,hidden.body);assert.equal(hidden.json().risks.some((r:any)=>r.id===id),false);assert.equal((await server.inject({url:'/api/risks/records?projectId=',headers:{cookie}})).statusCode,400);
+ const detail=await store.getProjectDetail(project.id);assert.ok(detail!.risks.some(r=>r.id===id));
+ const update=await write({...fields,title:'核对回款压力修订',action:'update',expectedVersion:1,requestId:randomUUID()});assert.equal(update.statusCode,200,update.body);
+ assert.equal((await write({...fields,action:'update',expectedVersion:1,requestId:randomUUID()})).statusCode,409);
+ assert.equal((await write({id,action:'delete',expectedVersion:2,note:'误建',requestId:randomUUID()})).statusCode,200);assert.equal((await store.getProjectDetail(project.id))!.risks.some(r=>r.id===id),false);
+ const removed=await server.inject({url:base,headers:{cookie}});assert.ok(removed.json().risks[0].deletedAt);const deletedBulk=await server.inject({url:'/api/risks/records',headers:{cookie}});assert.ok(deletedBulk.json().risks.find((r:any)=>r.id===id).deletedAt);
+ assert.equal((await write({id,action:'restore',expectedVersion:3,note:'核对后恢复',requestId:randomUUID()})).statusCode,200);
+ assert.equal((await write({id,action:'resolve',expectedVersion:4,note:'已核对处理',requestId:randomUUID()})).statusCode,200);assert.equal((await store.getProjectDetail(project.id))!.risks.find(r=>r.id===id)!.status,'已处理');
+ assert.equal((await write({...fields,action:'create',requestId:randomUUID(),level:'fake'})).statusCode,400);
+});

@@ -1,0 +1,7 @@
+.ledger-pagination{display:flex;align-items:center;justify-content:space-between;gap:16px;font-size:13px;color:var(--secondary)}
+.ledger-pagination>span{margin-right:auto;font-variant-numeric:tabular-nums}
+.ledger-pagination>div{display:flex;align-items:center;flex-wrap:wrap;justify-content:flex-end;gap:8px}
+:root.atelier-theme .ledger-pagination>div>button{display:inline-flex;align-items:center;justify-content:center;min-width:34px;min-height:34px;padding:5px 9px;border-radius:5px;font-size:13px;box-shadow:none}
+:root.atelier-theme .ledger-pagination>div>button[aria-current=page]{background:var(--bronze);color:var(--on-accent);border-color:var(--bronze)}
+.ledger-page-gap{padding:0 3px}
+@media(max-width:600px){.ledger-pagination{align-items:flex-start;flex-direction:column;gap:12px}.ledger-pagination>div{justify-content:flex-start}:root.atelier-theme .ledger-pagination>div>button{min-width:38px;min-height:44px}}

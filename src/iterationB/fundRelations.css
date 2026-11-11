@@ -1,0 +1,147 @@
+.fund-ledger-overview{margin:0 0 16px;color:var(--ink);min-width:0;container-type:inline-size}
+.fund-ledger-guidance{display:flex;align-items:center;background:#f5eee4;border:1px solid #e7dacb80;border-radius:10px;min-height:40px;padding:4px 14px;font-size:13px;line-height:1.5;color:var(--secondary);gap:16px;font-family:'PingFang SC','Microsoft YaHei',sans-serif}
+.fund-ledger-source,.fund-ledger-assistant{display:flex;align-items:center;gap:10px;min-width:0}
+.fund-ledger-source{font-weight:700;color:#68482b;flex:1.2}
+.fund-ledger-assistant{border-left:1px solid #d9c7b080;flex:1.5;padding-left:16px;font-family:inherit;font-weight:600;color:#514333}
+.fund-ledger-guidance svg{flex-shrink:0;color:#a17a47;width:15px;height:15px}
+.fund-ledger-assistant b{font-weight:700}
+:root.atelier-theme .funds-workspace .fund-ledger-assistant>button{min-height:26px;padding:2px 8px;font-size:12px}
+.fund-ledger-guidance>button[data-ui=primary] svg{color:inherit}
+:root.atelier-theme .fund-ledger-guidance .fund-review-entry-arrow{width:24px;height:20px;flex-shrink:0}
+.fund-ledger-guidance>button{display:inline-flex;align-items:center;justify-content:center;gap:12px;flex-shrink:0;min-height:36px;padding:6px 20px;white-space:nowrap}
+.fund-ledger-review-list article{padding:16px 0;border-top:1px solid var(--line)}
+.fund-ledger-review-list h3{font-size:16px;font-weight:600;overflow-wrap:anywhere}
+.fund-ledger-review-list small{color:var(--warning)}
+.fund-ledger-review-list article>div{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.fund-ledger-review-list button{display:inline-flex;align-items:center;gap:6px;min-height:40px}
+:root[data-color-mode=dark] .fund-ledger-guidance{background:var(--accent-soft);color:var(--ink)}
+.fund-ledger-overview button:focus-visible{outline:2px solid var(--bronze)!important;outline-offset:3px}
+/* Size the composition by available content width, not the monitor width. */
+:root.atelier-theme .funds-workspace .fund-ledger-guidance>button{font-family:inherit;font-size:13px;font-weight:700;padding:5px 14px;min-height:32px;border-radius:8px;box-shadow:inset 0 1px 0 #fff1d580,0 1px 3px #78502420!important}
+:root.atelier-theme :is(.funds-workspace,.projects-workspace,.materials-c,.report-catalogue-page,.report-creation-dialog,.report-detail-dialog) [data-ui=primary]{background:var(--action-create-fill)!important;color:var(--action-primary-ink)!important;border:1px solid #b58b54!important;border-radius:11px;box-shadow:inset 0 1px 1px #fff3d9a6,inset 0 -1px 1px #67401470,0 3px 6px #7c4c2429!important;text-shadow:0 1px 1px #58350955}
+:root.atelier-theme :is(.funds-workspace,.projects-workspace,.materials-c,.report-catalogue-page,.report-creation-dialog,.report-detail-dialog) [data-ui=primary]:not(:disabled):hover{background:var(--action-create-hover)!important}
+:root.atelier-theme :is(.funds-workspace,.projects-workspace,.materials-c,.report-catalogue-page,.report-creation-dialog,.report-detail-dialog) [data-ui=primary]:focus-visible{outline:2px solid var(--ink)!important;outline-offset:3px}
+:root.atelier-theme :is(.funds-workspace,.projects-workspace,.materials-c) [data-ui=secondary]{background:linear-gradient(145deg,#fffdf9,#f2e7d8)!important;border-color:#d9c5aa;box-shadow:inset 0 1px 0 #fff,0 2px 4px #78552e10;color:#67482b}
+:root[data-color-mode=dark] .fund-ledger-source{color:var(--ink)}
+:root.atelier-theme[data-color-mode=dark] :is(.funds-workspace,.projects-workspace,.materials-c) [data-ui=secondary]{background:linear-gradient(145deg,#443b2e,#302b23)!important;color:var(--ink)}
+
+/* Quiet list chrome; preserve the selected gold overview and all business fields. */
+:root.atelier-theme .funds-workspace .fund-register{border:0;border-radius:0;box-shadow:none;background:transparent;padding:12px 0 0}
+:root.atelier-theme .funds-workspace .fund-register [aria-label="基金阶段"]{background:transparent;border:0;padding:0}
+:root.atelier-theme .funds-workspace .fund-register tbody>tr>.fund-row-actions{background:inherit!important}
+:root.atelier-theme .funds-workspace .fund-row-actions,:root.atelier-theme .funds-workspace .fund-register th:last-child,:root.atelier-theme .funds-workspace .fund-row-actions>button,:root.atelier-theme .funds-workspace .fund-row-actions>button:hover{box-shadow:none!important;filter:none}
+@media(min-width:768px){
+ :root.atelier-theme .funds-workspace .fund-register table :is(th,td):nth-child(n+2):nth-child(-n+11){text-align:center;vertical-align:middle}
+ :root.atelier-theme .funds-workspace .fund-register table :is(th,td):last-child{text-align:center}
+ :root.atelier-theme .funds-workspace .fund-register table :is(th,td):first-child,:root.atelier-theme .funds-workspace .fund-register table :is(th,td):nth-child(12){text-align:left}
+}
+
+.fund-ledger-landscape{position:relative;isolation:isolate;overflow:hidden;display:grid;grid-template-columns:35% minmax(0,1fr);align-items:center;min-height:190px;padding:16px 32px;margin-bottom:16px;gap:0}
+.fund-ledger-landscape:before{content:'';position:absolute;z-index:-1;inset:0;pointer-events:none;background:radial-gradient(ellipse at 5% 50%,#dcb77b24,transparent 42%),radial-gradient(ellipse at 92% 50%,#dcb77b20,transparent 40%)}
+.fund-ledger-landscape:after{content:'';position:absolute;z-index:-1;inset:-12px;pointer-events:none;background:url('/images/fund-ledger-ribbon.png') center 65% / 100% auto no-repeat;filter:blur(6px);opacity:.36;mask-image:linear-gradient(transparent,#000 40%,#000 60%,transparent)}
+:root[data-color-mode=dark] .fund-ledger-landscape:after{opacity:.08;mix-blend-mode:luminosity}
+.fund-stage-composition{display:flex;align-items:center;gap:28px;min-width:0;padding-right:28px}
+.fund-stage-donut{position:relative;width:clamp(148px,11cqw,188px);aspect-ratio:1;flex-shrink:0;border-radius:50%;box-shadow:inset 0 1px 2px #fff3d9,0 1px 3px #8b632325}
+.fund-stage-donut:before{content:'';position:absolute;inset:15%;border-radius:50%;background:var(--paper);border:1px solid #dbc7a980;box-shadow:0 1px 3px #9c6b3020,inset 0 1px 3px #8b632312}
+.fund-ledger-metric{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;min-width:0;padding:8px 16px;text-align:center}
+:root.atelier-theme .fund-ledger-overview button.fund-ledger-metric{background:transparent!important;box-shadow:none!important;border:0!important;color:var(--ink)!important;border-radius:0;min-height:100px}
+.fund-ledger-metric strong{font-family:Georgia,'Times New Roman',serif;font-weight:400;font-style:italic;font-size:clamp(44px,4cqw,68px);line-height:1.1;font-variant-numeric:tabular-nums;color:#8d581a}
+.fund-ledger-metric span{font-size:clamp(16px,1.3cqw,22px);font-weight:600;line-height:1.4;color:var(--ink)}
+:root.atelier-theme .fund-ledger-overview .fund-ledger-count{position:absolute;inset:15%;padding:0;min-height:0!important;gap:0;border-radius:50%}
+.fund-ledger-count strong{font-size:clamp(42px,3.4cqw,58px);color:var(--ink)}
+.fund-ledger-count span{font-size:clamp(15px,1.2cqw,20px)}
+.fund-ledger-stages{min-width:144px;display:grid;gap:3px}
+.fund-ledger-stages h2{font-size:15px;line-height:1.5;font-weight:650;color:var(--ink);margin:0 0 5px}
+:root.atelier-theme .fund-ledger-stages button{display:grid;grid-template-columns:12px 1fr auto;align-items:center;gap:10px;min-height:28px;padding:2px 0;background:transparent!important;box-shadow:none!important;border:0!important;border-radius:0;color:var(--ink)!important;font-size:14px;font-weight:550;line-height:1.4;text-align:left}
+.fund-ledger-stages button i{width:12px;height:12px;border-radius:3px;box-shadow:inset 0 1px 0 #ffffff70}
+.fund-ledger-stages button>span:last-child{white-space:nowrap;color:var(--secondary);font-weight:400}
+.fund-ledger-stages strong{font-size:15px;font-weight:600;color:#744716;font-variant-numeric:tabular-nums;margin-right:4px}
+.fund-ledger-stages button:hover{opacity:.75;text-decoration:none}
+.fund-ledger-stages button:hover span{text-decoration:none}
+.fund-ledger-metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-items:stretch;min-height:130px;border-left:1px solid var(--line)}
+:root.atelier-theme .funds-workspace .fund-ledger-metrics>.fund-ledger-metric+.fund-ledger-metric{border-left:1px solid var(--line)!important}
+:root[data-color-mode=dark] .fund-ledger-metric strong,:root[data-color-mode=dark] .fund-ledger-stages strong{color:var(--bronze)}
+:root[data-color-mode=dark] .fund-ledger-count strong{color:var(--ink)}
+@media(max-width:1100px){.fund-ledger-landscape{grid-template-columns:1fr;padding:16px 0;gap:20px}.fund-stage-composition{justify-content:center;padding:0}.fund-ledger-metrics{border-left:0;border-top:1px solid var(--line);padding-top:16px;min-height:110px}}
+@media(max-width:767px){.fund-ledger-landscape{gap:16px}.fund-stage-composition{gap:24px}.fund-stage-donut{width:144px}.fund-ledger-stages{min-width:134px}.fund-ledger-metrics{gap:0;min-height:90px}.fund-ledger-metric{padding:6px 8px;gap:6px}.fund-ledger-metric strong{font-size:34px}.fund-ledger-count strong{font-size:44px}.fund-ledger-metric span{font-size:13px}.fund-ledger-count span{font-size:15px}.fund-ledger-guidance{flex-wrap:wrap;border-radius:10px;padding:10px;gap:10px}.fund-ledger-source,.fund-ledger-assistant{flex:1 0 100%}.fund-ledger-assistant{border:0;padding-left:0}.fund-ledger-guidance>button{margin-left:auto}}
+
+.fund-ledger-source{flex:0 1 auto}
+.fund-ledger-assistant{flex:0 1 auto;margin-left:auto;border-left:0;padding-left:20px;justify-content:flex-end}
+.fund-ledger-task-alert{color:#b23228;font-weight:700}
+:root.atelier-theme dialog.fund-completeness-dialog[open]{--ink:#352c23;--secondary:#6d6050;--line:#e3d8c8;--paper:#fbf8f1;width:min(94vw,1040px);max-width:1040px;color:var(--ink);padding:24px;border-color:#dbccb5;background:repeating-linear-gradient(125deg,#8b632302 0 1px,transparent 1px 5px),radial-gradient(ellipse at 0 0,#fffdf8b3,transparent 65%),linear-gradient(145deg,#fdfbf7,#f6f0e6);box-shadow:inset 0 1px 0 #fff9,0 18px 60px #32231533}
+.fund-completeness-dialog>div:first-child{align-items:center;margin-bottom:10px}
+.fund-completeness-dialog button{display:inline-flex;align-items:center;justify-content:center;gap:7px;white-space:nowrap}
+.fund-review-status{min-height:32px;padding:2px 0 8px;font-size:12px;line-height:1.7;color:var(--secondary);overflow-wrap:anywhere}
+.fund-review-status[role=alert]{color:var(--danger,#b23228)}
+.fund-review-totals{display:flex;align-items:center;flex-wrap:wrap;gap:12px 24px;padding:12px 16px;border:1px solid #d8c7a933;border-radius:7px;background:linear-gradient(110deg,#eee2cc44,#fcf8f033);font-size:14px}
+.fund-review-totals b{font-size:17px;font-weight:700;font-variant-numeric:tabular-nums}
+.fund-review-muted{color:var(--secondary);font-weight:400}
+.fund-review-priority{color:#a83329;font-weight:600}
+.fund-review-advice{color:#896120;font-weight:600}
+.fund-review-layout{display:grid;grid-template-columns:230px minmax(0,1fr);gap:24px;padding-top:20px;min-height:370px}
+.fund-review-funds{min-width:0;border-right:1px solid var(--line);padding-right:16px}
+.fund-review-funds>h3{font-size:12px;font-weight:500;color:var(--secondary);margin:0 0 8px}
+.fund-review-funds input{width:100%;min-width:0;padding:7px 8px;margin:0 0 8px;background:var(--paper);border:1px solid var(--line);border-radius:5px;font-size:12px;color:var(--ink)}
+.fund-review-fund-options{max-height:52vh;overflow-y:auto}
+:root.atelier-theme .fund-completeness-dialog .fund-review-fund-options>button{display:block;width:100%;text-align:left;white-space:normal;padding:12px 10px;border:0;border-bottom:1px solid var(--line);border-left:2px solid transparent;border-radius:0;background:transparent!important;box-shadow:none!important;color:var(--ink)}
+:root.atelier-theme .fund-completeness-dialog .fund-review-fund-options>button[aria-pressed=true]{background:linear-gradient(110deg,#eadbc066,#fbf5eb55)!important;border-left-color:#9c7136;border-radius:5px}
+.fund-review-fund-options>button>strong{display:block;font-size:13px;line-height:1.6;font-weight:650;overflow-wrap:anywhere}
+.fund-review-fund-options>button>span{display:flex;flex-wrap:wrap;gap:12px;font-size:11px;margin-top:5px;font-weight:400}
+.fund-ledger-review-list{min-width:0}
+.fund-ledger-review-list article{padding:0;border:0}
+.fund-ledger-review-list article header{display:flex;align-items:start;justify-content:space-between;gap:12px}
+.fund-ledger-review-list article h3{font-size:18px;font-weight:700;line-height:1.55;margin:0;overflow-wrap:anywhere}
+.fund-ledger-review-list article small{font-size:11px;color:var(--secondary);overflow-wrap:anywhere}
+.fund-ledger-review-list article .fund-review-demo{display:inline-block;margin-top:6px;padding:2px 6px;background:#f7e8ce;color:#84521e;border-radius:4px}
+.fund-review-order{font-size:12px;color:var(--secondary);line-height:1.7;margin:6px 0 18px}
+.fund-review-category{border:1px solid var(--line);border-radius:7px;margin-top:12px;overflow:hidden;background:#fdfaf480}
+.fund-review-category>summary{display:flex;align-items:center;justify-content:space-between;gap:14px;cursor:pointer;list-style:none;padding:13px 14px;background:linear-gradient(115deg,#eee4d388,#faf6ed99)}
+.fund-review-category>summary::-webkit-details-marker{display:none}
+.fund-review-category>summary>div{min-width:0}
+.fund-review-category>summary h4{display:flex;align-items:center;flex-wrap:wrap;gap:12px;font-size:14px;line-height:1.5;font-weight:700;margin:0;color:var(--ink)}
+.fund-review-category>summary h4>span{font-size:11px;font-weight:600;padding:2px 6px;background:#a833290b;border-radius:4px}
+.fund-review-category-advice>summary h4>span{background:#a47c2820}
+.fund-review-category>summary p{font-size:12px;color:var(--secondary);line-height:1.7;margin:4px 0 0;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+.fund-review-disclosure{flex-shrink:0;color:#a83329;font-size:11px;white-space:nowrap;font-weight:600}
+.fund-review-disclosure:before{content:'展开详情 ＋'}
+.fund-review-category[open]>.fund-review-disclosure:before,.fund-review-category[open]>summary .fund-review-disclosure:before{content:'收起 −'}
+.fund-review-category[open]>summary{border-bottom:1px solid var(--line)}
+.fund-ledger-review-list .fund-review-category ul{list-style:none;padding:0 14px;margin:0;background:#fffdf899}
+.fund-ledger-review-list li{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:14px 0;border-bottom:1px solid var(--line)}
+.fund-ledger-review-list li:last-child{border-bottom:0}
+.fund-ledger-review-list li h4{font-size:13px;font-weight:650;margin:0;line-height:1.6}
+.fund-ledger-review-list li p{font-size:12px;color:var(--secondary);line-height:1.8;margin:4px 0}
+.fund-ledger-review-list li>button{flex-shrink:0;font-size:12px;min-height:34px;padding:6px 10px}
+.fund-review-scope{font-size:11px;color:var(--secondary);line-height:1.6;margin:16px 0 0}
+.fund-review-empty{padding:24px 0;font-size:14px}
+:root[data-color-mode=dark] .fund-ledger-task-alert,:root[data-color-mode=dark] .fund-review-priority,:root[data-color-mode=dark] .fund-review-disclosure{color:#f58b7f}
+:root[data-color-mode=dark] .fund-review-advice{color:#dbb778}
+/* Keep the same paper and bronze hierarchy in dark mode. */
+:root[data-color-mode=dark] .fund-ledger-assistant{color:var(--ink)}
+:root.atelier-theme[data-color-mode=dark] dialog.fund-completeness-dialog[open]{--ink:#f0e4d0;--secondary:#c4b49e;--line:#65563f;--paper:#30291f;border-color:#796243;background:repeating-linear-gradient(125deg,#eacb8b04 0 1px,transparent 1px 5px),radial-gradient(ellipse at 0 0,#5a47342e,transparent 65%),linear-gradient(145deg,#342d23,#25221c);box-shadow:inset 0 1px 0 #ead7ae1a,0 18px 60px #0005}
+:root[data-color-mode=dark] .fund-review-totals{border-color:#a68b5833;background:linear-gradient(110deg,#9e7d3d26,#4b3e2926)}
+:root.atelier-theme[data-color-mode=dark] .fund-completeness-dialog .fund-review-fund-options>button[aria-pressed=true]{background:linear-gradient(110deg,#9e784138,#6b54332b)!important}
+:root[data-color-mode=dark] .fund-review-category{background:#30291f80}
+:root[data-color-mode=dark] .fund-review-category>summary{background:linear-gradient(115deg,#70573538,#4a3d2d66)}
+:root[data-color-mode=dark] .fund-ledger-review-list .fund-review-category ul{background:#211e1880}
+@media(max-width:767px){
+ .fund-ledger-assistant{margin-left:0;padding-left:0;justify-content:flex-start}
+ :root.atelier-theme dialog.fund-completeness-dialog[open]{padding:16px}
+ .fund-review-layout{grid-template-columns:minmax(0,1fr);gap:16px;min-height:0}
+ .fund-review-funds{border-right:0;border-bottom:1px solid var(--line);padding:0 0 12px}
+ .fund-review-fund-options{display:flex;gap:8px;overflow-x:auto;max-height:none}
+ :root.atelier-theme .fund-completeness-dialog .fund-review-fund-options>button{flex:0 0 190px;border-bottom:0;padding:8px}
+ .fund-review-fund-options>button>strong{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+ .fund-review-totals{font-size:12px;gap:8px 16px;padding-bottom:12px}
+ .fund-ledger-review-list li{align-items:flex-start;gap:10px;flex-direction:column}
+ .fund-completeness-dialog>div:first-child{align-items:flex-start;flex-wrap:wrap}
+ .fund-completeness-dialog>div:first-child>div{margin-left:auto}
+ .fund-review-status{min-height:44px}
+ .fund-review-category>summary{padding:11px}
+ .fund-review-disclosure{font-size:10px}
+}
+
+.fund-ledger-metrics .fund-ledger-metric strong{display:inline-block;transition:transform 160ms ease-out}
+@media(hover:hover){.fund-ledger-metrics .fund-ledger-metric strong:hover{transform:translateY(-3px)}}
+.fund-ledger-metrics .fund-ledger-metric:focus-visible strong{transform:translateY(-3px)}
+@media(prefers-reduced-motion:reduce){.fund-ledger-metrics .fund-ledger-metric strong{transition:none}.fund-ledger-metrics .fund-ledger-metric:is(:hover,:focus-visible) strong{transform:none}}

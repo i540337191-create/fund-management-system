@@ -1,0 +1,54 @@
+.settings-home-c{display:grid;grid-template-columns:minmax(0,2.65fr) minmax(280px,.85fr);gap:22px;min-width:0;color:var(--ink);align-items:start}
+.settings-home-c h2{margin:0;font-size:20px;line-height:1.5;font-weight:650}
+.settings-home-c p{margin:8px 0 0;font-size:14px;line-height:1.8;color:var(--secondary);overflow-wrap:anywhere}
+.settings-home-main{display:grid;align-content:start;gap:20px;min-width:0}
+.settings-home-entries{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.settings-home-row,.settings-reminder-home,.settings-home-audit,.settings-home-aside>section{border:1px solid var(--line);border-radius:12px;background-color:var(--surface);min-width:0}
+.settings-home-row{display:grid;grid-template-columns:64px minmax(0,1fr) auto;align-items:center;gap:14px;min-height:180px;padding:24px;position:relative;isolation:isolate}
+.settings-home-row::before{content:'';position:absolute;inset:55% 0 0;z-index:-1;border-radius:0 0 12px 12px;background:url('/images/fund-ledger-ribbon.png') center 60%/100% auto no-repeat;opacity:.22;pointer-events:none}
+.settings-home-icon-tile{display:flex;align-items:center;justify-content:center;width:64px;height:68px;border-radius:14px;background:linear-gradient(145deg,var(--surface),var(--accent-soft));box-shadow:0 3px 5px rgb(101 67 25 / .13);color:var(--bronze)}
+.settings-home-icon{flex-shrink:0;stroke-width:1.6}
+.settings-home-row-copy{min-width:0}
+.settings-home-row h3{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin:0;font-size:18px;line-height:1.5;font-weight:650}
+.settings-home-row p{margin-top:7px;font-size:13px}
+.settings-home-c button{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:40px;flex-shrink:0;white-space:nowrap}
+.settings-home-row>button{align-self:center;padding-inline:14px}
+.settings-home-scope{padding:2px 7px;border-radius:5px;background:var(--accent-soft);color:var(--secondary);font-size:12px;font-weight:400;white-space:nowrap}
+.settings-home-aside{display:grid;gap:18px;min-width:0}
+.settings-home-aside>section,.settings-home-audit,.settings-home-c .settings-reminder-home{padding:20px 22px}
+.settings-home-c :is(.settings-home-aside,.settings-home-audit) h2,.settings-home-c .settings-reminder-home h3{display:flex;align-items:center;gap:14px}
+.settings-home-c :is(.settings-home-aside,.settings-home-audit) h2::before,.settings-home-c .settings-reminder-home h3::before{content:'';width:5px;height:22px;flex-shrink:0;border-radius:3px;background:linear-gradient(#d5a45c,#98601e)}
+.settings-home-aside>section>button,.settings-home-audit-actions{margin-top:22px}
+.settings-home-account-name{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:16px}
+.settings-home-account-name>svg{color:var(--bronze);stroke-width:1.6}
+.settings-home-account-name>strong{font-size:17px;overflow-wrap:anywhere}
+.settings-home-account-detail{font-variant-numeric:tabular-nums}
+.settings-home-account>p[role=status]{min-height:56px}
+.settings-home-c .settings-home-status{display:inline-flex;align-items:center;margin:0;padding:3px 9px;border-radius:6px;font-size:13px;line-height:1.6;color:var(--warning);background:var(--warning-bg)}
+.settings-home-c .settings-home-status.is-enabled{color:var(--success);background:var(--success-bg)}
+.settings-home-c .settings-home-status.is-error{color:var(--danger);background:var(--danger-bg)}
+.settings-home-audit-actions{display:flex;gap:10px;flex-wrap:wrap}
+.settings-home-c .settings-reminder-home>.agent-workspace{margin:0;padding:0;border:0;background:transparent}
+.settings-home-c .settings-reminder-home h3{margin:0;font-size:20px;line-height:1.5;font-weight:650}
+.settings-home-c .settings-reminder-home .aw-preferences{margin:16px 0 0;gap:16px}
+.settings-home-c .settings-reminder-home .aw-preferences label{min-width:0;font-size:14px;gap:18px}
+.settings-home-c .settings-reminder-home .aw-preferences input{width:170px;max-width:100%;font-variant-numeric:tabular-nums}
+.settings-workspace>.settings-tabs[hidden]{display:none}
+.settings-workspace[data-section='设置总览']>.page-heading{position:relative;isolation:isolate;padding-bottom:26px}
+.settings-workspace[data-section='设置总览']>.page-heading::after{content:'';position:absolute;inset:0;z-index:-1;background:url('/images/fund-ledger-ribbon.png') right 54%/80% auto no-repeat;opacity:.32;pointer-events:none}
+:root[data-color-mode=dark] .settings-home-row::before{opacity:.04}
+:root[data-color-mode=dark] .settings-workspace[data-section='设置总览']>.page-heading::after{display:none}
+@media(min-width:1800px){.settings-home-row{min-height:210px;padding:28px;gap:20px}.settings-home-main{gap:24px}.settings-home-entries{gap:20px}}
+@media(max-width:1500px){.settings-home-c{grid-template-columns:minmax(0,2.25fr) minmax(270px,.9fr);gap:18px}.settings-home-row{grid-template-columns:56px minmax(0,1fr);padding:22px;gap:12px}.settings-home-icon-tile{width:56px;height:60px;grid-row:1/3}.settings-home-row>button{grid-column:2;justify-self:start}.settings-home-row h3{font-size:17px}}
+@media(max-width:1100px){.settings-home-c{grid-template-columns:minmax(0,2fr) minmax(240px,1fr)}.settings-home-row{padding:18px;grid-template-columns:44px minmax(0,1fr)}.settings-home-icon-tile{width:44px;height:50px}.settings-home-icon{width:28px}.settings-home-aside>section,.settings-home-audit,.settings-home-c .settings-reminder-home{padding:18px}}
+@media(max-width:950px){.settings-home-c{grid-template-columns:1fr}.settings-home-aside{grid-template-columns:repeat(2,minmax(0,1fr));align-items:stretch}.settings-home-row{min-height:180px}.settings-home-row h3{font-size:18px}}
+@media(max-width:560px){.settings-home-entries,.settings-home-aside{grid-template-columns:1fr}.settings-home-main{gap:16px}.settings-home-c{gap:16px}.settings-home-row{min-height:160px;grid-template-columns:54px minmax(0,1fr)}.settings-home-icon-tile{width:54px;height:58px}.settings-home-c button{min-height:44px}.settings-home-c h2,.settings-home-c .settings-reminder-home h3{font-size:18px}.settings-home-c .settings-reminder-home .aw-preferences label{width:100%;flex-wrap:wrap;gap:10px}.settings-home-c .settings-reminder-home .aw-preferences input{flex:1;min-width:80px;width:100%}.settings-home-c .settings-reminder-home .aw-preferences>button{flex:1}.settings-workspace[data-section='设置总览']>.page-heading{padding-bottom:18px}}
+
+.settings-home-aside>.settings-home-account{min-height:236px}
+.settings-home-c .settings-reminder-home{padding-block:16px}
+.settings-home-c .reminder-feedback{display:flow-root;min-height:28px}
+.settings-home-c .reminder-feedback p{margin-top:4px;line-height:1.6}
+.settings-home-c .settings-reminder-home .aw-preferences{display:grid;justify-items:start;margin-top:12px;gap:12px}
+.settings-home-c .settings-reminder-home .aw-preferences label{display:grid;width:100%;gap:8px}
+.settings-home-c .settings-reminder-home .aw-preferences input{width:100%}
+@media(min-width:1101px){.settings-workspace[data-section='设置总览']{overflow:visible}.settings-workspace[data-section='设置总览']>div:not([hidden]):has(>.settings-home-c){overflow:visible}}

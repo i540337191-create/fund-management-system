@@ -1,0 +1,3 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {sameJsonValue} from '../src/ledger/json-value.ts';
+test('JSONB object key order and omitted undefined fields are not business changes',()=>{assert.equal(sameJsonValue([{title:'正文',text:'原文'}],[{text:'原文',title:'正文'}]),true);assert.equal(sameJsonValue({fields:{a:1,b:false},optional:undefined},{fields:{b:false,a:1}}),true);assert.equal(sameJsonValue(undefined,undefined),true);});
+test('real edits, missing values, numeric types and array ordering remain protected',()=>{for(const [a,b] of [[{text:'原文'},{text:'新正文'}],[{version:1},{version:2}],[{amount:'1'},{amount:1}],[{field:null},{}],[[1,2],[2,1]],[undefined,null]])assert.equal(sameJsonValue(a,b),false);});

@@ -1,0 +1,22 @@
+.aw-plugins-workspace .aw-grid>.aw-record{display:flex;flex-direction:column;padding:20px;gap:16px}
+.aw-plugins-workspace .aw-record>.aw-record-head{align-items:flex-start;gap:12px}
+.aw-plugins-workspace .aw-record>.aw-description{flex:1;margin:0}
+.aw-plugins-workspace .aw-record>.aw-actions{margin:0;gap:8px}
+.aw-plugins-workspace .aw-status{padding:4px 8px;border-radius:8px;background:var(--warning-bg);color:var(--warning);font-size:12px;white-space:normal;text-align:center;flex-shrink:0;max-width:44%}
+.aw-plugins-workspace .aw-status[data-connected="true"]{background:var(--success-bg);color:var(--success)}
+.aw-runs-workspace .aw-ledger,.aw-memory-workspace .aw-ledger{display:grid;gap:16px}
+.aw-runs-workspace .aw-record,.aw-memory-workspace .aw-record{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px 24px;padding:16px;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
+.aw-runs-workspace .aw-record>.aw-record-head,.aw-memory-workspace .aw-record>.aw-record-head{grid-column:1/-1;gap:16px}
+.aw-runs-workspace .aw-record>.aw-description:empty{display:none}
+.aw-runs-workspace .aw-record>.aw-meta{grid-column:1/-1;margin:0;padding-bottom:8px;border-bottom:1px solid var(--line)}
+.aw-runs-workspace .aw-record>.aw-result{margin:0;padding:8px 0;background:transparent;white-space:pre-wrap;overflow-wrap:anywhere}
+.aw-runs-workspace .aw-record>.aw-actions{align-self:start;justify-content:flex-end;margin:0;padding-top:8px}
+.aw-memory-workspace .aw-record>.aw-description{grid-column:1;margin:0;white-space:pre-wrap;overflow-wrap:anywhere}
+.aw-memory-workspace .aw-record>p:not(.aw-description){grid-column:1;margin:0;padding:8px 12px;border-radius:8px;background:var(--inset);font-size:13px;line-height:1.8;overflow-wrap:anywhere}
+.aw-memory-workspace .aw-record>.aw-actions{grid-column:2;grid-row:2/4;align-self:center;justify-content:flex-end;margin:0;max-width:240px}
+.aw-memory-workspace .aw-record>.aw-template-preview{grid-column:1/-1;margin:0}
+.aw-memory-workspace .aw-status{padding:4px 8px;border-radius:8px;background:var(--accent-soft);color:var(--bronze);font-size:12px;flex-shrink:0}
+@media(max-width:760px){.aw-runs-workspace .aw-record,.aw-memory-workspace .aw-record{gap:12px;grid-template-columns:minmax(0,1fr)}.aw-runs-workspace .aw-record>.aw-actions,.aw-memory-workspace .aw-record>.aw-actions{grid-column:1;grid-row:auto;justify-self:end;padding:0;max-width:100%}.aw-memory-workspace .aw-record>.aw-template-preview{grid-column:1}}
+.agent-workspace:is(.aw-skills-form,.aw-plugins-form,.aw-memory-form)>fieldset{border-top:1px solid var(--line);padding-top:16px}
+.agent-workspace:is(.aw-skills-form,.aw-plugins-form,.aw-memory-form) .aw-field{margin-bottom:16px}
+.agent-workspace:is(.aw-skills-form,.aw-plugins-form,.aw-memory-form)>.aw-actions{position:sticky;bottom:-20px;z-index:2;justify-content:flex-end;margin-top:16px;border-top:1px solid var(--line);padding:16px 0;background:var(--surface)}

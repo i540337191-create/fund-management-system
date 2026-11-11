@@ -1,0 +1,4 @@
+.prerequisite-group:focus{outline:2px solid var(--action-info-line);outline-offset:4px;border-radius:4px;}
+.prerequisite-group[aria-invalid=true]{outline:2px solid var(--action-danger-line);outline-offset:4px;border-radius:4px;}
+.prerequisite-group[aria-invalid=true]>legend{color:var(--action-danger-ink);}
+.prerequisite-field[aria-invalid=true]{outline:2px solid var(--action-danger-line);outline-offset:2px;}

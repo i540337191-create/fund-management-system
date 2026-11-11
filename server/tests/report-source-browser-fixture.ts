@@ -1,0 +1,21 @@
+// Isolated browser fixture; never connects to the business database.
+import {mkdtemp,rm} from 'node:fs/promises';
+import {tmpdir} from 'node:os';
+import {join} from 'node:path';
+import {randomUUID} from 'node:crypto';
+import {createServer} from '../src/index.ts';
+import {createMemoryLedgerStore,createSeedLedgerState} from '../src/ledger/store.ts';
+const root=await mkdtemp(join(tmpdir(),'report-source-browser-'));
+const state=createSeedLedgerState();state.materials=[];
+const store=createMemoryLedgerStore(state),server=createServer({ledgerStore:store,auth:{mode:'local-bypass'},materialStorageRoot:root,ai:{env:{}}});
+let failMaterials=0,failUsers=0;
+server.addHook('onRequest',async(request,reply)=>{if(request.method==='GET'&&request.url==='/api/materials'&&failMaterials>0){failMaterials--;return reply.code(503).send({error:'qa_source_read_unavailable'});}if(request.method==='GET'&&request.url==='/api/users'&&failUsers>0){failUsers--;return reply.code(503).send({error:'qa_users_read_unavailable'});}});
+server.post('/api/health/report-source-fixture',async request=>{const b=request.body as {failMaterials?:number;failUsers?:number};failMaterials=b.failMaterials??0;failUsers=b.failUsers??0;return {ok:true};});
+server.get('/api/health/report-source-fixture',async()=>({materials:(await store.listMaterials()).map(m=>({id:m.id,name:m.name,fundId:m.fundId,projectId:m.projectId})),reports:(await store.listReports()).length,storage:root}));
+let workspace=(await server.inject('/api/agent-workspace')).json();
+const draft=await server.inject({method:'POST',url:'/api/agent-workspace/actions',payload:{requestId:randomUUID(),expectedRevision:workspace.revision,action:'save_template',data:{title:'隔离验收报告模板',scope:'organization',objectType:'report',stage:'',fields:[{id:'overview',label:'业务概况',type:'text',required:true,enabled:true}],materials:[]}}});
+if(draft.statusCode!==200)throw Error(draft.body);workspace=draft.json();
+const published=await server.inject({method:'POST',url:'/api/agent-workspace/actions',payload:{requestId:randomUUID(),expectedRevision:workspace.revision,action:'publish_template',data:{id:workspace.result.id}}});if(published.statusCode!==200)throw Error(published.body);
+await server.listen({host:'127.0.0.1',port:18891});
+console.log('ISOLATED_REPORT_SOURCE_READY');
+const stop=async()=>{await server.close();await rm(root,{recursive:true,force:true});process.exit(0);};process.on('SIGINT',()=>void stop());process.on('SIGTERM',()=>void stop());

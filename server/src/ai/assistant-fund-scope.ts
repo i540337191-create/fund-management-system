@@ -1,0 +1,24 @@
+import type {LedgerStore,Material} from '../ledger/store.ts';
+import {projectInvestmentLedger} from '../ledger/investment-ledger.ts';
+import {fail} from '../ledger/workflow.ts';
+export async function assistantFundScope(store:LedgerStore,fundId:string|undefined,includeDemo:boolean){
+ if(!fundId)return undefined;
+ const [funds,projects,materials,tasks,reports,companies,snapshot]=await Promise.all([store.listFunds(),store.listProjects(),store.listMaterials(),store.listTasks(),store.listReports(),store.listCompanies(),store.readInvestmentLedgerSnapshot()]);
+ if(!funds.some(f=>f.id===fundId))fail('fund_not_found',404);
+ const ledger=projectInvestmentLedger(snapshot,{type:'fund',id:fundId},{includeDemo}),projectIds=new Set(projects.filter(p=>p.fundId===fundId).map(p=>p.id));
+ for(const r of ledger.rows)projectIds.add(r.projectId);for(const i of ledger.issues)if(i.fundId===fundId&&i.projectId)projectIds.add(i.projectId);
+ for(const s of snapshot.states)if(s.deals.some(d=>d.terms?.some(t=>t.allocations?.some(a=>a.fundId===fundId)))||s.postInvestment?.investmentCashflows?.some(c=>c.fundId===fundId)||s.postInvestment?.exitPayments?.some(c=>c.fundId===fundId))projectIds.add(s.project.id);
+ const row=(r:{fundId?:string|null;projectId?:string|null;targetType?:string;targetId?:string|null})=>r.fundId?r.fundId===fundId:r.targetType==='fund'?r.targetId===fundId:r.projectId?projectIds.has(r.projectId):r.targetType==='project'?projectIds.has(r.targetId??''):false;
+ const material=(m:Material)=>{const fs=[m.fundId,...m.relationships?.funds?.map(f=>f.id)??[]].filter(Boolean);return fs.length?fs.includes(fundId):[m.projectId,...m.relationships?.projects?.map(p=>p.id)??[]].some(id=>!!id&&projectIds.has(id));};
+ const companyIds=new Set(projects.filter(p=>projectIds.has(p.id)).flatMap(p=>p.companyId?[p.companyId]:[])),materialIds=new Set(materials.filter(material).map(m=>m.id)),taskIds=new Set(tasks.filter(row).map(t=>t.id)),reportIds=new Set(reports.filter(row).map(r=>r.id));
+ const dealIds=new Set(ledger.rows.map(r=>r.dealId));for(const state of snapshot.states)for(const deal of state.deals)if(deal.terms?.some(t=>t.allocations?.some(a=>a.fundId===fundId)))dealIds.add(deal.id);
+ const known=new Map<string,boolean>();for(const state of snapshot.states){for(const deal of state.deals){known.set(deal.id,dealIds.has(deal.id));for(const term of deal.terms??[])known.set(term.id,term.allocations?.some(a=>a.fundId===fundId)??false);}for(const row of [...state.postInvestment?.investmentCashflows??[],...state.postInvestment?.exitPayments??[]])known.set(row.id,row.fundId===fundId);for(const row of state.postInvestment?.exitExecutions??[])known.set(row.id,row.allocations?.some(a=>a.fundId===fundId)??false);}for(const [rows,allowed]of [[funds,new Set([fundId])],[projects,projectIds],[materials,materialIds],[tasks,taskIds],[reports,reportIds],[companies,companyIds]] as const)for(const r of rows)known.set(r.id,allowed.has(r.id));
+ const reference=(key:string,value:unknown)=>{if(typeof value!=='string'||!value)return true;if(key==='fundId')return value===fundId;if(key==='projectId')return projectIds.has(value);if(key==='materialId')return materialIds.has(value);if(key==='reportId')return reportIds.has(value);if(key==='taskId')return taskIds.has(value);if(key==='companyId')return companyIds.has(value);if(key==='dealId')return dealIds.has(value);return known.get(value)!==false;};
+ const assert=(value:unknown,key=''):void=>{if(Array.isArray(value)){for(const x of value)assert(x,key.endsWith('Ids')?key.slice(0,-1):key);return;}if(value&&typeof value==='object'){for(const [k,v]of Object.entries(value))assert(v,k);return;}if(!reference(key,value))fail('fund_scope_conflict',403);};
+ const filter=(value:any,key='',inScope=false):any=>{
+  if(Array.isArray(value))return value.filter(v=>{if(!v||typeof v!=='object')return true;try{if(v.data)assert(v.data);}catch{return false;}return known.get(v.id)!==false&&known.get(v.objectId)!==false&&!(v.sourceMaterialIds??[]).some((id:string)=>!materialIds.has(id))&&(!v.sourceMapping?.materialId||materialIds.has(v.sourceMapping.materialId))&&(!['records','availableRecords','items','capitalRecords','risks','meetings'].includes(key)||inScope||known.get(v.id)===true||row(v))&&(!v.projectId&&!v.fundId&&!v.targetId||row(v)||projectIds.has(v.id));}).map(v=>filter(v,key,inScope));
+  if(value&&typeof value==='object'){if(known.get(value.id)===false)return null;const scoped=inScope||known.get(value.id)===true||known.get(value.targetId)===true||row(value);return Object.fromEntries(Object.entries(value).filter(([k,v])=>reference(k,v)&&!(Array.isArray(v)&&/Ids$/.test(k)&&v.some(id=>!reference(k.slice(0,-1),id)))).map(([k,v])=>[k,filter(v,k,scoped)]));}
+  return value;
+ };
+ return {fundId,projectIds,companyIds,materialIds,taskIds,reportIds,ledger,row,material,assert,filter};
+}

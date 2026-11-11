@@ -1,0 +1,4 @@
+import test from 'node:test';import assert from 'node:assert/strict';
+import {waitForIntakeExtraction} from '../src/lib/intakeExtraction.ts';
+test('automatic extraction waits for genuine pending and never retries unrelated failures',async()=>{let calls=0;const result=await waitForIntakeExtraction(async()=>{if(++calls<3)throw {code:'extraction_pending'};return {candidates:[]};},()=>true,async()=>{});assert.deepEqual(result,{candidates:[]});assert.equal(calls,3);await assert.rejects(waitForIntakeExtraction(async()=>{throw {code:'ai_unavailable'};},()=>true,async()=>{}),e=>(e as {code:string}).code==='ai_unavailable');});
+test('leaving the original object stops polling without applying late results',async()=>{let active=true,calls=0;const result=await waitForIntakeExtraction(async()=>{calls++;throw {code:'extraction_pending'};},()=>active,async()=>{active=false;});assert.equal(result,undefined);assert.equal(calls,1);});

@@ -1,0 +1,16 @@
+import type {RiskRecord} from './store.ts';
+import type {WorkflowState} from './workflow.ts';
+import type {SessionUser} from '../auth/session.ts';
+import {object,string,date,requestId,revision,fail} from './workflow.ts';
+import {emptyPostInvestment} from './post-investment.ts';
+import {canRole} from '../auth/rbac.ts';
+export type ManualRisk=RiskRecord & {version:number;deletedAt?:string};
+export const manualRiskFields={create:['id','title','type','level','source','time','summary'],update:['id','expectedVersion','title','type','level','source','time','summary'],resolve:['id','expectedVersion','note'],delete:['id','expectedVersion','note'],restore:['id','expectedVersion','note']};
+export function manualRiskInput(value:unknown){const b=object(value,['action','requestId',...new Set(Object.values(manualRiskFields).flat())]);const action=string(b.action,true,30) as keyof typeof manualRiskFields;if(!Object.hasOwn(manualRiskFields,action))fail('invalid_action');object(b,['action','requestId',...manualRiskFields[action]]);const out:Record<string,unknown>={action,requestId:requestId(b.requestId)};for(const key of manualRiskFields[action])out[key]=key==='expectedVersion'?revision(b[key]):key==='time'?date(b[key]):string(b[key],true,key==='summary'?10000:500);if(b.level!==undefined&&!['高','中','低'].includes(String(b.level)))fail('invalid_risk_level');return out;}
+export function manualRiskWrite(s:WorkflowState,b:Record<string,unknown>,actor:SessionUser){
+ if(!canRole(actor.role,'risk:write'))fail('forbidden',403);const rid=requestId(b.requestId),fingerprint=JSON.stringify({kind:'manualRisk',projectId:s.project.id,actorId:actor.id,b});const prior=s.receipts[rid];if(prior){if(prior.fingerprint!==fingerprint)fail('request_conflict',409);return structuredClone(prior.result);}
+ s.postInvestment??=emptyPostInvestment();const p=s.postInvestment,rows=p.manualRisks??=[];let row=rows.find(r=>r.id===b.id);const now=new Date().toISOString();
+ if(b.action==='create'){if(row)fail('risk_already_exists',409);row={id:String(b.id),projectId:s.project.id,target:s.project.name,title:String(b.title),type:String(b.type),level:String(b.level),source:String(b.source),time:String(b.time),summary:String(b.summary),status:'待跟进',version:1,updatedAt:now,dataOrigin:'user_input'};rows.push(row);}
+ else {if(!row)fail('risk_not_found',404);if(row.version!==b.expectedVersion)fail('risk_revision_conflict',409);if(b.action==='restore'){if(!row.deletedAt)fail('risk_state_conflict',409);delete row.deletedAt;}else{if(row.deletedAt)fail('risk_state_conflict',409);if(b.action==='delete')row.deletedAt=now;else if(b.action==='resolve')row.status='已处理';else Object.assign(row,{title:String(b.title),type:String(b.type),level:String(b.level),source:String(b.source),time:String(b.time),summary:String(b.summary)});}row.version++;row.updatedAt=now;}
+ p.revision++;s.auditEvents.push({id:'audit-'+rid,module:'风险监控',action:'manual_risk_'+b.action,targetType:'项目',targetId:s.project.id,targetName:row.title,actor:actor.name,time:now,detail:JSON.stringify({recordId:row.id,requestId:rid,actorId:actor.id,...b}),source:'人工风险登记',dataOrigin:'user_input'});const result={risk:structuredClone(row)};s.receipts[rid]={fingerprint,result};return result;
+}

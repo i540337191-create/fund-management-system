@@ -1,0 +1,9 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {activeBusinessTemplates,historicalTemplateValues,templatePreviewSchema} from '../src/lib/businessTemplates.ts';
+test('disabled published templates do not apply and old values remain read-only historical data',()=>{const templates=[{id:'active',objectType:'lp',status:'published',fields:[{id:'field',enabled:true},{id:'old',enabled:false}]},{id:'disabled',objectType:'lp',status:'published',enabled:false,fields:[{id:'field',enabled:true}]},{id:'draft',objectType:'lp',status:'draft',fields:[]}];const active=activeBusinessTemplates(templates,'lp');assert.deepEqual(active.map(t=>t.id),['active']);const values={'active:field':'当前','active:old':'停用字段','disabled:field':'历史值','draft:field':'草稿历史'};assert.deepEqual(historicalTemplateValues(active,values),[['active:old','停用字段'],['disabled:field','历史值'],['draft:field','草稿历史']]);assert.equal(values['disabled:field'],'历史值');assert.deepEqual(activeBusinessTemplates(templates,'fund'),[]);});
+
+test('template preview uses only the selected definition, preserving order, inactive fields and options without mutating it',()=>{
+ const first={version:2,fields:[{id:'shared',label:'甲字段',type:'choice',required:true,options:['选项甲','选项乙']},{id:'old',label:'停用字段',type:'date',enabled:false}]};
+ const second={version:3,fields:[{id:'shared',label:'乙字段',type:'number'}]};
+ const snapshot=structuredClone(first),a=templatePreviewSchema(first),b=templatePreviewSchema(second);
+ assert.equal(a.schemaRevision,2);assert.deepEqual(a.fields.map(f=>f.label),['甲字段','停用字段']);assert.equal(a.fields[0].type,'singleChoice');assert.deepEqual(a.fields[0].options.map(o=>[o.id,o.label]),[['选项甲','选项甲'],['选项乙','选项乙']]);assert.equal(a.fields[1].enabled,false);assert.deepEqual(b.fields.map(f=>f.label),['乙字段']);assert.equal(b.fields[0].type,'number');assert.deepEqual(first,snapshot);
+});

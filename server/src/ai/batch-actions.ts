@@ -1,0 +1,3 @@
+import type {AssistantProposal} from '../http/assistant-actions.ts';
+export type AssistantBatch={id:string;actionIds:string[];status:'running'|'complete'|'interrupted';completed:number;error?:string;createdAt:string};
+export function batchEligible(p:AssistantProposal){return ['company_update','project_update','fund_update','task_create','report_draft','company_create','project_create','fund_create','meeting_create'].includes(p.kind)||(p.kind==='workflow_action'&&['add_item','update_item','add_finding','save_report','save_terms','save_financial','save_visit','save_clause','save_exit'].includes(String(p.body.action)));}

@@ -1,0 +1,70 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { calculateReturns, returnYearFraction, sampleCalculationMissing, type EngineCashflow } from '../src/ledger/return-engine.ts';
+import { termChoices, type ReturnTerms } from '../src/ledger/return-basis.ts';
+const terms: ReturnTerms = { ...Object.fromEntries(Object.entries(termChoices).map(([k, v]) => [k, v[0]])), measure: 'realized', terminalPolicy: 'not_applicable_with_evidence', moicNumerator: 'distributions_only', cashflowMapping: { investment_payment: 'outflow', project_fee: 'outflow', project_tax: 'outflow', exit_receipt: 'inflow' }, irrDecimals: 8, moicDecimals: 6, amountDecimals: 2, tolerance: '0.00000001', explanation: 'Synthetic mathematical fixture, never finance approval' };
+const flow = (date: string, amount: string, kind = 'investment_payment'): EngineCashflow => ({ date, amount, kind, direction: kind === 'exit_receipt' ? 'inflow' : 'outflow', currency: 'CNY' });
+const simple = [flow('2025-01-01', '100'), flow('2026-01-01', '110', 'exit_receipt')];
+const run = (flows = simple, override: ReturnTerms = {}, terminal: any = null, asOf = '2026-01-01') => calculateReturns({ ...terms, ...override }, flows, terminal, asOf);
+test('annual cashflows, zero/negative rates, all three actual day counts and leap years', () => {
+    assert.deepEqual(run(), { irr: '0.10000000', moic: '1.100000', status: 'ok', reasonCodes: [], amounts: { invested: '100.00', outflows: '100.00', distributions: '110.00', terminal: '0.00' } });
+    assert.equal(run([simple[0], flow('2026-01-01', '100', 'exit_receipt')]).irr, '0.00000000');
+    const negative = [simple[0], flow('2026-01-01', '90', 'exit_receipt')];
+    assert.equal(run(negative).irr, '-0.10000000');
+    assert.equal(run(negative, { negativeRootPolicy: 'null_negative_root' }).status, 'negative_root');
+    assert.equal(run(simple, { dayCount: 'ACT_360' }).irr, (Math.pow(1.1, 360 / 365) - 1).toFixed(8));
+    assert.equal(returnYearFraction('9999-01-01', '9999-12-31', 'ACT_ACT_ISDA'), 364 / 365);
+    assert.equal(returnYearFraction('0004-01-01', '0005-01-01', 'ACT_ACT_ISDA'), 1);
+    assert.equal(returnYearFraction('2024-01-01', '2025-01-01', 'ACT_ACT_ISDA'), 1);
+    assert.equal(returnYearFraction('2023-07-01', '2025-07-01', 'ACT_ACT_ISDA'), 184 / 365 + 1 + 181 / 365);
+});
+test('same-day aggregation is order independent and never rounds actual money to display precision', () => {
+    const rows = [flow('2025-01-01', '100.25'), flow('2025-01-01', '0.25', 'project_fee'), flow('2026-01-01', '110.55', 'exit_receipt')];
+    assert.equal(run(rows, { amountDecimals: 0 }).irr, '0.10000000');
+    assert.equal(run(rows, { amountDecimals: 0 }).amounts!.invested, '100');
+    assert.deepEqual(run(rows), run([...rows].reverse()));
+    assert.equal(run([flow('2025-01-01', '100'), flow('2025-01-01', '110', 'exit_receipt')]).status, 'same_day');
+    assert.equal(run([simple[0]]).irr, null);
+});
+test('fees, taxes, mapping and MOIC denominator use declared cash policies without adding net receipt withholding twice', () => {
+    const rows = [...simple, flow('2025-01-01', '5', 'project_fee'), flow('2025-01-01', '5', 'project_tax')];
+    assert.equal(run(rows).irr, '0.00000000');
+    assert.equal(run(rows).moic, '1.100000');
+    assert.equal(run(rows, { moicDenominator: 'all_outflows', basis: 'net' }).moic, '1.000000');
+    const excluded = { ...terms.cashflowMapping, project_fee: 'exclude', project_tax: 'exclude' } as const;
+    assert.equal(run(rows, { cashflowMapping: excluded, feePolicy: 'exclude_with_disclosure', taxPolicy: 'exclude_with_disclosure' }).irr, '0.10000000');
+    assert.equal(run(rows, { cashflowMapping: excluded }).status, 'cashflow_policy_conflict');
+    assert.equal(run([{ ...simple[0], direction: 'inflow' }, simple[1]]).status, 'cashflow_mapping_conflict');
+});
+test('terminal values affect total returns only, require evidence and exact cutoff, never infer zero', () => {
+    const total: ReturnTerms = { measure: 'total', terminalPolicy: 'explicit_valuation_required', moicNumerator: 'distributions_plus_terminal' };
+    const terminal = { amount: '110', date: '2026-01-01', currency: 'CNY', scope: 'fixture', evidence: [{}] };
+    assert.equal(run([simple[0]], total).status, 'missing_valuation');
+    assert.equal(run([simple[0]], total, terminal).irr, '0.10000000');
+    assert.equal(run([simple[0]], total, terminal).moic, '1.100000');
+    assert.equal(run([simple[0]], total, { ...terminal, date: '2025-01-01' }).status, 'missing_valuation');
+    assert.equal(run(simple, {}, terminal).status, 'terminal_policy_conflict');
+});
+test('detects multiple and touching roots; respects bounds, precision and nonconvergence', () => {
+    const multiple = [flow('2023-01-01', '100'), flow('2024-01-01', '230', 'exit_receipt'), flow('2024-12-31', '132')];
+    assert.equal(run(multiple).status, 'multiple_roots');
+    assert.equal(run(multiple, { lowerRateBound: '0.15', upperRateBound: '0.3' }).irr, '0.20000000');
+    const touching = [flow('2023-01-01', '100'), flow('2024-01-01', '220', 'exit_receipt'), flow('2024-12-31', '121')];
+    assert.equal(run(touching).status, 'ambiguous_root');
+    assert.equal(run(multiple, { maxIterations: 1 }).status, 'iteration_limit');
+    assert.equal(run(simple, { upperRateBound: '0.05' }).status, 'no_root');
+    assert.equal(run(simple, { tolerance: '0.000000000000000001' }).status, 'unsupported_precision');
+    assert.equal(run(simple, { lowerRateBound: '-0.999999999999999999' }).status, 'unsupported_precision');
+});
+test('exact MOIC half-up/even rounding and independent sample values/status must agree', () => {
+    const rows = [simple[0], flow('2026-01-01', '112.5', 'exit_receipt')];
+    assert.equal(run(rows, { moicDecimals: 2 }).moic, '1.13');
+    assert.equal(run(rows, { irrDecimals: 2 }).irr, '0.13');
+    assert.equal(run(rows, { irrDecimals: 2, roundingMode: 'half_even' }).irr, '0.12');
+    assert.equal(run(rows, { moicDecimals: 2, roundingMode: 'half_even' }).moic, '1.12');
+    const sample = { cashflows: simple, terminalValue: null, asOfDate: '2026-01-01', expected: { irr: '0.1', moic: '1.1', resultStatus: 'ok', tolerance: '0.000001' } } as any;
+    assert.deepEqual(sampleCalculationMissing(sample, terms), []);
+    assert.deepEqual(sampleCalculationMissing({ ...sample, expected: { ...sample.expected, irr: '0.2' } }, terms), ['sample.calculation_mismatch']);
+    const huge = { ...sample, cashflows: [flow('2025-01-01', '0.01'), flow('2026-01-01', '999999999999999999.99', 'exit_receipt')], expected: { irr: null, moic: '99999999999999999998', resultStatus: 'unsupported_precision', tolerance: '0.000001' } };
+    assert.deepEqual(sampleCalculationMissing(huge, terms), ['sample.calculation_mismatch']);
+});

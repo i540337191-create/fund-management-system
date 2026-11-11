@@ -1,0 +1,31 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {randomUUID} from 'node:crypto';
+import {mkdtemp,rm,writeFile} from 'node:fs/promises';
+import {tmpdir} from 'node:os';
+import {join} from 'node:path';
+import {createMemoryLedgerStore} from '../src/ledger/store.ts';
+import {createTestServer,registeredCookie} from './auth-fixture.ts';
+test('lifecycle API verifies actual proof bytes, current roles, redaction and idempotent requests',async()=>{
+ const dir=await mkdtemp(join(tmpdir(),'lifecycle-')),store=createMemoryLedgerStore(),secret='lifecycle-test-synthetic-secret-32chars';
+ const server=createTestServer({ledgerStore:store,auth:{mode:'password',sessionSecret:secret,adminEmail:'admin@example.invalid',adminPassword:'password'},materialStorageRoot:dir});
+ try{const cookies:Record<string,string>={};for(const role of ['admin','finance','investment_manager','legal','viewer'])cookies[role]=await registeredCookie(server,{id:role==='admin'?'user-admin':'lifecycle-'+role,name:role,email:role+'@example.invalid',role:role as any},secret);
+ const fund=(await store.listFunds())[0],base='/api/funds/'+fund.id+'/lifecycle';const req=(role:string,url:string,payload?:any)=>server.inject({url,method:payload?'POST':'GET',headers:{cookie:cookies[role]},...(payload?{payload}:{})});let revision=1;
+ const act=async(role:string,action:string,body:any={})=>{const r=await req(role,base+'/actions',{requestId:randomUUID(),expectedRevision:revision,action,...(action==='submitReview'?{reviewerId:'lifecycle-investment_manager'}:{}),...body});if(r.statusCode===200)revision=r.json().revision;return r;};
+ assert.equal((await server.inject({url:base})).statusCode,401);assert.equal((await act('viewer','account',{name:'secret',kind:'basic',number:'000'})).statusCode,403);
+ let r=await act('investment_manager','createCase',{kind:'disclosure',title:'private disclosure',period:'2026-Y',ownerId:'lifecycle-investment_manager',dueDate:'2027-04-30'});assert.equal(r.statusCode,200,r.body);const caseId=r.json().cases[0].id;
+ r=await act('investment_manager','requirement',{caseId,name:'private requested document',required:true});assert.equal(r.statusCode,200,r.body);const itemId=r.json().cases[0].requirements[0].id;
+ const created=await req('investment_manager','/api/funds/'+fund.id+'/investors',{requestId:randomUUID(),name:'Lifecycle Evidence LP',type:'机构'});assert.equal(created.statusCode,200,created.body);const investor=created.json().investor;
+ const upload=await server.inject({url:`/api/funds/${fund.id}/investors/${investor.id}/materials/upload?`+new URLSearchParams({requestId:randomUUID(),expectedRevision:String(investor.revision),name:'proof.txt',type:'LP材料'}),method:'POST',headers:{cookie:cookies.admin,'content-type':'application/octet-stream'},payload:Buffer.from('交易金额：10.01\n交易日期：2026-11-02\n银行流水号：ABC123\n对方户名：测试客户\n收支方向：收入')});assert.equal(upload.statusCode,200,upload.body);const proof={materialId:upload.json().material.id,versionId:upload.json().version.id};
+ r=await act('investment_manager','attach',{caseId,itemId,proof});assert.equal(r.statusCode,200,r.body);
+ assert.equal((await req('investment_manager',base+'/cases/'+caseId+'/document.docx')).statusCode,409);await act('investment_manager','report',{caseId,report:'人工核验的披露正文'});await act('investment_manager','submitReview',{caseId});await act('investment_manager','review',{caseId,decision:'approve',note:'已按实际原件核对'});const docx=await req('investment_manager',base+'/cases/'+caseId+'/document.docx');assert.equal(docx.statusCode,200,docx.body);assert.equal(docx.rawPayload.subarray(0,2).toString(),'PK');const pdf=await req('investment_manager',base+'/cases/'+caseId+'/document.pdf');assert.equal(pdf.statusCode,200,pdf.body);assert.equal(pdf.rawPayload.subarray(0,5).toString(),'%PDF-');
+ const viewer=await req('viewer',base);assert.equal(viewer.statusCode,200,viewer.body);assert.equal(viewer.body.includes('private'),false);assert.equal(viewer.body.includes('proof.txt'),false);
+ const legal=await req('legal',base);assert.equal(legal.statusCode,200,legal.body);assert.equal(legal.json().cases[0].requirements[0].proof.readIssue,'forbidden');
+ r=await act('finance','account',{name:'basic',kind:'basic',number:'001'});assert.equal(r.statusCode,200,r.body);const accountId=r.json().accounts[0].id;
+ const b={requestId:randomUUID(),expectedRevision:revision,action:'receipt',accountId,direction:'in',confirmed:true,amount:'10.01',date:'2026-11-02',reference:'=formula',counterparty:'private payer',purpose:'fee',proof};r=await req('finance',base+'/actions',b);assert.equal(r.statusCode,200,r.body);revision=r.json().revision;assert.deepEqual((await req('finance',base+'/actions',b)).json(),r.json());
+ const suggestion=await req('finance',base+'/receipt-suggestions',proof);assert.equal(suggestion.statusCode,200,suggestion.body);assert.equal(suggestion.json().suggestions.amount.value,'10.01');assert.equal(suggestion.json().suggestions.reference.excerpt,'银行流水号：ABC123');assert.equal((await req('viewer',base+'/receipt-suggestions',proof)).statusCode,403);const xlsx=await req('finance',base+'/receipts.xlsx');assert.equal(xlsx.statusCode,200);assert.equal(xlsx.rawPayload.subarray(0,2).toString(),'PK');assert.equal((await req('viewer',base+'/receipts.xlsx')).statusCode,403);
+ const csv=await req('finance',base+'/receipts.csv');assert.equal(csv.statusCode,200,csv.body);assert.match(csv.json().csv,/'=FORMULA/);assert.equal((await req('viewer',base+'/receipts.csv')).statusCode,403);
+ const versions=await store.listMaterialVersions(proof.materialId);await writeFile(join(dir,versions.find(v=>v.id===proof.versionId)!.blobId),'tampered');r=await act('investment_manager','attach',{caseId,itemId,proof});assert.equal(r.statusCode,409,r.body);assert.equal(r.json().error,'material_integrity_mismatch');
+ await store.accountTransaction(s=>{s.users.find(u=>u.id==='lifecycle-finance')!.enabled=false;});assert.equal((await act('finance','account',{name:'cannot persist',kind:'basic',number:'002'})).statusCode,401);
+ }finally{await server.close();await rm(dir,{recursive:true,force:true});}
+});

@@ -1,0 +1,11 @@
+import {WorkflowDialog} from './MaterialFileDialogs';
+import {useEffect,useState,type ReactNode} from 'react';
+
+const views=[['project-task-register','项目任务管理'],['fund-operation-tasks','基金运营待办'],['lp-raising-tasks','LP募集待办']] as const;
+export function TaskBusinessViews({project,fund,lp}:{project:ReactNode;fund:ReactNode;lp:ReactNode}){
+ const fromHash=()=>views.findIndex(([id])=>location.hash==='#'+id);
+ const [active,setActive]=useState(()=>Math.max(0,fromHash()));
+ const [open,setOpen]=useState(()=>fromHash()>=0),[visited,setVisited]=useState(()=>fromHash()>=0);
+ useEffect(()=>{const restore=()=>{const next=fromHash();if(next>=0){setActive(next);setOpen(true);setVisited(true);requestAnimationFrame(()=>document.getElementById('task-business-views')?.scrollIntoView({block:'start'}));}};restore();const show=(event:Event)=>{const value=(event as CustomEvent<number>).detail;if(Number.isInteger(value)&&value>=0&&value<3){setActive(value);setOpen(true);setVisited(true);}};window.addEventListener('task-business-open',show);window.addEventListener('hashchange',restore);return()=>{window.removeEventListener('hashchange',restore);window.removeEventListener('task-business-open',show);};},[]);
+ return visited?<WorkflowDialog title="分类任务办理" open={open} busy={false} onClose={()=>{setOpen(false);history.replaceState({},'',location.pathname+location.search);}}><section className="task-business-views" id="task-business-views" aria-label="业务办理"><header><p>业务办理</p><h2>分类办理台账</h2></header><div role="tablist" aria-label="选择业务台账">{views.map(([id,label],i)=><button key={id} id={'tab-'+id} type="button" role="tab" aria-selected={active===i} aria-controls={'view-'+id} tabIndex={active===i?0:-1} onClick={()=>{setActive(i);history.replaceState({},'',location.pathname+location.search+'#'+id);}} onKeyDown={event=>{const next=event.key==='ArrowRight'?(i+1)%3:event.key==='ArrowLeft'?(i+2)%3:event.key==='Home'?0:event.key==='End'?2:-1;if(next>=0){event.preventDefault();setActive(next);document.getElementById('tab-'+views[next][0])?.focus();history.replaceState({},'',location.pathname+location.search+'#'+views[next][0]);}}}>{label}</button>)}</div>{[project,fund,lp].map((content,i)=><div key={views[i][0]} id={'view-'+views[i][0]} role="tabpanel" aria-labelledby={'tab-'+views[i][0]} hidden={active!==i}>{content}</div>)}</section></WorkflowDialog>:null;
+}

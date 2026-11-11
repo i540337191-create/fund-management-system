@@ -1,0 +1,44 @@
+:root.atelier-theme .restored-dashboard .dashboard-calendar{display:flex;align-items:center;gap:16px;width:480px;max-width:100%;justify-self:start;color:var(--ink);font-family:"Songti SC","STSong","SimSun",serif}
+:root.atelier-theme .restored-dashboard button.dashboard-desk-calendar{border:0;box-shadow:none;border-radius:0;min-width:0;min-height:0;padding-inline:0;background-color:transparent;cursor:pointer;transform-origin:50% 12%;transition:transform 180ms ease-out}
+.dashboard-desk-calendar>time{display:flex;flex-direction:column;align-items:center}
+.dashboard-desk-calendar:hover{transform:rotate(-1deg)}
+.dashboard-desk-calendar:active{transform:rotate(1.5deg) translateY(1px)}
+.dashboard-desk-calendar:focus-visible{outline:2px solid var(--bronze);outline-offset:2px}
+.dashboard-desk-calendar{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;flex:0 0 144px;height:160px;padding-top:45px;color:#33281c;background:none;font-style:normal;line-height:1;isolation:isolate}
+.dashboard-desk-calendar .desk-calendar-month{font-size:15px;line-height:18px}
+.dashboard-desk-calendar .desk-calendar-day{font-family:"Times New Roman","Songti SC",serif;font-size:43px;line-height:44px;font-weight:500;font-variant-numeric:tabular-nums}
+.dashboard-desk-calendar .desk-calendar-weekday{font-size:12px;line-height:17px}
+.dashboard-week-calendar{flex:1;min-width:0;padding-left:24px;border-left:1px solid color-mix(in srgb,var(--bronze) 25%,transparent)}
+.dashboard-week-heading{display:flex;align-items:center;justify-content:space-between;gap:8px;color:var(--bronze);margin-bottom:13px;min-height:28px}
+.dashboard-week-heading>strong{font-size:21px;line-height:26px;font-weight:700;white-space:nowrap}
+.dashboard-week-heading>div{display:flex;align-items:center;gap:2px;flex-shrink:0}
+:root.atelier-theme .restored-dashboard .dashboard-week-heading button{display:inline-flex;align-items:center;justify-content:center;min-width:26px;height:28px;padding:0;border:0;border-radius:5px;background:transparent;color:var(--bronze);box-shadow:none}
+:root.atelier-theme .restored-dashboard .dashboard-week-heading button:hover{background:var(--accent-soft)}
+:root.atelier-theme .restored-dashboard .dashboard-week-heading button:focus-visible{outline:2px solid var(--bronze);outline-offset:2px}
+:root.atelier-theme .restored-dashboard .dashboard-week-heading .dashboard-week-reset{font-size:12px;min-width:32px}
+.dashboard-week-days{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:5px;text-align:center}
+.dashboard-week-days>div{display:flex;flex-direction:column;align-items:center;gap:7px}
+.dashboard-week-days span{color:var(--secondary);font-size:15px;line-height:18px}
+.dashboard-week-days time{display:grid;place-items:center;width:30px;height:30px;border-radius:7px;font-size:17px;line-height:1;font-variant-numeric:tabular-nums}
+.dashboard-week-days time[aria-current="date"]{background:linear-gradient(140deg,#e6c995,#c7a064);color:#33281c;box-shadow:inset 0 1px 1px #ffffff30,0 1px 2px #68431a15}
+@media(max-width:1450px) and (min-width:1101px){:root.atelier-theme .restored-dashboard .restored-heading.page-heading{grid-template-columns:auto 1fr}:root.atelier-theme .restored-dashboard .restored-metrics{grid-column:1/-1;justify-content:flex-end}}
+@media(max-width:600px){:root.atelier-theme .restored-dashboard .dashboard-calendar{width:100%;gap:12px}.dashboard-desk-calendar{flex-basis:105px;height:122px;padding-top:30px}.dashboard-desk-calendar .desk-calendar-month{font-size:13px;line-height:16px}.dashboard-desk-calendar .desk-calendar-day{font-size:37px;line-height:38px}.dashboard-desk-calendar .desk-calendar-weekday{font-size:10px;line-height:16px}.dashboard-week-calendar{padding-left:12px}.dashboard-week-heading{flex-wrap:wrap;gap:2px;margin-bottom:6px}.dashboard-week-heading>strong{font-size:15px}.dashboard-week-days{gap:1px}.dashboard-week-days time{width:25px;height:28px;font-size:14px}.dashboard-week-days span{font-size:11px}.dashboard-week-days>div{gap:3px}:root.atelier-theme .restored-dashboard .dashboard-week-heading button{height:32px;min-width:30px}}
+
+.dashboard-week-days>[data-weekend="true"] :is(span,time){color:#b43e36}
+.dashboard-week-days>[data-weekend="true"] time[aria-current="date"]{background:linear-gradient(140deg,#f8e9ce,#e0bf88);color:#9e302c;font-weight:700}
+@media(prefers-reduced-motion:reduce){:root.atelier-theme .restored-dashboard button.dashboard-desk-calendar{transition:none;transform:none}}
+
+/* Tint the paper independently; filtering the button also washes out its date. */
+.dashboard-desk-calendar::before{content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;background:url('/src/assets/desk-calendar-blank.webp') center/110% 100% no-repeat}
+:root.atelier-theme .restored-dashboard button.dashboard-desk-calendar{color:#33281c}
+:root.atelier-theme[data-color-mode=dark] .restored-dashboard button.dashboard-desk-calendar{color:var(--ink)}
+:root[data-color-mode=dark] .dashboard-desk-calendar::before{filter:brightness(.3) saturate(.65)}
+:root[data-color-mode=dark] .dashboard-week-days>[data-weekend=true] :is(span,time){color:var(--danger)}
+:root[data-color-mode=dark] .dashboard-week-days time[aria-current=date]{background:var(--action-primary);color:var(--action-primary-ink)}
+:root[data-color-mode=dark] .dashboard-week-days>[data-weekend=true] time[aria-current=date]{background:var(--danger-bg);color:var(--danger)}
+/* Cross-year week headings and narrow split windows must retain every date and control. */
+.dashboard-week-heading{flex-wrap:wrap}
+.dashboard-week-heading>strong{min-width:0;max-width:100%;white-space:normal;overflow-wrap:anywhere}
+.dashboard-week-days>div{min-width:0}
+.dashboard-week-days time{width:min(30px,100%)}
+@media(max-width:600px){.dashboard-week-days time{width:min(25px,100%)}}

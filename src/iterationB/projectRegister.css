@@ -1,0 +1,71 @@
+@media(min-width:768px){.projects-workspace .project-register th:nth-child(8){text-align:right}.projects-workspace .project-register th:nth-child(9),.projects-workspace .project-register td:not([colspan]):nth-child(9){text-align:center}.projects-workspace .project-register th:last-child{text-align:center}.projects-workspace .project-register .project-row-actions{min-width:90px;white-space:nowrap}}
+
+@media(min-width:768px){
+ .project-table-viewport{--project-task-column:96px}
+ .project-table-viewport>.responsive-table>table>thead>tr>th:last-child,.project-table-viewport>.responsive-table>table>tbody>tr>td:not([colspan]):last-child{position:sticky;right:0;width:var(--project-task-column);min-width:var(--project-task-column);max-width:var(--project-task-column);box-sizing:border-box;z-index:3;background:var(--surface)}
+ .project-table-viewport>.responsive-table>table>thead>tr>th:nth-last-child(2),.project-table-viewport>.responsive-table>table>tbody>tr>td.project-row-actions{position:sticky;right:var(--project-task-column);min-width:96px;z-index:2;background:var(--surface);box-shadow:-1px 0 0 var(--line)}
+ .project-table-viewport>.responsive-table>table>thead>tr>th:last-child,.project-table-viewport>.responsive-table>table>thead>tr>th:nth-last-child(2){z-index:4;background:var(--inset)}
+ .project-table-viewport>.responsive-table>table>tbody>tr:hover>td.project-row-actions,.project-table-viewport>.responsive-table>table>tbody>tr:hover>td:not([colspan]):last-child{background:var(--hover)}
+}
+/* Sticky actions share the row surface so translucent hover does not stack. */
+.project-table-viewport>.responsive-table>table>tbody>tr>td.project-row-actions,
+.project-table-viewport>.responsive-table>table>tbody>tr>td:not([colspan]):last-child,
+.project-table-viewport>.responsive-table>table>tbody>tr:hover>td.project-row-actions,
+.project-table-viewport>.responsive-table>table>tbody>tr:hover>td:not([colspan]):last-child{background:inherit;box-shadow:none}
+/* Match the fund register: wrap descriptive fields instead of clipping columns. */
+@media(min-width:1280px){
+ .projects-workspace .project-register table{min-width:0;width:100%;table-layout:fixed;font-size:13px}
+ .projects-workspace .project-register table :is(th,td):nth-child(n){min-width:0;max-width:none;padding:13px 8px;white-space:normal;overflow-wrap:anywhere}
+ .projects-workspace .project-register table th{font-size:12px}
+ .projects-workspace .project-register table th:nth-child(1){width:15%}
+ .projects-workspace .project-register table th:nth-child(2){width:9%}
+ .projects-workspace .project-register table th:nth-child(3){width:13%}
+ .projects-workspace .project-register table th:nth-child(4){width:6%}
+ .projects-workspace .project-register table th:nth-child(5){width:7%}
+ .projects-workspace .project-register table th:nth-child(6){width:5%}
+ .projects-workspace .project-register table th:nth-child(7){width:6%}
+ .projects-workspace .project-register table th:nth-child(8){width:7%}
+ .projects-workspace .project-register table th:nth-child(9){width:5%}
+ .projects-workspace .project-register table th:nth-child(10){width:13%}
+ .projects-workspace .project-register table th:nth-child(11),.projects-workspace .project-register table th:nth-child(12){width:7%}
+ .projects-workspace .project-register table :is(th,td):nth-last-child(-n+2){position:static;box-shadow:none;background:inherit}
+ .projects-workspace .project-register .project-identity>button{white-space:normal;overflow-wrap:anywhere;text-align:left}
+ .projects-workspace .project-register table td:nth-child(8){font-variant-numeric:tabular-nums}
+ .projects-workspace .project-register-meta>span:last-child{display:none}
+}
+.project-ledger-tools{display:flex;align-items:center;justify-content:flex-end;flex-wrap:wrap;gap:14px;min-width:0}
+.project-ledger-tools .project-search{width:250px;max-width:100%;flex-shrink:1}
+.project-ledger-tools>label>select{margin-left:0}
+.project-ledger-count{font-size:12px;color:var(--secondary);white-space:nowrap}
+.funds-workspace .fund-register-heading h2{font-size:20px;font-weight:650;line-height:28px}
+.funds-workspace .fund-register-heading p{font-size:13px;line-height:19.5px;margin-top:5px;color:var(--secondary)}
+@media(max-width:1100px){.project-ledger-tools{justify-content:flex-start}.project-ledger-register-heading{align-items:flex-start}}
+.project-ledger-register-heading{justify-content:flex-start;column-gap:24px}
+.project-ledger-register-heading>.project-search{width:250px;max-width:100%;flex-shrink:1}
+.project-ledger-register-heading>.project-ledger-tools{margin-left:auto}
+:root.atelier-theme .projects-workspace .project-search>input:focus-visible{outline:none;box-shadow:none;border:0;border-radius:0}
+.projects-workspace .project-search:focus-within{border-color:var(--bronze)}
+@media(max-width:1100px){.project-ledger-register-heading>.project-ledger-tools{margin-left:0}}
+:root.atelier-theme .projects-workspace .project-search>input:focus{outline:none!important;box-shadow:none!important}
+.project-ledger-filterbar{display:grid;grid-template-columns:minmax(220px,320px) minmax(150px,190px) minmax(180px,220px) minmax(150px,190px);align-items:center;gap:12px;margin:16px 0 20px}
+.project-ledger-filterbar>.project-search{display:flex;align-items:center;gap:10px;height:44px;padding:0 14px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--secondary);min-width:0}
+.project-ledger-filterbar .project-search svg{flex-shrink:0}
+.project-ledger-filterbar .project-search input{width:100%;min-width:0;background:transparent;font-size:14px;color:var(--ink)}
+:root.atelier-theme .project-ledger-filterbar select{width:100%;margin:0;min-height:44px;height:44px;padding:0 14px;border:1px solid var(--line);border-radius:8px;background-color:var(--surface);color:var(--ink);font-size:14px}
+.project-ledger-label-filter{min-width:0;min-height:44px;display:flex;align-items:center;font-size:13px;color:var(--secondary)}
+.project-ledger-label-filter>label{display:block;width:100%;min-width:0}
+.project-ledger-filterbar select:hover{border-color:var(--bronze)}
+@media(max-width:1050px){.project-ledger-filterbar{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.project-ledger-filterbar{grid-template-columns:minmax(0,1fr)}}
+:root.atelier-theme .project-ledger-filterbar .project-search input{background:transparent!important;border:0!important;border-radius:0!important;padding:0!important;box-shadow:none!important}
+.ledger-pagination{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:18px 0 4px;font-size:13px;color:var(--secondary)}
+.ledger-pagination>div{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.ledger-pagination button{min-width:36px;min-height:36px;padding:6px 12px}
+@media(min-width:768px){
+ :root.atelier-theme .projects-workspace .project-register table :is(th,td):nth-child(n+2):nth-child(-n+9),
+ :root.atelier-theme .projects-workspace .project-register table :is(th,td):nth-child(n+11){text-align:center;vertical-align:middle}
+ :root.atelier-theme .projects-workspace .project-register table :is(th,td):first-child,
+ :root.atelier-theme .projects-workspace .project-register table :is(th,td):nth-child(10){text-align:left}
+}
+
+:root.atelier-theme .projects-workspace button[data-expand-entry][data-pending-count="0"]{color:var(--ink)!important}

@@ -1,0 +1,310 @@
+/* Institutional action hierarchy shared by pages, drawers and native dialogs. */
+:root{
+ --action-primary:#805a32;--action-primary-hover:#684722;--action-primary-ink:#fffaf3;
+ --action-secondary:#eee5d7;--action-secondary-hover:#e4d6c2;--action-secondary-ink:#674b2b;--action-secondary-line:#cdbc9f;
+ --action-info:#e4eeeb;--action-info-hover:#d3e5de;--action-info-ink:#285b50;--action-info-line:#a9c5b9;
+ --action-danger:#f7e7e3;--action-danger-hover:#f0d5ce;--action-danger-ink:#9d3831;--action-danger-line:#d9aea4;
+ --action-success:#e2eee4;--action-success-hover:#cedfce;--action-success-ink:#315e3e;--action-success-line:#a8c3aa;
+ --action-create-fill:linear-gradient(145deg,#946530,#795024);--action-create-hover:linear-gradient(145deg,#805525,#68441e);
+ --control-radius:9px;--control-focus:0 0 0 3px color-mix(in srgb,var(--bronze) 18%,transparent);
+}
+:root[data-color-mode="dark"]{
+ --action-create-fill:linear-gradient(145deg,#d5b889,#ba955f);--action-create-hover:linear-gradient(145deg,#e2c899,#c9a56e);
+ --action-primary:#d2ae7f;--action-primary-hover:#e1c394;--action-primary-ink:#292014;
+ --action-secondary:#393126;--action-secondary-hover:#493c2c;--action-secondary-ink:#e5c9a2;--action-secondary-line:#746045;
+ --action-info:#263c35;--action-info-hover:#304d43;--action-info-ink:#b1d6c4;--action-info-line:#557f6b;
+ --action-danger:#402925;--action-danger-hover:#56312a;--action-danger-ink:#efb3a5;--action-danger-line:#a66c60;
+ --action-success:#2c3c2d;--action-success-hover:#374d38;--action-success-ink:#bbd5b4;--action-success-line:#678261;
+}
+:root.atelier-theme :is(button,a)[data-ui]{
+ --control-bg:var(--action-secondary);--control-hover:var(--action-secondary-hover);--control-ink:var(--action-secondary-ink);--control-line:var(--action-secondary-line);
+ display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:36px;padding:7px 13px;
+ border:1px solid var(--control-line);border-radius:var(--control-radius);background:var(--control-bg);color:var(--control-ink);
+ font-size:13px;font-weight:600;line-height:1.4;white-space:normal;text-align:center;text-decoration:none;vertical-align:middle;
+ box-shadow:inset 0 1px 0 rgb(255 255 255 / .12);cursor:pointer;transition:background-color 160ms ease-out,border-color 160ms ease-out,transform 160ms ease-out;
+}
+:root.atelier-theme :is(button,a)[data-ui="primary"]{--control-bg:var(--action-primary);--control-hover:var(--action-primary-hover);--control-ink:var(--action-primary-ink);--control-line:var(--action-primary);box-shadow:0 2px 4px rgb(83 56 25 / .15),inset 0 1px 0 rgb(255 255 255 / .12)}
+:root.atelier-theme :is(button,a)[data-ui="info"]{--control-bg:var(--action-info);--control-hover:var(--action-info-hover);--control-ink:var(--action-info-ink);--control-line:var(--action-info-line)}
+:root.atelier-theme :is(button,a)[data-ui="danger"]{--control-bg:var(--action-danger);--control-hover:var(--action-danger-hover);--control-ink:var(--action-danger-ink);--control-line:var(--action-danger-line)}
+:root.atelier-theme :is(button,a)[data-ui="success"]{--control-bg:var(--action-success);--control-hover:var(--action-success-hover);--control-ink:var(--action-success-ink);--control-line:var(--action-success-line)}
+:root.atelier-theme :is(button,a)[data-ui]:not(:disabled):not([aria-disabled="true"]):hover{background:var(--control-hover);color:var(--control-ink);border-color:var(--control-line)}
+:root.atelier-theme :is(button,a)[data-ui]:focus-visible{outline:2px solid var(--control-ink);outline-offset:3px;box-shadow:var(--control-focus)}
+:root.atelier-theme :is(button,a)[data-ui]:not(:disabled):active{transform:translateY(1px);box-shadow:none}
+:root.atelier-theme :is(button,a)[data-ui]:is(:disabled,[aria-disabled="true"]){opacity:1;cursor:not-allowed;filter:none;background:var(--inset);color:var(--muted);border-color:var(--line);box-shadow:none;transform:none}
+:root.atelier-theme :is(button,a)[data-ui]>svg{width:16px;height:16px;flex-shrink:0;stroke-width:1.75}
+:root.atelier-theme :is(button,a)[data-ui="filter"]{box-shadow:none;font-weight:500}
+:root.atelier-theme :is(button,a)[data-ui="filter"][aria-pressed="true"]{background:var(--action-primary);color:var(--action-primary-ink);border-color:var(--action-primary)}
+:root.atelier-theme .ui-primary,:root.atelier-theme .ui-secondary{min-height:40px;padding-inline:17px}
+:root.atelier-theme :is(.assistant-icon,.atelier-icon-button){border-radius:8px}
+:root.atelier-theme :is(.atelier-icon-button,.assistant-icon):hover{color:var(--bronze);background:var(--accent-soft)}
+:root.atelier-theme .atelier-main :is(input:not([type=checkbox]):not([type=radio]):not([type=range]),textarea,select),:root.atelier-theme dialog :is(input:not([type=checkbox]):not([type=radio]):not([type=range]),textarea,select){
+ border-radius:8px;border-color:var(--line);background-color:var(--inset);transition:border-color 160ms ease-out,box-shadow 160ms ease-out;
+}
+/* Project scope labels already paint the control surface. */
+:root.atelier-theme .agent-shell .atelier-main :is(.agent-project-selector,.assistant-scope) select{background-color:transparent!important}
+:root.atelier-theme :is(.atelier-main,dialog) :is(input,select,textarea):focus-visible{border-color:var(--bronze);outline:2px solid var(--bronze);outline-offset:2px;box-shadow:var(--control-focus)}
+:root.atelier-theme :is(input[type=checkbox],input[type=radio]){accent-color:var(--bronze)}
+:root.atelier-theme .assistant-composer textarea:focus-visible{outline:none;box-shadow:none}
+:root.atelier-theme dialog:not(.atelier-mobile-dialog){border:1px solid var(--line);border-radius:16px;background:var(--surface);color:var(--ink);box-shadow:0 20px 65px rgb(20 17 12 / .2);padding:24px}
+:root.atelier-theme dialog:not(.atelier-mobile-dialog)::backdrop{background:rgb(23 23 19 / .5)}
+:root.atelier-theme dialog h2{font-weight:650;font-size:20px;line-height:1.4}
+:root.atelier-theme .surface-card{border-radius:12px}
+:root.atelier-theme :is(.responsive-table,.restored-table-scroll) th{color:var(--secondary);background:var(--inset);font-weight:600;line-height:1.5}
+:root.atelier-theme .responsive-table tbody tr:hover{background:color-mix(in srgb,var(--accent-soft) 35%,var(--surface))}
+:root.atelier-theme [data-status-tone]{border-radius:5px;gap:5px;padding:4px 8px;font-size:12px;line-height:1.4;font-weight:500}
+:root.atelier-theme [data-status-tone="green"]{background:var(--success-bg);color:var(--success)}
+:root.atelier-theme [data-status-tone="red"]{background:var(--danger-bg);color:var(--danger)}
+:root.atelier-theme [data-status-tone="orange"]{background:var(--warning-bg);color:var(--warning)}
+:root.atelier-theme [data-status-tone="gold"]{background:var(--accent-soft);color:var(--bronze)}
+:root.atelier-theme [data-status-tone="navy"]{background:var(--info-bg);color:var(--info)}
+@media(max-width:600px){
+ :root.atelier-theme :is(button,a)[data-ui]{min-height:44px;padding:9px 12px}
+ :root.atelier-theme dialog:not(.atelier-mobile-dialog){padding:18px;max-width:calc(100vw - 24px)}
+}
+@media(prefers-reduced-motion:reduce){:root.atelier-theme :is(button,a)[data-ui],:root.atelier-theme :is(.atelier-main,dialog) :is(input,select,textarea){transition:none;transform:none}}
+@media(forced-colors:active){:root.atelier-theme :is(button,a)[data-ui]{border:1px solid ButtonText;background:ButtonFace;color:ButtonText;box-shadow:none}}
+/* Large entry cards stay spacious, with a visible ink-and-bronze material palette. */
+:root.atelier-theme button.surface-card{background:color-mix(in srgb,var(--accent-soft) 52%,var(--surface));border-color:var(--action-secondary-line);text-align:left;box-shadow:none}
+:root.atelier-theme button.surface-card:hover{background:var(--accent-soft);border-color:var(--bronze)}
+:root.atelier-theme button.surface-card>svg{color:var(--bronze)}
+:root.atelier-theme .custom-kind-tabs{background:var(--accent-soft);padding:4px;gap:4px}
+:root.atelier-theme .custom-kind-tabs button{color:var(--action-secondary-ink);min-height:36px;padding:7px 16px;border-radius:7px}
+:root.atelier-theme .custom-kind-tabs button[aria-pressed=true]{background:var(--action-primary);color:var(--action-primary-ink);box-shadow:none}
+:root.atelier-theme .atelier-main button.text-left:not(.surface-card):not([data-ui]):is([class*="bg-[#1e2329]"],[class*="bg-[#11161d]"]){background:var(--accent-soft);border-color:var(--action-secondary-line)}
+
+:root.atelier-theme button.assistant-send[data-ui]{padding:0;min-height:40px}
+/* Dense table actions keep whole labels; long-form decisions can still wrap. */
+:root.atelier-theme :is(td,.responsive-table-cell) :is(button,a)[data-ui]{white-space:nowrap;min-width:max-content}
+/* Business names must wrap inside table cards; compact actions keep their own width. */
+:root.atelier-theme :is(td,.responsive-table-cell) :is(button,a)[data-ui="navigation"]{min-width:0;max-width:100%;white-space:normal;overflow-wrap:anywhere}
+:root.atelier-theme input[type=file]::file-selector-button{border:1px solid var(--action-info-line);border-radius:6px;background:var(--action-info);color:var(--action-info-ink);padding:6px 12px;margin-right:12px;font:inherit;font-weight:600;cursor:pointer}
+:root.atelier-theme input[type=file]::file-selector-button:hover{background:var(--action-info-hover)}
+
+.material-file-picker{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:8px;padding:8px;border:1px solid var(--line);border-radius:9px;background:var(--inset)}
+:root.atelier-theme .material-file-picker input[type=file]{flex:1;min-width:180px;width:auto;margin:0;padding:0;border:0}
+.material-ocr-label{display:inline-flex;align-items:center;flex-shrink:0;border-radius:6px;padding:6px 10px;background:var(--action-info);color:var(--action-info-ink);font-size:13px;font-weight:600;line-height:1.5}
+
+/* Module headings share one anchor, type scale and rhythm. */
+:root.atelier-theme .page-heading{margin:0 0 20px;padding:0 0 16px;min-height:0;border-bottom:1px solid var(--line);gap:16px}
+:root.atelier-theme .page-heading-eyebrow{margin:0 0 4px;padding:0;color:var(--bronze);font-size:12px;font-weight:600;line-height:18px;letter-spacing:0}
+:root.atelier-theme .page-heading h1{margin:0;color:var(--ink);font-size:26px;font-weight:650;line-height:34px;letter-spacing:0}
+:root.atelier-theme .atelier-main:has(.restored-dashboard){padding-top:25px;padding-bottom:0}
+:root.atelier-theme .restored-heading.page-heading{align-items:flex-start}
+:root.atelier-theme .restored-title .page-heading-main{display:block}
+@media(max-width:760px){:root.atelier-theme .atelier-main:has(.restored-dashboard){padding-top:20px}.restored-heading.page-heading{align-items:stretch}}
+
+/* Compact current-week calendar and centered live dashboard counts. */
+:root{--metric-todo:#a67c00;--metric-projects:#287047;--metric-materials:#08748a;--metric-risk:#b4423c}
+:root[data-color-mode="dark"]{--metric-todo:#edc35c;--metric-projects:#91cda4;--metric-materials:#7dcbdc;--metric-risk:#ef9c92}
+:root.atelier-theme .restored-heading.page-heading{display:grid;grid-template-columns:auto minmax(220px,1fr) auto;gap:20px;align-items:start}
+.dashboard-mini-calendar{width:252px;max-width:100%;justify-self:start;padding:8px 12px;border-radius:12px;background:var(--accent-soft);color:var(--ink)}
+.mini-calendar-heading{display:flex;align-items:center;gap:5px;color:var(--bronze);font-size:11px;line-height:18px;margin-bottom:5px}
+.mini-calendar-heading>strong{flex:1;font-weight:600;white-space:nowrap}
+.mini-calendar-heading>button{display:inline-flex;align-items:center;justify-content:center;min-width:24px;min-height:24px;border-radius:5px;color:var(--bronze)}
+.mini-calendar-heading>button:hover{background:var(--action-secondary-hover)}
+.mini-calendar-today{font-size:10px;padding:0 4px}
+.mini-calendar-week{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px;text-align:center}
+.mini-calendar-week>div{display:flex;align-items:center;flex-direction:column;gap:3px}
+.mini-calendar-week span{font-size:10px;color:var(--secondary);line-height:14px}
+.mini-calendar-week time{display:grid;place-items:center;width:25px;height:25px;border-radius:7px;font-size:12px;font-weight:600;font-variant-numeric:tabular-nums}
+.mini-calendar-week .is-today time{background:var(--action-primary);color:var(--action-primary-ink)}
+:root.atelier-theme .restored-metrics>button>span{display:flex;flex-direction:column;align-items:center;text-align:center;min-width:62px}
+:root.atelier-theme .restored-metrics strong{width:100%;text-align:center}
+:root.atelier-theme .restored-metrics [data-metric="todo"] strong{color:var(--metric-todo)}
+:root.atelier-theme .restored-metrics [data-metric="projects"] strong{color:var(--metric-projects)}
+:root.atelier-theme .restored-metrics [data-metric="materials"] strong{color:var(--metric-materials)}
+:root.atelier-theme .restored-metrics [data-metric="risk"] strong{color:var(--metric-risk)}
+@media(max-width:1450px) and (min-width:761px){.restored-title>div:not(.page-heading-main){display:none}}
+@media(max-width:1100px){:root.atelier-theme .restored-heading.page-heading{grid-template-columns:1fr auto}.restored-metrics{grid-column:1/-1;justify-content:space-between}}
+@media(max-width:600px){:root.atelier-theme .restored-heading.page-heading{grid-template-columns:1fr}.dashboard-mini-calendar{width:100%;max-width:none;justify-self:stretch}.restored-metrics{width:100%}.mini-calendar-heading>button{min-width:44px;min-height:44px}.mini-calendar-week time{width:30px;height:30px}}
+
+:root.atelier-theme .restored-metrics svg{width:20px;height:20px;margin-top:0}
+:root.atelier-theme .restored-metrics .metric-label{line-height:20px}
+
+@media(min-width:1101px){.dashboard-mini-calendar{transform:translate(12px,-6px)}}
+
+/* Failed operations retain their destination instead of becoming a global unsaved flag. */
+.actionable-notice{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:16px;padding:14px 16px;border:1px solid var(--action-danger-line);border-radius:10px;background:var(--action-danger);color:var(--action-danger-ink);font-size:14px;line-height:1.65}
+.actionable-notice-message{min-width:0;overflow-wrap:anywhere}
+.actionable-notice-actions{display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:8px;flex-shrink:0}
+.actionable-notice-actions a{display:inline-flex;align-items:center;text-decoration:underline;text-underline-offset:3px;min-height:36px;white-space:nowrap}
+@media(max-width:767px){.actionable-notice{align-items:flex-start;flex-direction:column}.actionable-notice-actions{justify-content:flex-start}}
+
+.restored-panel>header>.dashboard-task-heading{display:flex;align-items:center;gap:24px;flex-wrap:wrap}.business-tab-rail{padding-block:4px}.business-tab-rail>div{gap:8px;padding-block:12px}
+
+.history-row{position:relative;display:flex;align-items:center;gap:4px}.history-row>.assistant-history-item{min-width:0;flex:1;padding-right:38px}.history-row-menu{position:absolute;right:7px;top:13px;z-index:2}.history-row-menu summary{list-style:none;display:flex;align-items:center;justify-content:center;width:28px;height:30px;cursor:pointer;color:#d4c4aa;border-radius:6px}.history-row-menu summary::-webkit-details-marker{display:none}.history-row-menu summary:hover{background:#5a4a34}.history-row-menu>div{position:absolute;right:0;top:32px;width:145px;padding:6px;display:grid;gap:4px;border:1px solid #756044;border-radius:8px;background:#332d23;box-shadow:0 6px 18px #0005}.history-row-menu button{display:flex;align-items:center;gap:8px;padding:9px;text-align:left;border:0;border-radius:5px;color:#f3e9d9;background:transparent}.history-row-menu button:hover{background:#544532}.history-row-menu button:disabled{opacity:.45}
+.notice-inline-help{display:inline-block;margin-inline-start:12px;font-size:12px;line-height:1.6;text-underline-offset:3px}.notice-inline-help[href]{font-weight:600;text-decoration:underline;color:var(--info)}
+
+.history-popup{position:fixed;z-index:1100;width:156px;padding:6px;display:grid;gap:4px;border:1px solid #756044;border-radius:9px;background:#332d23;box-shadow:0 8px 24px #0005;color:#f3e9d9}.history-popup button{display:flex;align-items:center;gap:8px;min-height:38px;padding:9px;border:0;border-radius:5px;text-align:left;background:transparent;color:inherit;font-size:13px}.history-popup button:hover,.history-popup button:focus-visible{background:#544532}.history-popup button:disabled{opacity:.45;cursor:not-allowed}
+
+:root.atelier-theme .material-file-picker input[type=file].batch-file-input{flex:0 0 112px;min-width:112px;width:112px;font-size:0}:root.atelier-theme .material-file-picker input[type=file].batch-file-input::file-selector-button{font-size:13px;margin-right:0}.batch-file-count{flex:1;min-width:100px;font-size:13px;color:var(--secondary)}
+
+/* Fund operations are a compact overview, with space reserved only for actual records. */
+.fund-operations-summary{margin:20px 0;padding:20px 22px;background:var(--surface);border:1px solid var(--line);border-radius:14px}
+.fund-summary-heading,.fund-summary-heading>div,.fund-summary-toolbar{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.fund-summary-heading>div{justify-content:flex-start;gap:12px}
+.fund-summary-heading h2{font-size:18px;font-weight:650;line-height:1.5}
+.fund-summary-heading p{font-size:12px;line-height:1.6;color:var(--secondary);margin-top:3px}
+.fund-summary-icon{display:grid;place-items:center;width:42px;height:42px;flex-shrink:0;border-radius:12px;background:var(--inset);color:var(--bronze)}
+.fund-summary-toolbar{margin-top:18px;padding-bottom:16px;border-bottom:1px solid var(--line)}
+.fund-summary-search{display:flex;align-items:center;gap:10px;max-width:420px;flex:1;min-width:0;padding:0 12px;border:1px solid var(--line);border-radius:9px;background:var(--paper);color:var(--secondary)}
+.fund-summary-search:focus-within{border-color:var(--bronze);outline:2px solid color-mix(in srgb,var(--bronze) 18%,transparent);outline-offset:2px}
+:root.atelier-theme .fund-summary-search input[type=search]{width:100%;min-width:0;min-height:40px;border:0;background:transparent;box-shadow:none;padding:8px 0;outline:0;font-size:13px}
+.fund-summary-results{max-height:360px;overflow-y:auto;overscroll-behavior:auto;margin-top:16px;display:grid;gap:14px}
+.fund-summary-results>p:last-child{font-size:11px;color:var(--secondary)}
+.fund-summary-results article{border-top:0;padding-top:0}
+@media(max-width:600px){.fund-operations-summary{padding:16px}.fund-summary-heading{align-items:flex-start;gap:8px}.fund-summary-heading>div{gap:8px}.fund-summary-icon{display:none}.fund-summary-heading h2{font-size:16px}.fund-summary-toolbar{flex-wrap:wrap;gap:10px}.fund-summary-search{flex-basis:100%;max-width:none}.fund-summary-results{max-height:none}}
+.meeting-intake{padding:18px;border:1px solid var(--line);border-radius:12px;background:var(--paper);display:grid;gap:16px}
+.meeting-source-options{display:flex;gap:8px;flex-wrap:wrap}
+.meeting-intake-note{display:block;font-size:12px;line-height:1.8;color:var(--secondary);margin-top:8px}
+.meeting-audio-source{display:grid;gap:10px}
+.meeting-audio-source input{display:block;width:100%;margin-top:8px}
+.meeting-organize-action{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.meeting-organize-action>span,.meeting-draft-heading>span{font-size:12px;color:var(--secondary)}
+.meeting-intake-status{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--bronze);line-height:1.7}
+.meeting-transcript{white-space:pre-wrap;max-height:240px;overflow:auto;font-size:13px;line-height:1.9;margin-top:12px}
+.meeting-draft-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-top:8px}
+.meeting-draft-heading h3{font-size:16px;font-weight:650}
+.meeting-save-actions{position:sticky;bottom:-20px;display:flex;gap:12px;padding:16px 0;background:var(--surface);border-top:1px solid var(--line);z-index:1}
+@media(max-width:600px){.meeting-intake{padding:14px}.meeting-source-options{gap:6px}.meeting-source-options button{flex:1;font-size:12px;padding-inline:8px}.meeting-draft-heading{align-items:flex-start;flex-direction:column;gap:4px}}
+:root.atelier-theme .fund-summary-search input[type=search]{background-color:transparent!important;border:0!important;box-shadow:none!important;outline:none!important}
+@media(max-width:600px){.meeting-source-options{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}:root.atelier-theme .meeting-source-options>button{flex-direction:column;gap:6px;white-space:nowrap;font-size:12px;padding:10px 4px;min-height:64px}}
+.meeting-upload-next{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;padding:12px 14px;border:1px solid var(--action-secondary-line);border-radius:9px;background:var(--action-secondary);color:var(--ink)}
+.meeting-upload-next p{flex:1;min-width:180px;font-size:13px;line-height:1.8}
+.meeting-management-notice{margin:0 0 16px;padding:12px 16px;border:1px solid var(--action-info-line);border-radius:9px;background:var(--action-info);color:var(--action-info-ink);font-size:13px;line-height:1.8}
+.meeting-detail-meta{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.meeting-detail-footer{display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:8px;padding-top:16px;border-top:1px solid var(--line)}
+@media(max-width:600px){.meeting-detail-meta{grid-template-columns:1fr}.meeting-detail-footer{flex-wrap:wrap}}
+
+:root.atelier-theme :is(button,a)[data-ui="navigation"]{--control-bg:var(--info-bg);--control-hover:color-mix(in srgb,var(--info-bg) 82%,var(--info));--control-ink:var(--info);--control-line:color-mix(in srgb,var(--info) 38%,var(--line));}
+:root.atelier-theme a:is([href^="/projects"],[href^="/companies"],[href^="/funds"],[href^="/materials?"],[href="/materials"],[href^="/tasks"],[href^="/meetings"],[href^="/reports"],[href^="/settings"]){color:var(--info);text-underline-offset:3px;}
+.material-extraction-text{max-height:54vh;overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere;border:1px solid var(--line);border-radius:9px;background:var(--inset);color:var(--ink);padding:16px;font:inherit;font-size:14px;line-height:1.9;}
+
+/* Wrapped action rows keep vertical breathing room without changing their horizontal spacing. */
+:root.atelier-theme :where(.flex.flex-wrap):has(> :is(button,a)[data-ui]),:root.atelier-theme .page-heading-actions,:root.atelier-theme .actionable-notice-actions,:root.atelier-theme .fund-summary-toolbar,:root.atelier-theme .restored-filterline{row-gap:12px}
+/* Conversation activity follows the real request; only the ring rotates. */
+.assistant-history-item>.history-running-indicator{display:grid;place-items:center;flex:0 0 15px;width:15px;height:15px;margin-top:3px;color:inherit}
+.history-running-ring{display:block;width:14px;height:14px;box-sizing:border-box;border:1.5px dashed currentColor;border-radius:50%;animation:history-ring-rotate .9s linear infinite}
+@keyframes history-ring-rotate{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){.history-running-ring{animation:none}}
+/* Compact confirmation skin preserves the existing dialog and theme tokens. */
+:root.atelier-theme dialog:has(>.system-confirm-body){width:min(92vw,512px);padding:24px;background:var(--surface);border-color:color-mix(in srgb,var(--bronze) 24%,var(--line));border-top:2px solid var(--bronze);box-shadow:0 16px 48px rgb(0 0 0 / .2)}
+.system-confirm-body>p{margin:0;color:var(--ink);font-size:14px;line-height:1.8;white-space:pre-wrap;overflow-wrap:anywhere}
+.system-confirm-body>footer{display:flex;justify-content:flex-end;gap:16px;margin-top:24px;flex-wrap:wrap}
+.system-confirm-body>footer>button{min-width:112px}
+.dismissible-menu[open]>:not(summary){overscroll-behavior:contain;overflow-y:auto;max-height:70vh}
+.restored-dashboard .restored-metrics>button{padding:12px 16px;border:1px solid var(--line);border-radius:10px;background:var(--surface);min-width:112px;gap:10px}
+.restored-dashboard .restored-metrics [data-metric="funds"] strong{color:var(--bronze)}
+.dashboard-summary-row{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:16px 0;border-bottom:1px solid var(--line)}
+.dashboard-summary-row h3{font-weight:600}.dashboard-summary-row p,.dashboard-summary-row small{color:var(--secondary);margin-top:6px}
+.restored-right-column .restored-attention{display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:12px;align-items:center}
+.restored-right-column .restored-attention>div,.restored-right-column .restored-attention>p,.restored-right-column .restored-attention>small{grid-column:1}
+.restored-right-column .restored-attention>button{grid-column:2;grid-row:1 / span 3;margin-top:0;white-space:nowrap}
+.restored-right-column .restored-calendar{align-self:flex-start}
+.restored-right-column .restored-agenda>strong,.restored-right-column .restored-calendar{background:linear-gradient(145deg,color-mix(in srgb,var(--bronze) 30%,var(--surface)),var(--surface));border:1px solid color-mix(in srgb,var(--bronze) 45%,var(--line));border-radius:8px;box-shadow:inset 0 1px 0 #ffffff15,0 3px 9px #00000018}
+@media(max-width:760px){.restored-dashboard .restored-metrics{flex-wrap:wrap}.restored-dashboard .restored-metrics>button{min-width:calc(50% - 6px);flex:1}.dashboard-summary-row{align-items:flex-start}}
+@supports (appearance:base-select){
+ :root.atelier-theme select:not([multiple]),:root.atelier-theme select:not([multiple])::picker(select){appearance:base-select!important}
+ :root.atelier-theme select:not([multiple]){display:inline-flex;justify-content:space-between;gap:12px;align-items:center;cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;background-image:none!important}
+ select:not([multiple])::picker-icon{color:var(--bronze);transition:rotate .15s ease}
+ select:not([multiple]):open::picker-icon{rotate:180deg}
+ select:not([multiple])::picker(select){box-sizing:border-box;min-width:anchor-size(width);width:anchor-size(width);max-width:anchor-size(width);position-area:bottom;position-try-fallbacks:none;margin:4px 0 0;padding:4px;border:1px solid var(--line);border-radius:0 0 10px 10px;background:var(--surface);color:var(--ink);box-shadow:0 8px 20px #00000024;max-height:320px;overflow:auto;overscroll-behavior:contain}
+ select:not([multiple]) option{white-space:normal;overflow-wrap:anywhere;padding:9px 12px;border-radius:6px;min-height:36px}
+ select:not([multiple]) option:checked{background:var(--accent-soft);color:var(--ink);font-weight:600}
+ select:not([multiple]) option:hover,select:not([multiple]) option:focus{background:var(--inset);outline:2px solid var(--bronze);outline-offset:-2px}
+ select:not([multiple]) option:disabled{opacity:.5;cursor:not-allowed}
+}
+.restored-right-column :is(.restored-meeting,.restored-agenda)>div:last-child{display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:12px;align-items:center;min-width:0}
+.restored-right-column :is(.restored-meeting,.restored-agenda)>div:last-child>:not(button){grid-column:1}
+.restored-right-column :is(.restored-meeting,.restored-agenda)>div:last-child>button{grid-column:2;grid-row:1 / span 3;margin-top:0;white-space:nowrap}
+.restored-right-column .restored-read-status>button{margin-left:12px}
+/* Collapsible business entries remain visibly actionable in both themes. */
+:root.atelier-theme details>summary{color:var(--danger)!important;cursor:pointer}
+:root.atelier-theme details>summary::marker{color:var(--danger)}
+:root.atelier-theme button[data-expand-entry]{color:var(--danger)!important;border-color:var(--action-danger-line)}
+:root.atelier-theme details>summary:focus-visible{outline:2px solid var(--danger);outline-offset:3px;border-radius:5px}
+:root.atelier-theme :is(.restored-name,.restored-text-link){color:var(--action-info-ink)}
+:root.atelier-theme button:is([aria-label^="关闭"],[aria-label*="更多"],.atelier-icon-button,.assistant-icon){color:var(--action-secondary-ink);background:var(--action-secondary);border-color:var(--action-secondary-line)}
+:root.atelier-theme .agent-workspace:not(.aw-notice-panel) button:not([data-ui]):not(.aw-primary){color:var(--action-secondary-ink);background:var(--action-secondary);border:1px solid var(--action-secondary-line)}
+:root.atelier-theme .agent-workspace button.aw-primary{color:var(--action-primary-ink);background:var(--action-primary);border:1px solid var(--action-primary)}
+/* Legacy actions share the palette without changing their layout or click handlers. */
+:root.atelier-theme :is(.atelier-main,dialog) button:where(:not([data-ui]):not(.aw-primary):not([class*="bg-gold"]):not(:disabled)){background-color:var(--action-secondary);border-color:var(--action-secondary-line);color:var(--action-secondary-ink)}
+:root.atelier-theme :is(.atelier-main,dialog) button:not([data-ui]):is([class*="text-red"],[class*="danger"]):not(:disabled){background-color:var(--action-danger);border-color:var(--action-danger-line);color:var(--action-danger-ink)}
+:root.atelier-theme :is(.atelier-main,dialog) button:not([data-ui]):is([class*="text-green"],[class*="text-emerald"]):not(:disabled){background-color:var(--action-success);border-color:var(--action-success-line);color:var(--action-success-ink)}
+@media(forced-colors:active){:root.atelier-theme details>summary{color:ButtonText!important}:root.atelier-theme :is(.atelier-main,dialog) button:not([data-ui]){background-color:ButtonFace;color:ButtonText}}
+
+/* Unslop polish: keep the established ledger layout and semantic actions. */
+.business-sync-feedback{position:fixed;top:80px;right:24px;z-index:45;width:min(640px,calc(100vw - 48px));max-height:calc(100dvh - 104px);overflow-y:auto;background:var(--surface);border-radius:12px;box-shadow:0 8px 24px #00000018}
+:root.atelier-theme .restored-dashboard .restored-heading.page-heading{margin:0 0 12px;padding:0 0 8px;gap:24px;align-items:center}
+:root.atelier-theme .restored-dashboard .restored-title h1{font-size:28px;font-weight:600;letter-spacing:0}
+:root.atelier-theme .restored-dashboard .page-heading-eyebrow{font-size:12px;font-weight:600;line-height:18px;color:var(--bronze);letter-spacing:0;margin-bottom:4px}
+:root.atelier-theme .restored-dashboard .restored-metrics{gap:12px}
+:root.atelier-theme .restored-dashboard .restored-metrics>button{padding:12px 16px;min-width:112px;background:var(--surface);box-shadow:none;border:0.5px solid color-mix(in srgb,var(--line) 55%,transparent)}
+:root.atelier-theme .restored-dashboard .restored-metrics .metric-label{font-size:12px;font-weight:400}
+:root.atelier-theme .restored-dashboard .restored-metrics strong{font-size:28px;font-weight:500;font-variant-numeric:tabular-nums}
+:root.atelier-theme .restored-dashboard .restored-grid{gap:16px}
+:root.atelier-theme .restored-dashboard :is(.restored-main-column,.restored-right-column){gap:16px}
+:root.atelier-theme .restored-dashboard .restored-panel>header{padding:16px 20px 12px}
+:root.atelier-theme .restored-dashboard .restored-panel h2{font-size:18px;font-weight:600;letter-spacing:0}
+:root.atelier-theme .restored-dashboard .restored-tabs{gap:16px}
+:root.atelier-theme .restored-dashboard .restored-tabs>button{background:transparent!important;border:0;border-bottom:2px solid transparent;border-radius:0;padding:8px 0;color:var(--secondary);box-shadow:none}
+:root.atelier-theme .restored-dashboard .restored-tabs>button.active{color:var(--bronze);border-bottom-color:var(--bronze);font-weight:600}
+:root.atelier-theme .restored-dashboard :is(.restored-name,.restored-text-link){background:transparent!important;border:0;box-shadow:none;text-align:left}
+:root.atelier-theme .restored-dashboard .restored-text-link{font-size:12px}
+:root.atelier-theme .restored-dashboard .restored-read-status{background:transparent;font-size:12px;line-height:20px;color:var(--secondary)}
+:root.atelier-theme .restored-dashboard .restored-source-note{font-size:11px;line-height:20px;margin:0;padding:8px 20px 12px;color:var(--muted)}
+:root.atelier-theme .restored-dashboard .restored-calendar{box-shadow:inset 0 1px 0 #ffffff15,0 2px 6px #0000000c}
+@media(max-width:760px){:root.atelier-theme .restored-dashboard .restored-heading.page-heading{gap:16px;padding-top:0}:root.atelier-theme .restored-dashboard .restored-metrics{gap:8px}:root.atelier-theme .restored-dashboard .restored-metrics>button{min-width:calc(50% - 4px)}:root.atelier-theme .restored-dashboard .restored-panel>header{padding:16px}.business-sync-feedback{right:16px;width:calc(100vw - 32px)}}
+
+/* Unslop: shared hierarchy stays quiet; business actions retain semantic colors. */
+:root.atelier-theme .page-heading h1{font-size:28px;font-weight:600;line-height:36px}
+:root.atelier-theme :is(dialog h2,.settings-home h2,.fund-summary-heading h2,.fund-relations>h2){font-weight:600}
+:root.atelier-theme :is(.project-register td:first-child button,.fund-identity>button):not([data-ui]){background:transparent;color:var(--bronze);box-shadow:none;text-align:left}
+:root.atelier-theme :is(.project-register td:first-child button,.fund-identity>button):not([data-ui]):hover{background:var(--accent-soft);text-decoration:none;outline:none;border-color:transparent;border-radius:4px;box-shadow:0 4px 12px color-mix(in srgb,var(--bronze) 28%,transparent);color:var(--bronze)}
+:root.atelier-theme .project-stock .project-stock-segment{background:var(--stock-color);color:var(--ink)}
+:root.atelier-theme .project-stock .project-stock-segment[data-stage-tone="0"],:root.atelier-theme[data-color-mode="dark"] .project-stock .project-stock-segment[data-stage-tone="3"]{color:var(--on-accent)}
+:root.atelier-theme .fund-register table td:nth-child(4){white-space:normal;overflow-wrap:anywhere}
+:root.atelier-theme .weekly-workbench button.weekly-history-item[data-selected="false"]{background:var(--surface);color:var(--bronze);border-color:var(--line)}
+:root.atelier-theme .weekly-workbench button.weekly-history-item[data-selected="true"]{background:var(--accent-soft);border-color:var(--bronze);box-shadow:inset 3px 0 0 var(--bronze)}
+:root.atelier-theme .settings-workspace>.page-heading{overflow:visible;flex-shrink:0}
+:root.atelier-theme .settings-workspace>.settings-tabs{gap:8px;flex-shrink:0}
+:root.atelier-theme .settings-tabs>button[aria-pressed="true"]{background:var(--action-primary);color:var(--action-primary-ink);border-color:var(--action-primary)}
+:root.atelier-theme .restored-progress small,:root.atelier-theme .restored-progress-note,:root.atelier-theme .restored-current-stage,:root.atelier-theme .restored-date-source{font-size:12px;letter-spacing:0}
+:root.atelier-theme .restored-dashboard :is(.restored-pager,.restored-source-note){font-size:12px}
+:root.atelier-theme :is(.restored-task-table,.restored-project-table) th{font-size:12px;letter-spacing:0}
+@media(forced-colors:active){:root.atelier-theme .weekly-history-item[data-selected="true"]{outline:2px solid Highlight;outline-offset:-2px}}
+
+:root.atelier-theme .restored-dashboard :is(.restored-attention>small,.restored-calendar small,.restored-meeting p,.restored-meeting>div>small,.mini-calendar-week span,.mini-calendar-heading){font-size:12px;letter-spacing:0}
+
+@media(min-width:1280px){:root.atelier-theme .fund-register table th:nth-child(4){width:12%}}
+
+/* Keep the dashboard title at the shared ledger heading origin beside its calendar. */
+:root.atelier-theme .restored-dashboard .restored-heading>.restored-title{align-self:start}
+@media(min-width:1800px){:root.atelier-theme .atelier-main:has(.restored-dashboard){padding-top:30px}}
+/* Business links share the ledger's soft elevation instead of hover underlines. */
+:root.atelier-theme main :is(a,button):hover,:root.atelier-theme main :is(a,button):hover *{text-decoration:none!important}
+@media(hover:hover){
+ :root.atelier-theme main :is(a,button.business-name-link,button.material-file-name,button.material-tree-file,.project-register td:first-child button,.fund-identity>button,.archive-document-list td:first-child button,.project-header-a h2>button):not([data-ui]):not(:disabled):hover{background:var(--accent-soft)!important;color:var(--bronze);border-radius:4px;box-shadow:0 4px 12px color-mix(in srgb,var(--bronze) 28%,transparent)!important}
+}
+:root.atelier-theme :is(dialog,[role=dialog]) :is(a,button):hover,:root.atelier-theme :is(dialog,[role=dialog]) :is(a,button):hover *{text-decoration:none!important}
+@media(hover:hover){:root.atelier-theme :is(dialog,[role=dialog]) :is(a,button.business-name-link,button.material-file-name,button.material-tree-file,.project-register td:first-child button,.fund-identity>button,.archive-document-list td:first-child button,.project-header-a h2>button):not([data-ui]):not(:disabled):hover{background:var(--accent-soft)!important;box-shadow:0 4px 12px color-mix(in srgb,var(--bronze) 28%,transparent)!important}}
+.system-title-tooltip{position:fixed;inset:auto;margin:0;z-index:1100;box-sizing:border-box;width:max-content;max-width:min(320px,calc(100vw - 16px));max-height:calc(100dvh - 16px);overflow:auto;padding:11px 14px;border:1px solid color-mix(in srgb,var(--bronze) 35%,var(--line));border-radius:10px;background:var(--surface);color:var(--ink);font:400 13px/1.7 "PingFang SC","Microsoft YaHei",sans-serif;text-align:left;white-space:pre-wrap;overflow-wrap:anywhere;box-shadow:0 6px 18px color-mix(in srgb,var(--ink) 16%,transparent)}
+.system-title-tooltip[hidden]{display:none}
+
+::highlight(required-word){color:#c62828}
+:root[data-color-mode="dark"] ::highlight(required-word){color:#ff8e86}
+
+/* Business creation entries and settings home primary actions share one bronze finish. */
+:root.atelier-theme :is(button,a)[data-ui="primary"]:is([data-action="create"],.settings-home-c button):not(:disabled):not([aria-disabled="true"]){
+ background:var(--action-create-fill);color:var(--action-primary-ink);border-color:var(--action-primary);border-radius:var(--control-radius);font-weight:600;
+ box-shadow:0 2px 4px rgb(83 56 25 / .15),inset 0 1px 0 rgb(255 255 255 / .2);
+}
+:root.atelier-theme :is(button,a)[data-ui="primary"]:is([data-action="create"],.settings-home-c button):not(:disabled):not([aria-disabled="true"]):is(:hover,:focus-visible){
+ background:var(--action-create-hover);color:var(--action-primary-ink);border-color:var(--action-primary);
+ transform:translateY(-1px);box-shadow:0 4px 9px rgb(83 56 25 / .2),inset 0 1px 0 rgb(255 255 255 / .2);
+}
+:root.atelier-theme :is(button,a)[data-ui="primary"]:is([data-action="create"],.settings-home-c button):not(:disabled):not([aria-disabled="true"]):active{transform:translateY(0);box-shadow:inset 0 1px 2px rgb(63 39 15 / .18)}
+@media(prefers-reduced-motion:reduce){:root.atelier-theme :is(button,a):is([data-action="create"],.settings-home-c button[data-ui="primary"]){transition:none!important;transform:none!important}}
+
+/* Errors and prerequisite guidance share one readable semantic color. */
+:root.atelier-theme :is([role="alert"],.form-guidance,.notice-inline-help[href],.notice-inline-help [role="status"]){color:var(--action-danger-ink)!important}
