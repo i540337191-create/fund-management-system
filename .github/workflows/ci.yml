@@ -11,6 +11,9 @@ jobs:
   test-build:
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    env:
+      DOCUMENT_PYTHON: /usr/bin/python3
+      DOCUMENT_SOFFICE: /usr/bin/soffice
 
     steps:
       - name: Check out repository
@@ -26,6 +29,13 @@ jobs:
           cache-dependency-path: |
             package-lock.json
             server/package-lock.json
+
+      - name: Install document and OCR runtime
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends python3 python3-pil python3-openpyxl python3-olefile poppler-utils tesseract-ocr tesseract-ocr-chi-sim tesseract-ocr-eng libreoffice-writer libreoffice-calc libreoffice-impress fonts-noto-cjk ffmpeg
+          /usr/bin/python3 -c "import PIL, openpyxl, olefile"
+          /usr/bin/soffice --version
 
       - name: Install frontend dependencies
         run: npm ci
@@ -102,6 +112,10 @@ jobs:
           --health-retries 5
 
     env:
+      DOCUMENT_PYTHON: /usr/bin/python3
+      DOCUMENT_SOFFICE: /usr/bin/soffice
+      QWEN_API_KEY: ci-synthetic-provider-only
+      QWEN_BASE_URL: http://127.0.0.1:18799/v1
       DATABASE_URL: postgres://fundapp:ci-postgres-password-123@127.0.0.1:5432/fundapp_road_fund
       RESTORE_DATABASE_URL: postgres://fundapp:ci-postgres-password-123@127.0.0.1:5432/fundapp_road_restore
       PGPASSWORD: ci-postgres-password-123
@@ -131,11 +145,29 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y postgresql-client
 
+      - name: Install document and OCR runtime
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends python3 python3-pil python3-openpyxl python3-olefile poppler-utils tesseract-ocr tesseract-ocr-chi-sim tesseract-ocr-eng libreoffice-writer libreoffice-calc libreoffice-impress fonts-noto-cjk ffmpeg
+          /usr/bin/python3 -c "import PIL, openpyxl, olefile"
+          /usr/bin/soffice --version
+
       - name: Install frontend dependencies
         run: npm ci
 
       - name: Install API dependencies
         run: npm --prefix server ci
+
+      - name: Start synthetic AI provider fixture
+        run: |
+          node tests/fixtures/ci-ai-provider.mjs > /tmp/ci-ai-provider.log 2>&1 &
+          echo $! > /tmp/ci-ai-provider.pid
+          for attempt in {1..30}; do
+            if curl -fsS http://127.0.0.1:18799/health >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/ci-ai-provider.log
+          exit 1
 
       - name: Run PostgreSQL release preflight
         run: npm run preflight:release -- --json
@@ -229,6 +261,11 @@ jobs:
             kill "$(cat /tmp/fund-management-restored-api.pid)" 2>/dev/null || true
           fi
 
+      - name: Stop synthetic AI provider fixture
+        if: always()
+        run: |
+          if [ -f /tmp/ci-ai-provider.pid ]; then kill "$(cat /tmp/ci-ai-provider.pid)" 2>/dev/null || true; fi
+
   docker-compose-smoke:
     runs-on: ubuntu-latest
     timeout-minutes: 25
@@ -254,6 +291,24 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
+
+      - name: Configure synthetic AI provider fixture
+        run: |
+          cat > "$RUNNER_TEMP/compose-ci-ai.yml" <<EOF
+          services:
+            ai-fixture:
+              image: node:22-bookworm-slim
+              command: ["node", "/fixture/ci-ai-provider.mjs"]
+              environment:
+                CI_AI_FIXTURE_HOST: 0.0.0.0
+              volumes:
+                - "$GITHUB_WORKSPACE/tests/fixtures/ci-ai-provider.mjs:/fixture/ci-ai-provider.mjs:ro"
+            api:
+              environment:
+                QWEN_API_KEY: ci-synthetic-provider-only
+                QWEN_BASE_URL: http://ai-fixture:18799/v1
+          EOF
+          echo "COMPOSE_FILE=$GITHUB_WORKSPACE/docker-compose.yml:$RUNNER_TEMP/compose-ci-ai.yml" >> "$GITHUB_ENV"
 
       - name: Run Compose release preflight
         run: npm run preflight:release -- --compose --json

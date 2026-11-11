@@ -63,13 +63,15 @@ npm run build
 npm run build:api
 ```
 
+CI validates AI intake persistence with `tests/fixtures/ci-ai-provider.mjs`, a synthetic-only protocol fixture that copies the known test document and labels its output; it does not run a model. The local browser demo does not use this fixture.
+
 Historical tests that depended on private company documents have been replaced by independent synthetic parser/import fixtures. The application ships three new example checklist DOCX files, not the old source documents. No real OCR or AI output is fabricated for the demo.
 
 ## Persistent deployment
 
 The API supports PostgreSQL 16 and includes migrations. See `.env.example`, `docker-compose.yml` and `docs/deployment/` for configuration and deployment scripts. Before exposing a deployment, configure password authentication, strong independent secrets, your own database/storage and HTTPS. Never commit `.env` files or uploaded records.
 
-Document generation uses Python with `python-docx`; PDF conversion requires LibreOffice. The API Dockerfile supplies these dependencies. Local transcription also requires the pinned whisper.cpp runtime and model described below.
+Document generation uses the Python standard library; PDF conversion requires LibreOffice. The API Dockerfile supplies Python, Office/OCR tools and their runtime dependencies. Ubuntu CI installs the same document tools and explicitly sets `DOCUMENT_PYTHON` and `DOCUMENT_SOFFICE`. Local transcription also requires the pinned whisper.cpp runtime and model described below.
 
 ### Optional transcription assets
 

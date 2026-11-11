@@ -7,10 +7,18 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { createServer } from '../server/src/index.ts';
 import { createMemoryLedgerStore } from '../server/src/ledger/store.ts';
+import { createCiAiProvider } from './fixtures/ci-ai-provider.mjs';
 const execFileAsync=promisify(execFile);
 test('release --write and marker readback use strict task identity/revision and cannot advance workflow stages',async t=>{
  const store=createMemoryLedgerStore();const email='release-check@example.local',password='release-test-password';
- const server=createServer({ledgerStore:store,ai:{env:{QWEN_API_KEY:'isolated-release-fixture'},fetchImpl:async()=>({ok:true,status:200,text:async()=>JSON.stringify({choices:[{message:{content:JSON.stringify({summary:'原件要求补齐财务资料',extracted:['补齐财务资料'],generatedTasks:['经办人补齐财务资料']})}}]})})},auth:{mode:'password',adminEmail:email,adminPassword:password,sessionSecret:'release-check-secret'}});
+ const provider=createCiAiProvider();
+ await new Promise<void>(resolve=>provider.listen(0,'127.0.0.1',resolve));
+ t.after(()=>new Promise<void>((resolve,reject)=>provider.close(error=>error?reject(error):resolve())));
+ const address=provider.address();assert(address&&typeof address==='object');
+ const providerUrl=`http://127.0.0.1:${address.port}/v1`;
+ const rejected=await fetch(providerUrl+'/chat/completions',{method:'POST',headers:{Authorization:'Bearer ci-synthetic-provider-only','Content-Type':'application/json'},body:JSON.stringify({messages:[{role:'user',content:JSON.stringify({inputType:'财务报表',source:'not the synthetic release document'})}]})});
+ assert.equal(rejected.status,422);
+ const server=createServer({ledgerStore:store,ai:{env:{QWEN_API_KEY:'ci-synthetic-provider-only',QWEN_BASE_URL:providerUrl}},auth:{mode:'password',adminEmail:email,adminPassword:password,sessionSecret:'release-check-secret'}});
  const requests:{method:string;path:string;body:any}[]=[];
  server.addHook('preHandler',async request=>{if(request.url.startsWith('/api/tasks')||request.url.endsWith('/stage'))requests.push({method:request.method,path:request.url,body:request.body});});
  const baseUrl=await server.listen({host:'127.0.0.1',port:0});t.after(()=>server.close());
@@ -22,5 +30,6 @@ test('release --write and marker readback use strict task identity/revision and 
  assert.match(creation.requestId,/^[0-9a-f-]{36}$/);assert.equal(creation.ownerId,'user-admin');assert.equal(creation.owner,undefined);assert.equal(creation.actor,undefined);
  const update=requests.find(request=>request.method==='PATCH'&&request.path.startsWith('/api/tasks/'))!.body;assert.match(update.requestId,/^[0-9a-f-]{36}$/);assert.notEqual(update.requestId,creation.requestId);assert.equal(update.expectedRevision,1);assert.equal(update.actor,undefined);
  const task=store.listTasks().find(task=>task.name===`服务端发布验收任务 ${marker}`)!;assert.equal(task.ownerId,'user-admin');assert.equal(task.revision,2);assert.equal(task.status,'进行中');assert.equal(store.listProjects().find(project=>project.id==='demo-robotics')!.stage,before);
+ const intake=store.listAiIntakeItems().find(item=>item.title===`服务端发布验收 AI 收件箱 ${marker}.txt`)!;assert.equal(intake.status,'已归档');assert.match(intake.summary,/CI synthetic provider fixture/);assert.deepEqual(intake.generatedTasks,[]);
  assert.ok(store.listAuditEvents().some(event=>event.action==='更新任务'&&JSON.parse(event.detail).actorId==='user-admin'));
 });

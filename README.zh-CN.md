@@ -35,8 +35,10 @@ npm run build:api
 
 原依赖私有资料的回归测试已改用独立的虚构小样本。示例清单模板重新生成，不是客户原件或通用法律标准。金融与适当性规则正式使用前应按组织及司法辖区配置并由专业人员复核。
 
-持久化部署使用 PostgreSQL 16、迁移与独立文件存储；配置见`.env.example`及`docs/deployment/`。正式部署前设置密码认证、独立强密钥与HTTPS。文档生成需要Python及python-docx；PDF转换需要LibreOffice。完整容器/语音识别构建需先执行`git lfs install && git lfs pull`。
+持久化部署使用 PostgreSQL 16、迁移与独立文件存储；配置见`.env.example`及`docs/deployment/`。正式部署前设置密码认证、独立强密钥与HTTPS。文档生成使用Python标准库；PDF转换需要LibreOffice。Ubuntu CI安装对应Office/OCR依赖，并明确配置`DOCUMENT_PYTHON`与`DOCUMENT_SOFFICE`。完整容器/语音识别构建需先执行`git lfs install && git lfs pull`。
 
 本项目代码采用MIT许可证；依赖及语音识别模型保留原许可证。当前为开发版本，不代表金融合规认证、正式客户案例或自动投资决策服务。
 
 主界面支持中英切换；少量服务端动态提示及导出模板仍保留中文。
+
+CI的AI收件箱持久化检查使用`tests/fixtures/ci-ai-provider.mjs`，只接受已知合成原文、原样引用并明确标注测试输出，不执行模型推理；本地浏览器演示不接入该fixture。

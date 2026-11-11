@@ -622,6 +622,9 @@ test("phase1 audit verifies release package contract", () => {
 });
 
 test("phase1 audit accepts release package handoff when git remote is absent", () => {
+  const isolatedGit = createSyntheticReleaseRepo();
+  const gitEnv = { ...process.env, GIT_DIR: path.join(isolatedGit, ".git"), GIT_WORK_TREE: isolatedGit };
+  assert.equal(execFileSync("git", ["remote", "-v"], { env: gitEnv, encoding: "utf8" }), "");
   const { stdout } = spawnSync(
     process.execPath,
     [
@@ -632,7 +635,7 @@ test("phase1 audit accepts release package handoff when git remote is absent", (
       "--soft",
       "--json",
     ],
-    { cwd: repoRoot, encoding: "utf8" },
+    { cwd: repoRoot, encoding: "utf8", env: gitEnv },
   );
   const result = JSON.parse(stdout);
   const handoffCheck = result.checks.find((check) => check.area === "Target tools" && check.name === "source handoff");
