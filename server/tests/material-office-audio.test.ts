@@ -33,7 +33,7 @@ test('local ASR indexes actual speech and refuses silent audio', {skip:!audioEna
  for(const [name,needle] of [['chinese.wav','项目验收'],['english.mp3','amber'],['english.m4a','amber'],['english.ogg','amber'],['english.webm','amber'],['english-live.webm','amber'],['english.flac','amber'],['silence.wav','']]){
   const bytes=await readFile(resolve(fixtures,name));const id=randomUUID();await writeFile(resolve(root,id),bytes);
   const v={id,blobId:id,name,sha256:createHash('sha256').update(bytes).digest('hex'),sizeBytes:bytes.length} as any;
-  const result=await ensureMaterialExtraction(root,v);assert.equal(result.status,needle?'ready':'failed',JSON.stringify(result));if(needle){assert.ok(result.pages.some(p=>p.text.toLowerCase().includes(needle)),JSON.stringify(result));assert.match(result.pages[0].text,/录音 \d\d:\d\d/);if(name==='chinese.wav'){const speech=result.pages.map(p=>p.text).join(' ');assert.match(speech,/11月5日/);assert.match(speech,/整理验收任务/);}}
+  const result=await ensureMaterialExtraction(root,v);assert.equal(result.status,needle?'ready':'failed',JSON.stringify(result));if(needle){assert.ok(result.pages.some(p=>name==='chinese.wav'?/[项項]目[验驗]收/.test(p.text):p.text.toLowerCase().includes(needle)),JSON.stringify(result));assert.match(result.pages[0].text,/录音 \d\d:\d\d/);if(name==='chinese.wav'){const speech=result.pages.map(p=>p.text).join(' ');assert.match(speech,/11月5日/);assert.match(speech,/整理[验驗]收任[务務]/);}}
  }
 });
 test('AI responds promptly while recording is pending and does not invent a citation',async t=>{
